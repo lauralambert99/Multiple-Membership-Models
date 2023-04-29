@@ -1,0 +1,50 @@
+# Running a Multiple Membership Model 
+
+As noted in `\@ref(software)`, the only software currently able to run a multiple membership model is MLwiN (add ref).  There is an R package, R2MLwiN [@R-R2MLwiN] that allows for an R-interface which runs MLwiN in the background.  This allows users to work with a program they are already familiar with while accessing the capabilities of MLwiN.  However, as also previously noted, you must have an active MLwiN license, and have the program installed on your computer for your R code to work.
+
+## Intercept-only Model
+We will first run an intercept-only model, looking at Math as an outcome and only including the intercept and the multiple membership effect of teachers.  This model will inform us as to how the variance in Math scores is divided between teacher variance components (level 2) and student variance components (level 1).  
+
+```{r intercept only, include = TRUE, message = FALSE}
+library(R2MLwiN)
+options(MLwiN_path="C:\\Program Files (x86)\\MLwiN trial\\i386\\mlwin.exe")
+
+intonly <- Math ~ 1 + (1|tchr1) + (1|S_ID)
+
+MultiMemb <- list(list(
+  mmvar = list("tchr1", "tchr2", "tchr3", "tchr4", "tchr5", "tchr6", "tchr7", "tchr8", "tchr9", "tchr10", "tchr11", "tchr12"),
+  weights = list("w1", "w2", "w3", "w4", "w5", "w6", "w7", "w8", "w9", "w10", "w11", "w12")), NA)
+
+(MMembModel1 <- runMLwiN(Formula = intonly, data = StudData, estoptions = list(EstM = 1, drop.data = FALSE, mm = MultiMemb)))
+
+```
+
+
+## Adding in level 1 predictors
+
+```{r level 1 pred, include = TRUE, message = FALSE}
+lev1 <- Math ~ 1 + S_SES + female + NB + SAT_M + (1|tchr1) + (1|S_ID)
+
+MultiMemb <- list(list(
+  mmvar = list("tchr1", "tchr2", "tchr3", "tchr4", "tchr5", "tchr6", "tchr7", "tchr8", "tchr9", "tchr10", "tchr11", "tchr12"),
+  weights = list("w1", "w2", "w3", "w4", "w5", "w6", "w7", "w8", "w9", "w10", "w11", "w12")), NA)
+
+(MMembModel2 <- runMLwiN(Formula = lev1, data = StudData, estoptions = list(EstM = 1, drop.data = FALSE, mm = MultiMemb)))
+```
+
+## Adding in level 2 predictors
+
+
+## Footnotes
+
+Footnotes are put inside the square brackets after a caret `^[]`. Like this one ^[This is a footnote.]. 
+
+## Citations
+
+Reference items in your bibliography file(s) using `@key`.
+
+For example, we are using the **bookdown** package [@R-bookdown] (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and **knitr** [@xie2015] (this citation was added manually in an external file book.bib). 
+Note that the `.bib` files need to be listed in the index.Rmd with the YAML `bibliography` key.
+
+
+The RStudio Visual Markdown Editor can also make it easier to insert citations: <https://rstudio.github.io/visual-markdown-editing/#/citations>

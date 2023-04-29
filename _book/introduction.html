@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Introduction | Multiple Membership Models: A tutorial</title>
+  <meta name="description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Introduction | Multiple Membership Models: A tutorial" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Introduction | Multiple Membership Models: A tutorial" />
+  
+  <meta name="twitter:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  
+
+<meta name="author" content="Laura Lambert" />
+
+
+<meta name="date" content="2023-04-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="data.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Multiple Membership Models: A tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like https://bookdown.org/yihui/bookdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.1</b> R packages used</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#cross-classified-vs.-multiple-membership-models"><i class="fa fa-check"></i><b>2.1</b> Cross-classified vs. Multiple membership models</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#a-note-on-notation"><i class="fa fa-check"></i><b>2.2</b> A note on Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#examining-the-data"><i class="fa fa-check"></i><b>3.1</b> Examining the Data</a></li>
+<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#software"><i class="fa fa-check"></i><b>3.2</b> Software Considerations</a></li>
+<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.3</b> Captioned figures and tables</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html"><i class="fa fa-check"></i><b>4</b> Multiple Membership models: the details</a></li>
+<li class="chapter" data-level="5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html"><i class="fa fa-check"></i><b>5</b> Running a Multiple Membership Model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#intercept-only-model"><i class="fa fa-check"></i><b>5.1</b> Intercept-only Model</a></li>
+<li class="chapter" data-level="5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors"><i class="fa fa-check"></i><b>5.2</b> Adding in level 1 predictors</a></li>
+<li class="chapter" data-level="5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors"><i class="fa fa-check"></i><b>5.3</b> Adding in level 2 predictors</a></li>
+<li class="chapter" data-level="5.4" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#footnotes"><i class="fa fa-check"></i><b>5.4</b> Footnotes</a></li>
+<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#citations"><i class="fa fa-check"></i><b>5.5</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
+<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
+<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
+<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multiple Membership Models: A tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1 hasAnchor" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>When evaluating data in the educational field and in many other fields, researchers often run into the problem of their data being nested or clustered. When this occurs, they are no longer able to use multiple regression, as they would be violating the independent observations assumption, and may instead turn to multilevel modeling. With multilevel modeling, a researcher is able to handle students nested in schools and patients nested in nurses, as well as longitudinal models where time points are nested within individuals. However, a key facet to all of these models is the strict hierarchical nature of the data: each level one unit (students, patients, or time points) is nested within one, and only one, level 2 unit (school, nurse, individual). If we were to draw this relationship, it would look like Figure 1: there are no lines that are crossed, and each level one unit is associated with only one level two unit. This can also be represented in table form; a true hierarchical model will only have one row (cite rr thing…maybe LEMMA thing?).</p>
+<table>
+<caption>(#tab:true hierarchical table)Data distribution indicating a true hierarchical model</caption>
+<thead>
+<tr class="header">
+<th align="left">student</th>
+<th align="left">Math_Teacher_1</th>
+<th align="left">Math_Teacher_2</th>
+<th align="left">Math_Teacher_3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">student</td>
+<td align="left">1, 2</td>
+<td align="left">3, 4</td>
+<td align="left">5, 6</td>
+</tr>
+</tbody>
+</table>
+<p>Two level strict hierarchical models can be written as two separate equations, each representing a level of the model.<br />
+<span class="math display">\[y_{ij} = \beta_{0j} + r_{ij}\]</span>
+<span class="math display">\[\beta_{0j} = \gamma_{00} + u_{0j}\]</span>,</p>
+<p>With these equations, <span class="math inline">\(y_{ij}\)</span> is outcome and <span class="math inline">\(\beta_{0j}\)</span> represents intercepts. In the intercept-only model presented, there are no slope components, but if we were to add in predictors, we could examine how slopes vary. <span class="math inline">\(r_{ij}\)</span> is the random variation in level one, while <span class="math inline">\(u_{0j}\)</span> is random variation in level 2 (Raudenbush &amp; Bryk, 2002; Snijders &amp; Bosker, 2012).</p>
+<div id="cross-classified-vs.-multiple-membership-models" class="section level2 hasAnchor" number="2.1">
+<h2><span class="header-section-number">2.1</span> Cross-classified vs. Multiple membership models<a href="introduction.html#cross-classified-vs.-multiple-membership-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cross-classified models can also be represented in table or visual form. In table form, the cross classified structure becomes evident when there are level one units in more than one row and column.</p>
+<table>
+<caption>(#tab:cross classified table)Data distribution indicating a cross-classified model</caption>
+<thead>
+<tr class="header">
+<th align="left">X.</th>
+<th align="left">Physics.Teacher.1</th>
+<th align="left">Physics.Teacher.2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Math Teacher 1</td>
+<td align="left">1, 2</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Math Teacher 2</td>
+<td align="left">3</td>
+<td align="left">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Math Teacher 3</td>
+<td align="left"></td>
+<td align="left">5, 6</td>
+</tr>
+</tbody>
+</table>
+<p>Multiple membership data are less evident in table form unless you are paying careful attention to the population in each cell, but becomes more evident in a unit diagram. As with the other diagrams, however, these can quickly become visually confusing with large datasets.</p>
+</div>
+<div id="a-note-on-notation" class="section level2 hasAnchor" number="2.2">
+<h2><span class="header-section-number">2.2</span> A note on Notation<a href="introduction.html#a-note-on-notation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are three possibilities for how to depict these models, each with its own set of advantages and disadvantages. Standard hierarchical notation, which we are familiar with from truly hierarchical models, uses subscripts to identify individual and cluster level predictors and effects. The disadvantage of this notation is that, due to its familiarity, individuals may incorrectly assume that unit <span class="math inline">\(\textit{i}\)</span> is strictly nested within cluster <span class="math inline">\(\textit{j}\)</span>, which is not the case (Raudenbush &amp; Bryk, 2002; Leckie, 2013). Another method is to use multiple subscript notation (Beretvas, 2010). This notation makes the non-hierarchical structure more apparent, however, it can quickly become challenging to read.<br />
+The notation we will use moving forward is classification notation (Leckie, 2013):<br />
+<span class="math display">\[y_{i} = \beta_{0} + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}\]</span>
+<span class="math display">\[u_{j}^{(2)} \sim N(0, \sigma_{u(2)}^{2})\]</span>
+<span class="math display">\[e_{i}^{(2)} \sim N(0, \sigma_{e}^{2})\]</span>
+With this notation, the multiple membership component is represented by <span class="math inline">\(\sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)}\)</span>, which represents the weighted (<span class="math inline">\(w_{j,i}^{(2)}\)</span>) cluster effects (<span class="math inline">\(u_{j}^{(2)}\)</span>). The weight component represents the amount of time unit <span class="math inline">\(\textit{i}\)</span> spent in cluster <span class="math inline">\(\textit{j}\)</span>, with the superscript (2) representing this is associated with the second level. All levels in the model are indicated, with level 1 (1) being implicit. The superscripts/subscripts for each level will identify to which level the random effects, variance parameters, and covariance parameters are associated with.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -8,18 +8,36 @@ thdf <- data.frame(student = ('student'),
                    Math_Teacher_2 = ("3, 4"),
                    Math_Teacher_3 = ("5, 6"))
 ```
+
+```{r true hierarchical table, echo = FALSE}
 knitr::kable(thdf, booktabs = TRUE, caption = 'Data distribution indicating a true hierarchical model'
 
 )
+```
 
-Two level strict hierarchical models can be written as two separate equations, each representing a level of the model.  The level 1 equation is $y_{ij} = \beta_{0j} + r_{ij}$ and the associated level 2 equation would be $\beta_{0j} = \gamma_{00} + u_{0j}$, where *y_{ij}* is outcome and *\beta_{0j}* represents intercepts.  In the intercept-only model presented, there are no slope components, but if we were to add in predictors, we could examine how slopes vary.  *r_{ij}* is the random variation in level one, while *u_{0j}* is random variation in level 2 (Raudenbush & Bryk, 2002; Snijders & Bosker, 2012).
+Two level strict hierarchical models can be written as two separate equations, each representing a level of the model.   
+$$y_{ij} = \beta_{0j} + r_{ij}$$ 
+$$\beta_{0j} = \gamma_{00} + u_{0j}$$, 
+
+With these equations, $y_{ij}$ is outcome and $\beta_{0j}$ represents intercepts.  In the intercept-only model presented, there are no slope components, but if we were to add in predictors, we could examine how slopes vary.  $r_{ij}$ is the random variation in level one, while $u_{0j}$ is random variation in level 2 (Raudenbush & Bryk, 2002; Snijders & Bosker, 2012).
 
 ## Cross-classified vs. Multiple membership models
+Cross-classified models can also be represented in table or visual form.  In table form, the cross classified structure becomes evident when there are level one units in more than one row and column.
+```{r cross classified table, echo = FALSE}
+cct <- data.frame(' ' = c("Math Teacher 1", "Math Teacher 2", "Math Teacher 3"),
+                  "Physics Teacher 1" = c("1, 2", "3", " "),
+                  "Physics Teacher 2" = c(" ", "4", "5, 6"))
 
-All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+knitr::kable(cct, booktabs = TRUE, caption = 'Data distribution indicating a cross-classified model')
+```
+
+Multiple membership data are less evident in table form unless you are paying careful attention to the population in each cell, but becomes more evident in a unit diagram. As with the other diagrams, however, these can quickly become visually confusing with large datasets. 
 
 ## A note on Notation
+There are three possibilities for how to depict these models, each with its own set of advantages and disadvantages.  Standard hierarchical notation, which we are familiar with from truly hierarchical models, uses subscripts to identify individual and cluster level predictors and effects.  The disadvantage of this notation is that, due to its familiarity, individuals may incorrectly assume that unit $\textit{i}$ is strictly nested within cluster $\textit{j}$, which is not the case (Raudenbush & Bryk, 2002; Leckie, 2013).  Another method is to use multiple subscript notation (Beretvas, 2010).  This notation makes the non-hierarchical structure more apparent, however, it can quickly become challenging to read.  
+The notation we will use moving forward is classification notation (Leckie, 2013):  
+$$y_{i} = \beta_{0} + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}$$
+$$u_{j}^{(2)} \sim N(0, \sigma_{u(2)}^{2})$$
+$$e_{i}^{(2)} \sim N(0, \sigma_{e}^{2})$$
+With this notation, the multiple membership component is represented by $\sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)}$, which represents the weighted ($w_{j,i}^{(2)}$) cluster effects ($u_{j}^{(2)}$). The weight component represents the amount of time unit $\textit{i}$ spent in cluster $\textit{j}$, with the superscript (2) representing this is associated with the second level.  All levels in the model are indicated, with level 1 (1) being implicit.  The superscripts/subscripts for each level will identify to which level the random effects, variance parameters, and covariance parameters are associated with.
 
-Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
-
-##Data

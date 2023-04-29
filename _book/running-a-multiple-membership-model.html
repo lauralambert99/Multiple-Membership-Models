@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Running a Multiple Membership Model | Multiple Membership Models: A tutorial</title>
+  <meta name="description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Running a Multiple Membership Model | Multiple Membership Models: A tutorial" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Running a Multiple Membership Model | Multiple Membership Models: A tutorial" />
+  
+  <meta name="twitter:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  
+
+<meta name="author" content="Laura Lambert" />
+
+
+<meta name="date" content="2023-04-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="multiple-membership-models-the-details.html"/>
+<link rel="next" href="blocks.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Multiple Membership Models: A tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like https://bookdown.org/yihui/bookdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.1</b> R packages used</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#cross-classified-vs.-multiple-membership-models"><i class="fa fa-check"></i><b>2.1</b> Cross-classified vs. Multiple membership models</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#a-note-on-notation"><i class="fa fa-check"></i><b>2.2</b> A note on Notation</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#data"><i class="fa fa-check"></i><b>2.3</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>3</b> Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-1.html"><a href="data-1.html#examining-the-data"><i class="fa fa-check"></i><b>3.1</b> Examining the Data</a></li>
+<li class="chapter" data-level="3.2" data-path="data-1.html"><a href="data-1.html#software"><i class="fa fa-check"></i><b>3.2</b> Software Considerations</a></li>
+<li class="chapter" data-level="3.3" data-path="data-1.html"><a href="data-1.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.3</b> Captioned figures and tables</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html"><i class="fa fa-check"></i><b>4</b> Multiple Membership models: the details</a></li>
+<li class="chapter" data-level="5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html"><i class="fa fa-check"></i><b>5</b> Running a Multiple Membership Model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#intercept-only-model"><i class="fa fa-check"></i><b>5.1</b> Intercept-only Model</a></li>
+<li class="chapter" data-level="5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors"><i class="fa fa-check"></i><b>5.2</b> Adding in level 1 predictors</a></li>
+<li class="chapter" data-level="5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors"><i class="fa fa-check"></i><b>5.3</b> Adding in level 2 predictors</a></li>
+<li class="chapter" data-level="5.4" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#footnotes"><i class="fa fa-check"></i><b>5.4</b> Footnotes</a></li>
+<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#citations"><i class="fa fa-check"></i><b>5.5</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
+<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
+<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
+<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multiple Membership Models: A tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="running-a-multiple-membership-model" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Running a Multiple Membership Model<a href="running-a-multiple-membership-model.html#running-a-multiple-membership-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>As noted in <code>\@ref(software)</code>, the only software currently able to run a multiple membership model is MLwiN (add ref). There is an R package, R2MLwiN <span class="citation">(<a href="#ref-R-R2MLwiN" role="doc-biblioref">Zhang et al. 2023</a>)</span> that allows for an R-interface which runs MLwiN in the background. This allows users to work with a program they are already familiar with while accessing the capabilities of MLwiN. However, as also previously noted, you must have an active MLwiN license, and have the program installed on your computer for your R code to work.</p>
+<div id="intercept-only-model" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Intercept-only Model<a href="running-a-multiple-membership-model.html#intercept-only-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We will first run an intercept-only model, looking at Math as an outcome and only including the intercept and the multiple membership effect of teachers. This model will inform us as to how the variance in Math scores is divided between teacher variance components (level 2) and student variance components (level 1).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="running-a-multiple-membership-model.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(R2MLwiN)</span>
+<span id="cb1-2"><a href="running-a-multiple-membership-model.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">MLwiN_path=</span><span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Program Files (x86)</span><span class="sc">\\</span><span class="st">MLwiN trial</span><span class="sc">\\</span><span class="st">i386</span><span class="sc">\\</span><span class="st">mlwin.exe&quot;</span>)</span>
+<span id="cb1-3"><a href="running-a-multiple-membership-model.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="running-a-multiple-membership-model.html#cb1-4" aria-hidden="true" tabindex="-1"></a>intonly <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
+<span id="cb1-5"><a href="running-a-multiple-membership-model.html#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="running-a-multiple-membership-model.html#cb1-6" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
+<span id="cb1-7"><a href="running-a-multiple-membership-model.html#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
+<span id="cb1-8"><a href="running-a-multiple-membership-model.html#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
+<span id="cb1-9"><a href="running-a-multiple-membership-model.html#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="running-a-multiple-membership-model.html#cb1-10" aria-hidden="true" tabindex="-1"></a>(MMembModel1 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonly, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
+<pre><code>## MLwiN is running, please wait......</code></pre>
+<pre><code>## 
+## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
+## MLwiN (version: 2.36)  multilevel model (Normal) 
+##        N min     mean max N_complete min_complete mean_complete max_complete
+## tchr1 56  75 92.85714 122         56           75      92.85714          122
+## Estimation algorithm:  MCMC      Cross-classified              Elapsed time : 7.64s 
+## Number of obs:  5200 (from total 5200)          Number of iter.: 5000  Chains: 1  Burn-in: 500 
+## Bayesian Deviance Information Criterion (DIC)
+## Dbar      D(thetabar)    pD      DIC
+## 56499.285  56453.141  46.146     56545.430  
+## --------------------------------------------------------------------------------------------------- 
+## The model formula:
+## Math ~ 1 + (1 | tchr1) + (1 | S_ID)
+## Level 2: tchr1     Level 1: S_ID      
+## --------------------------------------------------------------------------------------------------- 
+## The fixed part estimates:  
+##                 Coef.   Std. Err.       z   Pr(&gt;|z|)       [95% Cred.   Interval]   ESS 
+## Intercept   431.52398     2.21944  194.43          0  ***   426.97449   435.91524   395 
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  
+## --------------------------------------------------------------------------------------------------- 
+## The random part estimates at the tchr1 level: 
+##                     Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+## var_Intercept   238.96526    57.92255    147.42228   374.11760   2080 
+## --------------------------------------------------------------------------------------------------- 
+## The random part estimates at the S_ID level: 
+##                      Coef.   Std. Err.   [95% Cred.    Interval]    ESS 
+## var_Intercept   3064.65607    59.68536   2948.33898   3181.76541   4681 
+## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</code></pre>
+</div>
+<div id="adding-in-level-1-predictors" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Adding in level 1 predictors<a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="running-a-multiple-membership-model.html#cb4-1" aria-hidden="true" tabindex="-1"></a>lev1 <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> S_SES <span class="sc">+</span> female <span class="sc">+</span> NB <span class="sc">+</span> SAT_M <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
+<span id="cb4-2"><a href="running-a-multiple-membership-model.html#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="running-a-multiple-membership-model.html#cb4-3" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
+<span id="cb4-4"><a href="running-a-multiple-membership-model.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
+<span id="cb4-5"><a href="running-a-multiple-membership-model.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
+<span id="cb4-6"><a href="running-a-multiple-membership-model.html#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="running-a-multiple-membership-model.html#cb4-7" aria-hidden="true" tabindex="-1"></a>(MMembModel2 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> lev1, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
+<pre><code>## MLwiN is running, please wait......</code></pre>
+<pre><code>## 
+## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
+## MLwiN (version: 2.36)  multilevel model (Normal) 
+##        N min     mean max N_complete min_complete mean_complete max_complete
+## tchr1 56  75 92.85714 122         56           75      92.85714          122
+## Estimation algorithm:  MCMC      Cross-classified              Elapsed time : 8.04s 
+## Number of obs:  5200 (from total 5200)          Number of iter.: 5000  Chains: 1  Burn-in: 500 
+## Bayesian Deviance Information Criterion (DIC)
+## Dbar      D(thetabar)    pD      DIC
+## 45974.512  45914.977  59.535     46034.047  
+## --------------------------------------------------------------------------------------------------- 
+## The model formula:
+## Math ~ 1 + S_SES + female + NB + SAT_M + (1 | tchr1) + (1 | S_ID)
+## Level 2: tchr1     Level 1: S_ID      
+## --------------------------------------------------------------------------------------------------- 
+## The fixed part estimates:  
+##                 Coef.   Std. Err.       z    Pr(&gt;|z|)       [95% Cred.   Interval]    ESS 
+## Intercept   279.62954     2.84908   98.15           0  ***   273.90705   285.21935    135 
+## S_SES         0.19225     0.13941    1.38      0.1679         -0.07746     0.46060   5000 
+## female        0.07094     0.57517    0.12      0.9018         -1.06873     1.21318   5000 
+## NB           -5.51947     1.44494   -3.82   0.0001335  ***    -8.35400    -2.68946   5000 
+## SAT_M         0.29935     0.00164  182.64           0  ***     0.29624     0.30250   5000 
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  
+## --------------------------------------------------------------------------------------------------- 
+## The random part estimates at the tchr1 level: 
+##                     Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+## var_Intercept   257.83191    52.32436    174.63370   377.42433   4261 
+## --------------------------------------------------------------------------------------------------- 
+## The random part estimates at the S_ID level: 
+##                     Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+## var_Intercept   405.08992     7.99638    390.11636   421.00231   5000 
+## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</code></pre>
+</div>
+<div id="adding-in-level-2-predictors" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Adding in level 2 predictors<a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="footnotes" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> Footnotes<a href="running-a-multiple-membership-model.html#footnotes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Footnotes are put inside the square brackets after a caret <code>^[]</code>. Like this one <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+</div>
+<div id="citations" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Citations<a href="running-a-multiple-membership-model.html#citations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Reference items in your bibliography file(s) using <code>@key</code>.</p>
+<p>For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="#ref-R-bookdown" role="doc-biblioref">Xie 2023</a>)</span> (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span> (this citation was added manually in an external file book.bib).
+Note that the <code>.bib</code> files need to be listed in the index.Rmd with the YAML <code>bibliography</code> key.</p>
+<p>The RStudio Visual Markdown Editor can also make it easier to insert citations: <a href="https://rstudio.github.io/visual-markdown-editing/#/citations" class="uri">https://rstudio.github.io/visual-markdown-editing/#/citations</a></p>
+
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-xie2015" class="csl-entry">
+Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.org/knitr/">http://yihui.org/knitr/</a>.
+</div>
+<div id="ref-R-bookdown" class="csl-entry">
+———. 2023. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
+</div>
+<div id="ref-R-R2MLwiN" class="csl-entry">
+Zhang, Zhengzheng, Chris Charlton, Richard Parker, George Leckie, and William Browne. 2023. <em>R2MLwiN: Running MLwiN from Within r</em>. <a href="https://CRAN.R-project.org/package=R2MLwiN">https://CRAN.R-project.org/package=R2MLwiN</a>.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>This is a footnote.<a href="running-a-multiple-membership-model.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="multiple-membership-models-the-details.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="blocks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-walkthrough.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

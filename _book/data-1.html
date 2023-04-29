@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Data | Multiple Membership Models: A tutorial</title>
+  <meta name="description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Data | Multiple Membership Models: A tutorial" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Data | Multiple Membership Models: A tutorial" />
+  
+  <meta name="twitter:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  
+
+<meta name="author" content="Laura Lambert" />
+
+
+<meta name="date" content="2023-04-29" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="multiple-membership-models-the-details.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Multiple Membership Models: A tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like https://bookdown.org/yihui/bookdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.1</b> R packages used</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#cross-classified-vs.-multiple-membership-models"><i class="fa fa-check"></i><b>2.1</b> Cross-classified vs. Multiple membership models</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#a-note-on-notation"><i class="fa fa-check"></i><b>2.2</b> A note on Notation</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#data"><i class="fa fa-check"></i><b>2.3</b> Data</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data-1.html"><a href="data-1.html"><i class="fa fa-check"></i><b>3</b> Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data-1.html"><a href="data-1.html#examining-the-data"><i class="fa fa-check"></i><b>3.1</b> Examining the Data</a></li>
+<li class="chapter" data-level="3.2" data-path="data-1.html"><a href="data-1.html#software"><i class="fa fa-check"></i><b>3.2</b> Software Considerations</a></li>
+<li class="chapter" data-level="3.3" data-path="data-1.html"><a href="data-1.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.3</b> Captioned figures and tables</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html"><i class="fa fa-check"></i><b>4</b> Multiple Membership models: the details</a></li>
+<li class="chapter" data-level="5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html"><i class="fa fa-check"></i><b>5</b> Running a Multiple Membership Model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#intercept-only-model"><i class="fa fa-check"></i><b>5.1</b> Intercept-only Model</a></li>
+<li class="chapter" data-level="5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors"><i class="fa fa-check"></i><b>5.2</b> Adding in level 1 predictors</a></li>
+<li class="chapter" data-level="5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors"><i class="fa fa-check"></i><b>5.3</b> Adding in level 2 predictors</a></li>
+<li class="chapter" data-level="5.4" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#footnotes"><i class="fa fa-check"></i><b>5.4</b> Footnotes</a></li>
+<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#citations"><i class="fa fa-check"></i><b>5.5</b> Citations</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
+<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
+<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
+<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multiple Membership Models: A tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="data-1" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Data<a href="data-1.html#data-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>The data used for this tutorial were simulated in R to loosely represent a cohort of JMU students. As accurate counts and frequencies of the predictors were not available outside of a request to PAIR, “best guesses” were employed where necessary. In a fictional scenario, JMU has decided to add a Math Achievement Test as a graduation requirement: students must take this test the semester they anticipate graduating as a measure of their Math Achievement at JMU, with the point of comparison being a cut-score. The stakes are similar to Assessment Day and there are no penalties for low scores. JMU, recognizing that many factors may play into how well a student does on this test, wants to consider the role different math teachers play as well as some student-level predictors. Not wanting this to hold any penalty towards teachers either, JMU has assigned each teacher an anonymous ID and associated it with the years of experience. JMU is additionally considering what teacher qualities help students be more successful, with the idea of offering more professional development in those areas. Currently, the only teacher-level predictor available is number of years of experience of the instructor.</p>
+<p>JMU hopes to answer the following research questions:</p>
+<p>The predictors are listed in the table below, along with a brief description.</p>
+<table>
+<caption>(#tab:data table)Simulated dataset that will be used for analysis</caption>
+<colgroup>
+<col width="9%" />
+<col width="90%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Predictor</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">MathAch</td>
+<td align="left">Mach Achievement; outcome variable, score on a (fictional) math test given to students</td>
+</tr>
+<tr class="even">
+<td align="left">S_ID</td>
+<td align="left">Student ID; a single number representation of students, from 1 to 5200</td>
+</tr>
+<tr class="odd">
+<td align="left">SAT_M</td>
+<td align="left">SAT math score; ranges from 200-800 and represents the SAT math score of students prior to entering JMU.</td>
+</tr>
+<tr class="even">
+<td align="left">S_gend</td>
+<td align="left">Student gender; a non-binary gender indicator with 0 = female, 1 = male, and 2 = other/nonbinary/fluid</td>
+</tr>
+<tr class="odd">
+<td align="left">female, NB</td>
+<td align="left">Dummy coded student gender, since gender is categorical. Male is the reference</td>
+</tr>
+<tr class="even">
+<td align="left">S_SES</td>
+<td align="left">Student SES; values range from 2-29 cite thing here</td>
+</tr>
+<tr class="odd">
+<td align="left">num_tchrs</td>
+<td align="left">Number of teachers; the number of math teachers a student had at JMU</td>
+</tr>
+<tr class="even">
+<td align="left">phys</td>
+<td align="left">Physics; if a student took physics or not, with 0 = no and 1 = yes</td>
+</tr>
+<tr class="odd">
+<td align="left">phys_tchr</td>
+<td align="left">Physics teacher; if a student took physics, the ID of the teacher they had (ranging from 1 – 22)</td>
+</tr>
+<tr class="even">
+<td align="left">tchr1-tchr12</td>
+<td align="left">Teachers 1 through 12; teacher IDs (ranging from 1-56) of teachers students had. If a student had less than 12 teachers, teacher ID = 0</td>
+</tr>
+<tr class="odd">
+<td align="left">w1-w12</td>
+<td align="left">Weights; these represent the amount of time spent with each teacher. Values can range from 1 (only had one teacher) to 0.083 (had 12 teachers)</td>
+</tr>
+<tr class="even">
+<td align="left">t1_exp-t12_exp</td>
+<td align="left">Teacher experience; Given the compact nature of this dataset, the experience of the first through twelfth teachers of each student is given in years.</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+<p>The data are in a .cvs file in “compact” form, as opposed to “long” form. Compact form contains two different sets of variables: one set for the first through twelfth teacher to instruct each student and another set represent the multiple membership weight variables. Wide form would have the same information, but in only one set of variables representing the individual teacher IDs and the proportion of time each teacher spent instructing each student (see tables below). While the wide form is less efficient, some programs require the data to be in one form or the other. In this instance, MLwiN using Bayesian routines (what we will be using) requires compact form (Leckie, 2013).</p>
+<div id="examining-the-data" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Examining the Data<a href="data-1.html#examining-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The next step is to determine what type of predictors we have and what they look like, as well as if we have a true hierarchical model, a “nesting as nuisance” model, or a non-hierarchical model such as cross-classified or multiple membership models. We will be looking for if students (in this case) belong to one and only one cluster (teachers), which would indicate a hierarchical approach or a “nesting as nuisance” approach. However, if, as is the case, students belong to multiple clusters, we will be taking a non-hierarchical approach. For this example, we are only considering one cluster, so we will be using a multiple membership design. We can see in the <code>num_tchrs</code> column there are students ranging from having had 1 teacher to 12 teachers, indicating we have a multiple membership column. We could also look at the <code>tchr1</code> through <code>tchr12</code> columns, and see there are values in more than one of those - indicating that students have encountered more than one math teacher.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-1.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read in the data file</span></span>
+<span id="cb1-2"><a href="data-1.html#cb1-2" aria-hidden="true" tabindex="-1"></a>StudData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;exampledata2.csv&quot;</span>)</span>
+<span id="cb1-3"><a href="data-1.html#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="data-1.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#See what it looks like</span></span>
+<span id="cb1-5"><a href="data-1.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(StudData)</span></code></pre></div>
+<pre><code>##   X.1 X S_ID S_gend     S_SES num_tchrs phys tchr1 tchr2 tchr3 tchr4 tchr5 tchr6 tchr7 tchr8 tchr9 tchr10 tchr11 tchr12   w1   w2   w3   w4 w5 w6
+## 1   1 1    1      0 14.880674         3    0    24    32    46     0     0     0     0     0     0      0      0      0 0.33 0.33 0.33 0.00  0  0
+## 2   2 2    2      0 14.575710         4    0    30    52    54    18     0     0     0     0     0      0      0      0 0.25 0.25 0.25 0.25  0  0
+## 3   3 3    3      1 13.173884         1    0    12     0     0     0     0     0     0     0     0      0      0      0 1.00 0.00 0.00 0.00  0  0
+## 4   4 4    4      1 13.065602         2    0    32    30     0     0     0     0     0     0     0      0      0      0 0.50 0.50 0.00 0.00  0  0
+## 5   5 5    5      0 16.105715         2    0     3    48     0     0     0     0     0     0     0      0      0      0 0.50 0.50 0.00 0.00  0  0
+## 6   6 6    6      1  8.190244         2    1     3    44     0     0     0     0     0     0     0      0      0      0 0.50 0.50 0.00 0.00  0  0
+##   w7 w8 w9 w10 w11 w12     Math t10_exp    t1_exp    t2_exp   t3_exp   t4_exp t5_exp t6_exp t7_exp t8_exp t9_exp t11_exp t12_exp phys_tchr SAT_M
+## 1  0  0  0   0   0   0 524.4056      NA  7.504014 10.358077 8.625167       NA     NA     NA     NA     NA     NA      NA      NA         0   795
+## 2  0  0  0   0   0   0 488.9099      NA  9.796930 11.785604 8.438843 8.458218     NA     NA     NA     NA     NA      NA      NA         0   693
+## 3  0  0  0   0   0   0 489.3046      NA  6.490974        NA       NA       NA     NA     NA     NA     NA     NA      NA      NA         0   706
+## 4  0  0  0   0   0   0 477.3350      NA 10.358077  9.796930       NA       NA     NA     NA     NA     NA     NA      NA      NA         0   654
+## 5  0  0  0   0   0   0 429.6443      NA 12.899187  6.413480       NA       NA     NA     NA     NA     NA     NA      NA      NA         0   419
+## 6  0  0  0   0   0   0 428.4827      NA 12.899187  8.620738       NA       NA     NA     NA     NA     NA     NA      NA      NA         9   416
+##   female NB
+## 1      1  0
+## 2      1  0
+## 3      0  0
+## 4      0  0
+## 5      1  0
+## 6      0  0</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-1.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(StudData)</span></code></pre></div>
+<pre><code>##       X.1             X             S_ID          S_gend           S_SES          num_tchrs           phys            tchr1           tchr2      
+##  Min.   :   1   Min.   :   1   Min.   :   1   Min.   :0.0000   Min.   : 5.657   Min.   : 1.000   Min.   :0.0000   Min.   : 1.00   Min.   : 0.00  
+##  1st Qu.:1301   1st Qu.:1301   1st Qu.:1301   1st Qu.:0.0000   1st Qu.:11.652   1st Qu.: 1.000   1st Qu.:0.0000   1st Qu.:14.00   1st Qu.: 0.00  
+##  Median :2600   Median :2600   Median :2600   Median :0.0000   Median :12.988   Median : 2.000   Median :0.0000   Median :29.00   Median :14.00  
+##  Mean   :2600   Mean   :2600   Mean   :2600   Mean   :0.4708   Mean   :12.996   Mean   : 2.593   Mean   :0.2492   Mean   :28.61   Mean   :18.73  
+##  3rd Qu.:3900   3rd Qu.:3900   3rd Qu.:3900   3rd Qu.:1.0000   3rd Qu.:14.353   3rd Qu.: 4.000   3rd Qu.:0.0000   3rd Qu.:43.00   3rd Qu.:35.00  
+##  Max.   :5200   Max.   :5200   Max.   :5200   Max.   :2.0000   Max.   :20.249   Max.   :12.000   Max.   :1.0000   Max.   :56.00   Max.   :57.00  
+##                                                                                                                                                  
+##      tchr3            tchr4            tchr5           tchr6            tchr7             tchr8             tchr9             tchr10       
+##  Min.   : 0.000   Min.   : 0.000   Min.   : 0.00   Min.   : 0.000   Min.   : 0.0000   Min.   : 0.0000   Min.   : 0.0000   Min.   : 0.0000  
+##  1st Qu.: 0.000   1st Qu.: 0.000   1st Qu.: 0.00   1st Qu.: 0.000   1st Qu.: 0.0000   1st Qu.: 0.0000   1st Qu.: 0.0000   1st Qu.: 0.0000  
+##  Median : 0.000   Median : 0.000   Median : 0.00   Median : 0.000   Median : 0.0000   Median : 0.0000   Median : 0.0000   Median : 0.0000  
+##  Mean   : 9.415   Mean   : 7.238   Mean   : 5.06   Mean   : 2.625   Mean   : 0.4515   Mean   : 0.4065   Mean   : 0.3956   Mean   : 0.3735  
+##  3rd Qu.:14.000   3rd Qu.: 1.000   3rd Qu.: 0.00   3rd Qu.: 0.000   3rd Qu.: 0.0000   3rd Qu.: 0.0000   3rd Qu.: 0.0000   3rd Qu.: 0.0000  
+##  Max.   :57.000   Max.   :57.000   Max.   :56.00   Max.   :57.000   Max.   :55.0000   Max.   :56.0000   Max.   :56.0000   Max.   :56.0000  
+##                                                                                                                                            
+##      tchr11            tchr12              w1               w2               w3                w4                w5                w6         
+##  Min.   : 0.0000   Min.   : 0.0000   Min.   :0.0830   Min.   :0.0000   Min.   :0.00000   Min.   :0.00000   Min.   :0.00000   Min.   :0.00000  
+##  1st Qu.: 0.0000   1st Qu.: 0.0000   1st Qu.:0.2500   1st Qu.:0.0000   1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:0.00000  
+##  Median : 0.0000   Median : 0.0000   Median :0.5000   Median :0.2000   Median :0.00000   Median :0.00000   Median :0.00000   Median :0.00000  
+##  Mean   : 0.3406   Mean   : 0.2996   Mean   :0.5784   Mean   :0.2424   Mean   :0.07666   Mean   :0.04988   Mean   :0.03008   Mean   :0.01458  
+##  3rd Qu.: 0.0000   3rd Qu.: 0.0000   3rd Qu.:1.0000   3rd Qu.:0.5000   3rd Qu.:0.16600   3rd Qu.:0.08300   3rd Qu.:0.00000   3rd Qu.:0.00000  
+##  Max.   :57.0000   Max.   :57.0000   Max.   :1.0000   Max.   :0.5000   Max.   :0.33000   Max.   :0.25000   Max.   :0.20000   Max.   :0.16600  
+##                                                                                                                                               
+##        w7                 w8                w9               w10                w11                 w12                 Math          t10_exp      
+##  Min.   :0.000000   Min.   :0.00000   Min.   :0.00000   Min.   :0.000000   Min.   :0.0000000   Min.   :0.0000000   Min.   :285.4   Min.   : 6.874  
+##  1st Qu.:0.000000   1st Qu.:0.00000   1st Qu.:0.00000   1st Qu.:0.000000   1st Qu.:0.0000000   1st Qu.:0.0000000   1st Qu.:387.9   1st Qu.: 8.947  
+##  Median :0.000000   Median :0.00000   Median :0.00000   Median :0.000000   Median :0.0000000   Median :0.0000000   Median :431.6   Median :10.329  
+##  Mean   :0.001487   Mean   :0.00124   Mean   :0.00112   Mean   :0.001035   Mean   :0.0009777   Mean   :0.0009258   Mean   :431.7   Mean   :10.288  
+##  3rd Qu.:0.000000   3rd Qu.:0.00000   3rd Qu.:0.00000   3rd Qu.:0.000000   3rd Qu.:0.0000000   3rd Qu.:0.0000000   3rd Qu.:476.6   3rd Qu.:11.064  
+##  Max.   :0.142800   Max.   :0.12500   Max.   :0.11000   Max.   :0.100000   Max.   :0.0900000   Max.   :0.0830000   Max.   :580.7   Max.   :15.045  
+##                                                                                                                                    NA&#39;s   :5136    
+##      t1_exp           t2_exp           t3_exp           t4_exp           t5_exp           t6_exp           t7_exp           t8_exp      
+##  Min.   : 6.208   Min.   : 6.208   Min.   : 6.208   Min.   : 6.208   Min.   : 6.208   Min.   : 6.208   Min.   : 6.208   Min.   : 6.208  
+##  1st Qu.: 8.625   1st Qu.: 8.621   1st Qu.: 8.621   1st Qu.: 8.621   1st Qu.: 8.621   1st Qu.: 8.623   1st Qu.: 9.067   1st Qu.: 7.872  
+##  Median :10.292   Median :10.170   Median :10.025   Median :10.170   Median : 9.966   Median :10.292   Median :11.048   Median :10.025  
+##  Mean   :10.137   Mean   :10.077   Mean   :10.034   Mean   :10.082   Mean   : 9.992   Mean   :10.134   Mean   :10.679   Mean   : 9.839  
+##  3rd Qu.:11.550   3rd Qu.:11.064   3rd Qu.:11.064   3rd Qu.:11.064   3rd Qu.:11.063   3rd Qu.:11.550   3rd Qu.:12.159   3rd Qu.:11.048  
+##  Max.   :15.045   Max.   :15.045   Max.   :15.045   Max.   :15.045   Max.   :15.045   Max.   :15.045   Max.   :15.045   Max.   :15.045  
+##                   NA&#39;s   :1748     NA&#39;s   :3474     NA&#39;s   :3894     NA&#39;s   :4305     NA&#39;s   :4709     NA&#39;s   :5118     NA&#39;s   :5127    
+##      t9_exp          t11_exp          t12_exp         phys_tchr         SAT_M           female             NB        
+##  Min.   : 6.208   Min.   : 6.208   Min.   : 6.413   Min.   : 0.00   Min.   :200.0   Min.   :0.0000   Min.   :0.0000  
+##  1st Qu.: 8.625   1st Qu.: 9.108   1st Qu.: 8.625   1st Qu.: 0.00   1st Qu.:350.0   1st Qu.:0.0000   1st Qu.:0.0000  
+##  Median : 9.890   Median :10.329   Median :10.170   Median : 0.00   Median :500.0   Median :1.0000   Median :0.0000  
+##  Mean   : 9.723   Mean   :10.122   Mean   :10.004   Mean   : 2.88   Mean   :499.8   Mean   :0.5717   Mean   :0.0425  
+##  3rd Qu.:11.048   3rd Qu.:11.048   3rd Qu.:11.063   3rd Qu.: 0.00   3rd Qu.:646.2   3rd Qu.:1.0000   3rd Qu.:0.0000  
+##  Max.   :14.599   Max.   :14.599   Max.   :14.139   Max.   :22.00   Max.   :800.0   Max.   :1.0000   Max.   :1.0000  
+##  NA&#39;s   :5132     NA&#39;s   :5140     NA&#39;s   :5143</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-1.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb5-2"><a href="data-1.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> StudData) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="data-1.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> num_tchrs))</span></code></pre></div>
+<p><img src="_main_files/figure-html/predictors-1.png" width="672" /></p>
+</div>
+<div id="software" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Software Considerations<a href="data-1.html#software" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>I was unable to find any software other than MLwiN(cite) that was capable of running multiple membership models. That said, both R and Stata have functions or packages that allow you to use their interface and run MLwiN in the background, to prevent the need to learn an entirely new interface. MLwiN is not a free software and is produced by the group. A 30-day free trial with full functionality is available to anyone in the world, and for researchers in the US, a single-user license is £400 or a PhD license is available for XXX, though it expires after 3 years. In order to perform the analyses demonstrated below, I obtained a 30-day free license and used the R2MLwiN (cite) package to allow me to use an R interface. While the R code is provided, it will not work unless you also have a valid MLwiN license.</p>
+<p>There are two steps to cross-reference any heading:</p>
+<ol style="list-style-type: decimal">
+<li>Label the heading: <code># Hello world {#nice-label}</code>.
+<ul>
+<li>Leave the label off if you like the automated heading generated based on your heading title: for example, <code># Hello world</code> = <code># Hello world {#hello-world}</code>.</li>
+<li>To label an un-numbered heading, use: <code># Hello world {-#nice-label}</code> or <code>{# Hello world .unnumbered}</code>.</li>
+</ul></li>
+<li>Next, reference the labeled heading anywhere in the text using <code>\@ref(nice-label)</code>; for example, please see Chapter <a href="#cross"><strong>??</strong></a>.
+<ul>
+<li>If you prefer text as the link instead of a numbered reference use: <a href="#cross">any text you want can go here</a>.</li>
+</ul></li>
+</ol>
+</div>
+<div id="captioned-figures-and-tables" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Captioned figures and tables<a href="data-1.html#captioned-figures-and-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Figures and tables <em>with captions</em> can also be cross-referenced from elsewhere in your book using <code>\@ref(fig:chunk-label)</code> and <code>\@ref(tab:chunk-label)</code>, respectively.</p>
+<p>See Figure <a href="data-1.html#fig:nice-fig">3.1</a>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data-1.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
+<span id="cb6-2"><a href="data-1.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pressure, <span class="at">type =</span> <span class="st">&#39;b&#39;</span>, <span class="at">pch =</span> <span class="dv">19</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:nice-fig"></span>
+<img src="_main_files/figure-html/nice-fig-1.png" alt="Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases." width="80%" />
+<p class="caption">
+Figure 3.1: Here is a nice figure!
+</p>
+</div>
+<p>Don’t miss Table <a href="data-1.html#tab:nice-tab">3.1</a>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data-1.html#cb7-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb7-2"><a href="data-1.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(pressure, <span class="dv">10</span>), <span class="at">caption =</span> <span class="st">&#39;Here is a nice table!&#39;</span>,</span>
+<span id="cb7-3"><a href="data-1.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">booktabs =</span> <span class="cn">TRUE</span></span>
+<span id="cb7-4"><a href="data-1.html#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<table>
+<caption><span id="tab:nice-tab">Table 3.1: </span>Here is a nice table!</caption>
+<thead>
+<tr class="header">
+<th align="right">temperature</th>
+<th align="right">pressure</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">0.0002</td>
+</tr>
+<tr class="even">
+<td align="right">20</td>
+<td align="right">0.0012</td>
+</tr>
+<tr class="odd">
+<td align="right">40</td>
+<td align="right">0.0060</td>
+</tr>
+<tr class="even">
+<td align="right">60</td>
+<td align="right">0.0300</td>
+</tr>
+<tr class="odd">
+<td align="right">80</td>
+<td align="right">0.0900</td>
+</tr>
+<tr class="even">
+<td align="right">100</td>
+<td align="right">0.2700</td>
+</tr>
+<tr class="odd">
+<td align="right">120</td>
+<td align="right">0.7500</td>
+</tr>
+<tr class="even">
+<td align="right">140</td>
+<td align="right">1.8500</td>
+</tr>
+<tr class="odd">
+<td align="right">160</td>
+<td align="right">4.2000</td>
+</tr>
+<tr class="even">
+<td align="right">180</td>
+<td align="right">8.8000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="multiple-membership-models-the-details.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-data.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

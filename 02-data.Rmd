@@ -1,0 +1,74 @@
+# Data
+
+The data used for this tutorial were simulated in R to loosely represent a cohort of JMU students.  As accurate counts and frequencies of the predictors were not available outside of a request to PAIR, “best guesses” were employed where necessary.  In a fictional scenario, JMU has decided to add a Math Achievement Test as a graduation requirement: students must take this test the semester they anticipate graduating as a measure of their Math Achievement at JMU, with the point of comparison being a cut-score.  The stakes are similar to Assessment Day and there are no penalties for low scores.  JMU, recognizing that many factors may play into how well a student does on this test, wants to consider the role different math teachers play as well as some student-level predictors.  Not wanting this to hold any penalty towards teachers either, JMU has assigned each teacher an anonymous ID and associated it with the years of experience.  JMU is additionally considering what teacher qualities help students be more successful, with the idea of offering more professional development in those areas.  Currently, the only teacher-level predictor available is number of years of experience of the instructor.  
+
+JMU hopes to answer the following research questions: 
+
+The predictors are listed in the table below, along with a brief description.
+
+```{r data table, echo = FALSE}
+df <- data.frame('Predictor' = c("MathAch", "S_ID", "SAT_M", "S_gend", "female, NB", "S_SES", "num_tchrs", "phys", "phys_tchr", "tchr1-tchr12", "w1-w12", "t1_exp-t12_exp"),
+                 'Description' = c("Mach Achievement; outcome variable, score on a (fictional) math test given to students", "Student ID; a single number representation of students, from 1 to 5200", "SAT math score; ranges from 200-800 and represents the SAT math score of students prior to entering JMU.", "Student gender; a non-binary gender indicator with 0 = female, 1 = male, and 2 = other/nonbinary/fluid", "Dummy coded student gender, since gender is categorical.  Male is the reference", "Student SES; values range from 2-29 cite thing here", "Number of teachers; the number of math teachers a student had at JMU", "Physics; if a student took physics or not, with 0 = no and 1 = yes", "Physics teacher; if a student took physics, the ID of the teacher they had (ranging from 1 – 22)", "Teachers 1 through 12; teacher IDs (ranging from 1-56) of teachers students had.  If a student had less than 12 teachers, teacher ID = 0", "Weights; these represent the amount of time spent with each teacher.  Values can range from 1 (only had one teacher) to 0.083 (had 12 teachers)", "Teacher experience; Given the compact nature of this dataset, the experience of the first through twelfth teachers of each student is given in years."))
+
+knitr::kable(df, booktabs = TRUE, 
+             caption = 'Simulated dataset that will be used for analysis')
+```
+\
+
+The data are in a .cvs file in “compact” form, as opposed to “long” form.  Compact form contains two different sets of variables: one set for the first through twelfth teacher to instruct each student and another set represent the multiple membership weight variables.  Wide form would have the same information, but in only one set of variables representing the individual teacher IDs and the proportion of time each teacher spent instructing each student (see tables below).  While the wide form is less efficient, some programs require the data to be in one form or the other.  In this instance, MLwiN using Bayesian routines (what we will be using) requires compact form (Leckie, 2013). 
+
+
+## Examining the Data
+
+The next step is to determine what type of predictors we have and what they look like, as well as if we have a true hierarchical model, a “nesting as nuisance” model, or a non-hierarchical model such as cross-classified or multiple membership models.  We will be looking for if students (in this case) belong to one and only one cluster (teachers), which would indicate a hierarchical approach or a "nesting as nuisance" approach.  However, if, as is the case, students belong to multiple clusters, we will be taking a non-hierarchical approach.  For this example, we are only considering one cluster, so we will be using a multiple membership design.  We can see in the `num_tchrs` column there are students ranging from having had 1 teacher to 12 teachers, indicating we have a multiple membership column.  We could also look at the `tchr1` through `tchr12` columns, and see there are values in more than one of those - indicating that students have encountered more than one math teacher.
+
+```{r data check, include = TRUE, message = FALSE}
+#Read in the data file
+StudData <- read.csv("exampledata2.csv")
+
+#See what it looks like
+head(StudData)
+summary(StudData)
+
+```
+
+
+```{r predictors, include = TRUE, message = FALSE, warning = FALSE}
+library(ggplot2)
+ggplot(data = StudData) +
+  geom_histogram(aes(x = num_tchrs))
+
+```
+
+
+## Software Considerations  {#software}
+I was unable to find any software other than MLwiN(cite) that was capable of running multiple membership models.  That said, both R and Stata have functions or packages that allow you to use their interface and run MLwiN in the background, to prevent the need to learn an entirely new interface.  MLwiN is not a free software and is produced by the group.  A 30-day free trial with full functionality is available to anyone in the world, and for researchers in the US, a single-user license is £400 or a PhD license is available for XXX, though it expires after 3 years.  In order to perform the analyses demonstrated below, I obtained a 30-day free license and used the R2MLwiN (cite) package to allow me to use an R interface.  While the R code is provided, it will not work unless you also have a valid MLwiN license.
+
+There are two steps to cross-reference any heading:
+
+1. Label the heading: `# Hello world {#nice-label}`. 
+    - Leave the label off if you like the automated heading generated based on your heading title: for example, `# Hello world` = `# Hello world {#hello-world}`.
+    - To label an un-numbered heading, use: `# Hello world {-#nice-label}` or `{# Hello world .unnumbered}`.
+
+1. Next, reference the labeled heading anywhere in the text using `\@ref(nice-label)`; for example, please see Chapter \@ref(cross). 
+    - If you prefer text as the link instead of a numbered reference use: [any text you want can go here](#cross).
+
+## Captioned figures and tables
+
+Figures and tables *with captions* can also be cross-referenced from elsewhere in your book using `\@ref(fig:chunk-label)` and `\@ref(tab:chunk-label)`, respectively.
+
+See Figure \@ref(fig:nice-fig).
+
+```{r nice-fig, fig.cap='Here is a nice figure!', out.width='80%', fig.asp=.75, fig.align='center', fig.alt='Plot with connected points showing that vapor pressure of mercury increases exponentially as temperature increases.'}
+par(mar = c(4, 4, .1, .1))
+plot(pressure, type = 'b', pch = 19)
+```
+
+Don't miss Table \@ref(tab:nice-tab).
+
+```{r nice-tab, tidy=FALSE}
+knitr::kable(
+  head(pressure, 10), caption = 'Here is a nice table!',
+  booktabs = TRUE
+)
+```
