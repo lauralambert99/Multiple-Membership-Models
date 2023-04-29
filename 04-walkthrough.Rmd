@@ -1,10 +1,37 @@
 # Running a Multiple Membership Model 
 
-As noted in `\@ref(software)`, the only software currently able to run a multiple membership model is MLwiN (add ref).  There is an R package, R2MLwiN [@R-R2MLwiN] that allows for an R-interface which runs MLwiN in the background.  This allows users to work with a program they are already familiar with while accessing the capabilities of MLwiN.  However, as also previously noted, you must have an active MLwiN license, and have the program installed on your computer for your R code to work.
+As noted in \@ref(software), the only software currently able to run a multiple membership model is MLwiN (add ref).  There is an R package, R2MLwiN [@R-R2MLwiN] that allows for an R-interface which runs MLwiN in the background.  This allows users to work with a program they are already familiar with while accessing the capabilities of MLwiN.  However, as also previously noted, you must have an active MLwiN license, and have the program installed on your computer for your R code to work.
 
 ## Intercept-only Model
 We will first run an intercept-only model, looking at Math as an outcome and only including the intercept and the multiple membership effect of teachers.  This model will inform us as to how the variance in Math scores is divided between teacher variance components (level 2) and student variance components (level 1).  
 
+### First Steps
+Setting this up to run in R, we first need to make sure we have MLwiN installed, as well as call the `R2MLwiN` package.  Additionally, R2MLwiN defaults the path to MLwiN as "C:/Program Files/MLwiN v3.06/".  If yours, like mine, is installed elsewhere, you need to include `options(MLwiN_pah = "path/to/MLwiN")`.  An easy way to copy the path is to find it in your computer, hold 'shift' and right click the program.  The option "copy as path" comes up as an option, and you can just paste it in.
+
+### Define the model
+After we have loaded in the appropriate packages, we take a few steps to actually run the model.  First, we define the intercept-only model, including both the teacher columns and the student IDs.  For our dataset, our model definition will be `intonly <- Math ~ 1 + (1|tchr1) + (1|S_ID)`.  Important to note is that when defining the teacher columns (`(1|tchr1)`), we use the first column name, not `tchr` as you might be inclined to do.
+
+### Set up and send to MLwiN
+The next step is to define the multiple membership variables (teacher columns for us) and the associated weights.  To do this, we make an object that is a list of list of lists.  I named it `MultiMemb` in the code chunk below: 
+
+```{r multimemb, eval = FALSE, echo = TRUE} 
+MultiMemb <- list(list(
+  mmvar = list("tchr1", "tchr2", "tchr3", "tchr4", "tchr5", "tchr6", "tchr7", "tchr8", "tchr9", "tchr10", "tchr11", "tchr12"),
+  weights = list("w1", "w2", "w3", "w4", "w5", "w6", "w7", "w8", "w9", "w10", "w11", "w12")), NA)
+```
+
+Within this, `mmvar` specifies classification units (unit of multiple membership).  `weights` is where the associated weights go, and is the student-level weighting (in our case) given to each teacher they had.  The final `NA` indicates that level 1 has no multiple membership classification.  This set-up is why our data needed to be in compact rather than long form (\@ref(compact)).
+
+After we have defined `MultiMemb`, we can actually run the model.  This line is putting everything together:
+
+```{r intonly model only, echo = TRUE, eval = FALSE}
+(MMembModel1 <- runMLwiN(Formula = intonly, data = StudData, estoptions = list(EstM = 1, drop.data = FALSE, mm = MultiMemb)))
+```
+
+Looking at it, we are calling MLwiN with `runMLwiN`, defining what the model should be with `Formula`, and defining our data set with `data`.  `estoptions` is our estimation options.  When `EstM` is equal to 1, we are using MCMC estimation.  And lastly, within that same statement, `mm` is calling our `MultiMemb` object to match everything up and weight appropriately.
+
+### Put it all together
+Taking everything from above and putting it all together, we get the following code chunk, and then output.
 ```{r intercept only, include = TRUE, message = FALSE}
 library(R2MLwiN)
 options(MLwiN_path="C:\\Program Files (x86)\\MLwiN trial\\i386\\mlwin.exe")
@@ -19,10 +46,19 @@ MultiMemb <- list(list(
 
 ```
 
+## The Output
+Looking at the output from our intercept only model, we have a lot of information.  Skipping down to "The fixed part estimates:"
+```{r output intonly, include = TRUE, eval = FALSE}
+## The fixed part estimates:  
+##                 Coef.   Std. Err.       z   Pr(>|z|)       [95% Cred.   Interval]   ESS 
+## Intercept   431.52398     2.21944  194.43          0  ***   426.97449   435.91524   395 
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1  
+```
+we see that the intercept is 431.52.  This is the overall mean of math achievement across all the students and all the teachers.  Conveniently, this output also provides us with a 95% credibility interval (NOT a confidence interval) of (426.97, 435.91) indicating STUFF******.
 
 ## Adding in level 1 predictors
 
-```{r level 1 pred, include = TRUE, message = FALSE}
+```{r level 1 pred, include = TRUE, eval = FALSE, message = FALSE}
 lev1 <- Math ~ 1 + S_SES + female + NB + SAT_M + (1|tchr1) + (1|S_ID)
 
 MultiMemb <- list(list(

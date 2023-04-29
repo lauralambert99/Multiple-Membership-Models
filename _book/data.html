@@ -146,13 +146,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#cross-classified-vs.-multiple-membership-models"><i class="fa fa-check"></i><b>2.1</b> Cross-classified vs. Multiple membership models</a></li>
 <li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#a-note-on-notation"><i class="fa fa-check"></i><b>2.2</b> A note on Notation</a></li>
-<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#data"><i class="fa fa-check"></i><b>2.3</b> Data</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="introduction.html"><a href="introduction.html#data"><i class="fa fa-check"></i><b>3</b> Data</a>
+<li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3.1</b> Examining the Data</a></li>
-<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#software"><i class="fa fa-check"></i><b>3.2</b> Software Considerations</a></li>
-<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.3</b> Captioned figures and tables</a></li>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. long forms</a></li>
+<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#examining-the-data"><i class="fa fa-check"></i><b>3.2</b> Examining the Data</a></li>
+<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#software"><i class="fa fa-check"></i><b>3.3</b> Software Considerations</a></li>
+<li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.4</b> Captioned figures and tables</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html"><i class="fa fa-check"></i><b>4</b> Multiple Membership models: the details</a></li>
 <li class="chapter" data-level="5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html"><i class="fa fa-check"></i><b>5</b> Running a Multiple Membership Model</a>
@@ -197,7 +197,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="data" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">Chapter 3</span> Data<a href="introduction.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<h1><span class="header-section-number">Chapter 3</span> Data<a href="data.html#data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>The data used for this tutorial were simulated in R to loosely represent a cohort of JMU students. As accurate counts and frequencies of the predictors were not available outside of a request to PAIR, “best guesses” were employed where necessary. In a fictional scenario, JMU has decided to add a Math Achievement Test as a graduation requirement: students must take this test the semester they anticipate graduating as a measure of their Math Achievement at JMU, with the point of comparison being a cut-score. The stakes are similar to Assessment Day and there are no penalties for low scores. JMU, recognizing that many factors may play into how well a student does on this test, wants to consider the role different math teachers play as well as some student-level predictors. Not wanting this to hold any penalty towards teachers either, JMU has assigned each teacher an anonymous ID and associated it with the years of experience. JMU is additionally considering what teacher qualities help students be more successful, with the idea of offering more professional development in those areas. Currently, the only teacher-level predictor available is number of years of experience of the instructor.</p>
 <p>JMU hopes to answer the following research questions:</p>
 <p>The predictors are listed in the table below, along with a brief description.</p>
@@ -266,9 +266,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </table>
 <p><br />
 </p>
+<div id="compact" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Compact vs. long forms<a href="data.html#compact" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The data are in a .cvs file in “compact” form, as opposed to “long” form. Compact form contains two different sets of variables: one set for the first through twelfth teacher to instruct each student and another set represent the multiple membership weight variables. Wide form would have the same information, but in only one set of variables representing the individual teacher IDs and the proportion of time each teacher spent instructing each student (see tables below). While the wide form is less efficient, some programs require the data to be in one form or the other. In this instance, MLwiN using Bayesian routines (what we will be using) requires compact form (Leckie, 2013).</p>
-<div id="examining-the-data" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Examining the Data<a href="data.html#examining-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<div id="examining-the-data" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Examining the Data<a href="data.html#examining-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The next step is to determine what type of predictors we have and what they look like, as well as if we have a true hierarchical model, a “nesting as nuisance” model, or a non-hierarchical model such as cross-classified or multiple membership models. We will be looking for if students (in this case) belong to one and only one cluster (teachers), which would indicate a hierarchical approach or a “nesting as nuisance” approach. However, if, as is the case, students belong to multiple clusters, we will be taking a non-hierarchical approach. For this example, we are only considering one cluster, so we will be using a multiple membership design. We can see in the <code>num_tchrs</code> column there are students ranging from having had 1 teacher to 12 teachers, indicating we have a multiple membership column. We could also look at the <code>tchr1</code> through <code>tchr12</code> columns, and see there are values in more than one of those - indicating that students have encountered more than one math teacher.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Read in the data file</span></span>
 <span id="cb1-2"><a href="data.html#cb1-2" aria-hidden="true" tabindex="-1"></a>StudData <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;exampledata2.csv&quot;</span>)</span>
@@ -350,8 +353,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-3"><a href="data.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">x =</span> num_tchrs))</span></code></pre></div>
 <p><img src="_main_files/figure-html/predictors-1.png" width="672" /></p>
 </div>
-<div id="software" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Software Considerations<a href="data.html#software" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="software" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> Software Considerations<a href="data.html#software" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>I was unable to find any software other than MLwiN(cite) that was capable of running multiple membership models. That said, both R and Stata have functions or packages that allow you to use their interface and run MLwiN in the background, to prevent the need to learn an entirely new interface. MLwiN is not a free software and is produced by the group. A 30-day free trial with full functionality is available to anyone in the world, and for researchers in the US, a single-user license is £400 or a PhD license is available for XXX, though it expires after 3 years. In order to perform the analyses demonstrated below, I obtained a 30-day free license and used the R2MLwiN (cite) package to allow me to use an R interface. While the R code is provided, it will not work unless you also have a valid MLwiN license.</p>
 <p>There are two steps to cross-reference any heading:</p>
 <ol style="list-style-type: decimal">
@@ -366,8 +369,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ol>
 </div>
-<div id="captioned-figures-and-tables" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Captioned figures and tables<a href="data.html#captioned-figures-and-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="captioned-figures-and-tables" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Captioned figures and tables<a href="data.html#captioned-figures-and-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Figures and tables <em>with captions</em> can also be cross-referenced from elsewhere in your book using <code>\@ref(fig:chunk-label)</code> and <code>\@ref(tab:chunk-label)</code>, respectively.</p>
 <p>See Figure <a href="data.html#fig:nice-fig">3.1</a>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, .<span class="dv">1</span>, .<span class="dv">1</span>))</span>
