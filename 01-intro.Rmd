@@ -1,0 +1,25 @@
+# Introduction 
+
+When evaluating data in the educational field and in many other fields, researchers often run into the problem of their data being nested or clustered.  When this occurs, they are no longer able to use multiple regression, as they would be violating the independent observations assumption, and may instead turn to multilevel modeling.  With multilevel modeling, a researcher is able to handle students nested in schools and patients nested in nurses, as well as longitudinal models where time points are nested within individuals.  However, a key facet to all of these models is the strict hierarchical nature of the data: each level one unit (students, patients, or time points) is nested within one, and only one, level 2 unit (school, nurse, individual).  If we were to draw this relationship, it would look like Figure 1: there are no lines that are crossed, and each level one unit is associated with only one level two unit.  This can also be represented in table form; a true hierarchical model will only have one row (cite rr thing…maybe LEMMA thing?).  
+
+```{r true hierarchical dataframe, echo = FALSE}
+thdf <- data.frame(student = ('student'),
+                   Math_Teacher_1 = ("1, 2"),
+                   Math_Teacher_2 = ("3, 4"),
+                   Math_Teacher_3 = ("5, 6"))
+```
+knitr::kable(thdf, booktabs = TRUE, caption = 'Data distribution indicating a true hierarchical model'
+
+)
+
+Two level strict hierarchical models can be written as two separate equations, each representing a level of the model.  The level 1 equation is $y_{ij} = \beta_{0j} + r_{ij}$ and the associated level 2 equation would be $\beta_{0j} = \gamma_{00} + u_{0j}$, where *y_{ij}* is outcome and *\beta_{0j}* represents intercepts.  In the intercept-only model presented, there are no slope components, but if we were to add in predictors, we could examine how slopes vary.  *r_{ij}* is the random variation in level one, while *u_{0j}* is random variation in level 2 (Raudenbush & Bryk, 2002; Snijders & Bosker, 2012).
+
+## Cross-classified vs. Multiple membership models
+
+All chapter sections start with a second-level (`##`) or higher heading followed by your section title, like the sections above and below here. You can have as many as you want within a chapter.
+
+## A note on Notation
+
+Chapters and sections are numbered by default. To un-number a heading, add a `{.unnumbered}` or the shorter `{-}` at the end of the heading, like in this section.
+
+##Data
