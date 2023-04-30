@@ -9,7 +9,7 @@ We will first run an intercept-only model, looking at Math as an outcome and onl
 Setting this up to run in R, we first need to make sure we have MLwiN installed, as well as call the `R2MLwiN` package.  Additionally, R2MLwiN defaults the path to MLwiN as "C:/Program Files/MLwiN v3.06/".  If yours, like mine, is installed elsewhere, you need to include `options(MLwiN_pah = "path/to/MLwiN")`.  An easy way to copy the path is to find it in your computer, hold 'shift' and right click the program.  The option "copy as path" comes up as an option, and you can just paste it in.
 
 ### Define the model
-After we have loaded in the appropriate packages, we take a few steps to actually run the model.  First, we define the intercept-only model, including both the teacher columns and the student IDs.  For our dataset, our model definition will be `intonly <- Math ~ 1 + (1|tchr1) + (1|S_ID)`.  Important to note is that when defining the teacher columns (`(1|tchr1)`), we use the first column name, not `tchr` as you might be inclined to do.
+After we have loaded in the appropriate packages, we take a few steps to actually run the model.  First, we define the intercept-only model, including both the teacher columns and the student IDs.  For our dataset, our model definition will be `intonly <- Math ~ 1 + (1|tchr1) + (1|S_ID)`.  Important to note is that when defining the teacher columns (`(1|tchr1)`), we use the first column name, not `tchr` as you might be inclined to do.  The random part of the model, `(1|tchr1)` and `(1|S_ID)`, is written in descending order of hierarchy.  With this model specification, we are allowing intercepts to vary at level 2 (`(1|tchr1)`) and level 1 (`(1|S_ID)`).
 
 ### Set up and send to MLwiN
 The next step is to define the multiple membership variables (teacher columns for us) and the associated weights.  To do this, we make an object that is a list of list of lists.  I named it `MultiMemb` in the code chunk below: 
@@ -32,7 +32,7 @@ Looking at it, we are calling MLwiN with `runMLwiN`, defining what the model sho
 
 ### Put it all together
 Taking everything from above and putting it all together, we get the following code chunk, and then output.
-```{r intercept only, include = TRUE, message = FALSE}
+```{r intercept only, include = TRUE, message = FALSE, eval = FALSE}
 library(R2MLwiN)
 options(MLwiN_path="C:\\Program Files (x86)\\MLwiN trial\\i386\\mlwin.exe")
 

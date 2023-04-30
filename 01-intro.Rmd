@@ -21,8 +21,9 @@ $$\beta_{0j} = \gamma_{00} + u_{0j}$$,
 
 With these equations, $y_{ij}$ is outcome and $\beta_{0j}$ represents intercepts.  In the intercept-only model presented, there are no slope components, but if we were to add in predictors, we could examine how slopes vary.  $r_{ij}$ is the random variation in level one, while $u_{0j}$ is random variation in level 2 (Raudenbush & Bryk, 2002; Snijders & Bosker, 2012).
 
-## Cross-classified vs. Multiple membership models
-Cross-classified models can also be represented in table or visual form.  In table form, the cross classified structure becomes evident when there are level one units in more than one row and column.
+## Non-hierarchical models in brief
+While data can be purely hierarchical as described above, situations often arise when level 1 units do not fit neatly into one and only one level 2 cluster.  One example of this type of non-hierarchical model is a cross-classified model.  In this instance, level 1 units are members of more than one level two cluster, but there is not a pure hierarchy.  For example, students may be nested within both biology classes and chemistry classes, with the outcome measurement being science knowledge.  It would seem wise to take into account both the impact of biology classes as well as chemistry classes.  However, students who were in the same biology class are not all in the same chemistry class.  This situation would require the use of a cross-classified model.  Cross-classified models, like pure hierarchical models, can also be represented in table or visual form.  In table form, the cross classified structure becomes evident when there are level one units in more than one row and column.  In the simple example below, there are multiple cells filled in both rows (Physics Teacher 1 and 2) and in columns (Math Teacher 2).
+
 ```{r cross classified table, echo = FALSE}
 cct <- data.frame(' ' = c("Math Teacher 1", "Math Teacher 2", "Math Teacher 3"),
                   "Physics Teacher 1" = c("1, 2", "3", " "),
@@ -31,9 +32,9 @@ cct <- data.frame(' ' = c("Math Teacher 1", "Math Teacher 2", "Math Teacher 3"),
 knitr::kable(cct, booktabs = TRUE, caption = 'Data distribution indicating a cross-classified model')
 ```
 
-Multiple membership data are less evident in table form unless you are paying careful attention to the population in each cell, but becomes more evident in a unit diagram. As with the other diagrams, however, these can quickly become visually confusing with large datasets. 
+Another type of non-hierarchical model is a multiple membership model.  In this instance, there is only one level 2 cluster being considered, but the level 1 units do not all belong to one and only one cluster.  These types of models are frequently employed in education to model what are termed mobile students: students who attend more than one school over a school year, or more than one elementary school, for example.  Multiple membership data are less evident in table form unless you are paying careful attention to the population in each cell, but becomes more evident in a unit diagram. As with the other diagrams, however, these can quickly become visually confusing with large datasets. Moving forward, we will focus exclusively on multiple membership models.
 
-## A note on Notation
+## A note on Notation: Multiple Membership Models
 There are three possibilities for how to depict these models, each with its own set of advantages and disadvantages.  Standard hierarchical notation, which we are familiar with from truly hierarchical models, uses subscripts to identify individual and cluster level predictors and effects.  The disadvantage of this notation is that, due to its familiarity, individuals may incorrectly assume that unit $\textit{i}$ is strictly nested within cluster $\textit{j}$, which is not the case (Raudenbush & Bryk, 2002; Leckie, 2013).  Another method is to use multiple subscript notation (Beretvas, 2010).  This notation makes the non-hierarchical structure more apparent, however, it can quickly become challenging to read.  
 The notation we will use moving forward is classification notation (Leckie, 2013):  
 $$y_{i} = \beta_{0} + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}$$

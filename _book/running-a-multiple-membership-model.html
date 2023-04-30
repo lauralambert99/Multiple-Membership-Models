@@ -158,7 +158,7 @@ div.csl-indent {
 <li><a href="./">Multiple Membership Models: A tutorial</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like https://bookdown.org/yihui/bookdown</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.1</b> R packages used</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
@@ -166,8 +166,8 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#cross-classified-vs.-multiple-membership-models"><i class="fa fa-check"></i><b>2.1</b> Cross-classified vs. Multiple membership models</a></li>
-<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#a-note-on-notation"><i class="fa fa-check"></i><b>2.2</b> A note on Notation</a></li>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#non-hierarchical-models-in-brief"><i class="fa fa-check"></i><b>2.1</b> Non-hierarchical models in brief</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#a-note-on-notation-multiple-membership-models"><i class="fa fa-check"></i><b>2.2</b> A note on Notation: Multiple Membership Models</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
@@ -227,7 +227,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="running-a-multiple-membership-model" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Running a Multiple Membership Model<a href="running-a-multiple-membership-model.html#running-a-multiple-membership-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>As noted in <a href="data.html#software">3.3</a>, the only software currently able to run a multiple membership model is MLwiN (add ref). There is an R package, R2MLwiN <span class="citation">(<a href="#ref-R-R2MLwiN" role="doc-biblioref">Zhang et al. 2023</a>)</span> that allows for an R-interface which runs MLwiN in the background. This allows users to work with a program they are already familiar with while accessing the capabilities of MLwiN. However, as also previously noted, you must have an active MLwiN license, and have the program installed on your computer for your R code to work.</p>
+<p>As noted in <a href="data.html#software">3.3</a>, the only software currently able to run a multiple membership model is MLwiN (add ref). There is an R package, R2MLwiN <span class="citation">(<a href="#ref-R-R2MLwiN" role="doc-biblioref"><strong>R-R2MLwiN?</strong></a>)</span> that allows for an R-interface which runs MLwiN in the background. This allows users to work with a program they are already familiar with while accessing the capabilities of MLwiN. However, as also previously noted, you must have an active MLwiN license, and have the program installed on your computer for your R code to work.</p>
 <div id="intercept-only-model" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Intercept-only Model<a href="running-a-multiple-membership-model.html#intercept-only-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We will first run an intercept-only model, looking at Math as an outcome and only including the intercept and the multiple membership effect of teachers. This model will inform us as to how the variance in Math scores is divided between teacher variance components (level 2) and student variance components (level 1).</p>
@@ -237,81 +237,52 @@ div.csl-indent {
 </div>
 <div id="define-the-model" class="section level3 hasAnchor" number="5.1.2">
 <h3><span class="header-section-number">5.1.2</span> Define the model<a href="running-a-multiple-membership-model.html#define-the-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>After we have loaded in the appropriate packages, we take a few steps to actually run the model. First, we define the intercept-only model, including both the teacher columns and the student IDs. For our dataset, our model definition will be <code>intonly &lt;- Math ~ 1 + (1|tchr1) + (1|S_ID)</code>. Important to note is that when defining the teacher columns (<code>(1|tchr1)</code>), we use the first column name, not <code>tchr</code> as you might be inclined to do.</p>
+<p>After we have loaded in the appropriate packages, we take a few steps to actually run the model. First, we define the intercept-only model, including both the teacher columns and the student IDs. For our dataset, our model definition will be <code>intonly &lt;- Math ~ 1 + (1|tchr1) + (1|S_ID)</code>. Important to note is that when defining the teacher columns (<code>(1|tchr1)</code>), we use the first column name, not <code>tchr</code> as you might be inclined to do. The random part of the model, <code>(1|tchr1)</code> and <code>(1|S_ID)</code>, is written in descending order of hierarchy. With this model specification, we are allowing intercepts to vary at level 2 (<code>(1|tchr1)</code>) and level 1 (<code>(1|S_ID)</code>).</p>
 </div>
 <div id="set-up-and-send-to-mlwin" class="section level3 hasAnchor" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> Set up and send to MLwiN<a href="running-a-multiple-membership-model.html#set-up-and-send-to-mlwin" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The next step is to define the multiple membership variables (teacher columns for us) and the associated weights. To do this, we make an object that is a list of list of lists. I named it <code>MultiMemb</code> in the code chunk below:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="running-a-multiple-membership-model.html#cb1-1" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
-<span id="cb1-2"><a href="running-a-multiple-membership-model.html#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
-<span id="cb1-3"><a href="running-a-multiple-membership-model.html#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="running-a-multiple-membership-model.html#cb10-1" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
+<span id="cb10-2"><a href="running-a-multiple-membership-model.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
+<span id="cb10-3"><a href="running-a-multiple-membership-model.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span></code></pre></div>
 <p>Within this, <code>mmvar</code> specifies classification units (unit of multiple membership). <code>weights</code> is where the associated weights go, and is the student-level weighting (in our case) given to each teacher they had. The final <code>NA</code> indicates that level 1 has no multiple membership classification. This set-up is why our data needed to be in compact rather than long form (<a href="data.html#compact">3.1</a>).</p>
 <p>After we have defined <code>MultiMemb</code>, we can actually run the model. This line is putting everything together:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="running-a-multiple-membership-model.html#cb2-1" aria-hidden="true" tabindex="-1"></a>(MMembModel1 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonly, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="running-a-multiple-membership-model.html#cb11-1" aria-hidden="true" tabindex="-1"></a>(MMembModel1 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonly, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
 <p>Looking at it, we are calling MLwiN with <code>runMLwiN</code>, defining what the model should be with <code>Formula</code>, and defining our data set with <code>data</code>. <code>estoptions</code> is our estimation options. When <code>EstM</code> is equal to 1, we are using MCMC estimation. And lastly, within that same statement, <code>mm</code> is calling our <code>MultiMemb</code> object to match everything up and weight appropriately.</p>
 </div>
 <div id="put-it-all-together" class="section level3 hasAnchor" number="5.1.4">
 <h3><span class="header-section-number">5.1.4</span> Put it all together<a href="running-a-multiple-membership-model.html#put-it-all-together" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Taking everything from above and putting it all together, we get the following code chunk, and then output.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="running-a-multiple-membership-model.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(R2MLwiN)</span>
-<span id="cb3-2"><a href="running-a-multiple-membership-model.html#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">MLwiN_path=</span><span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Program Files (x86)</span><span class="sc">\\</span><span class="st">MLwiN trial</span><span class="sc">\\</span><span class="st">i386</span><span class="sc">\\</span><span class="st">mlwin.exe&quot;</span>)</span>
-<span id="cb3-3"><a href="running-a-multiple-membership-model.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="running-a-multiple-membership-model.html#cb3-4" aria-hidden="true" tabindex="-1"></a>intonly <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
-<span id="cb3-5"><a href="running-a-multiple-membership-model.html#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="running-a-multiple-membership-model.html#cb3-6" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
-<span id="cb3-7"><a href="running-a-multiple-membership-model.html#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
-<span id="cb3-8"><a href="running-a-multiple-membership-model.html#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
-<span id="cb3-9"><a href="running-a-multiple-membership-model.html#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="running-a-multiple-membership-model.html#cb3-10" aria-hidden="true" tabindex="-1"></a>(MMembModel1 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonly, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
-<pre><code>## MLwiN is running, please wait......</code></pre>
-<pre><code>## 
-## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
-## MLwiN (version: 2.36)  multilevel model (Normal) 
-##        N min     mean max N_complete min_complete mean_complete max_complete
-## tchr1 56  75 92.85714 122         56           75      92.85714          122
-## Estimation algorithm:  MCMC      Cross-classified              Elapsed time : 6.23s 
-## Number of obs:  5200 (from total 5200)          Number of iter.: 5000  Chains: 1  Burn-in: 500 
-## Bayesian Deviance Information Criterion (DIC)
-## Dbar      D(thetabar)    pD      DIC
-## 56499.285  56453.141  46.146     56545.430  
-## --------------------------------------------------------------------------------------------------- 
-## The model formula:
-## Math ~ 1 + (1 | tchr1) + (1 | S_ID)
-## Level 2: tchr1     Level 1: S_ID      
-## --------------------------------------------------------------------------------------------------- 
-## The fixed part estimates:  
-##                 Coef.   Std. Err.       z   Pr(&gt;|z|)       [95% Cred.   Interval]   ESS 
-## Intercept   431.52398     2.21944  194.43          0  ***   426.97449   435.91524   395 
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  
-## --------------------------------------------------------------------------------------------------- 
-## The random part estimates at the tchr1 level: 
-##                     Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
-## var_Intercept   238.96526    57.92255    147.42228   374.11760   2080 
-## --------------------------------------------------------------------------------------------------- 
-## The random part estimates at the S_ID level: 
-##                      Coef.   Std. Err.   [95% Cred.    Interval]    ESS 
-## var_Intercept   3064.65607    59.68536   2948.33898   3181.76541   4681 
-## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="running-a-multiple-membership-model.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(R2MLwiN)</span>
+<span id="cb12-2"><a href="running-a-multiple-membership-model.html#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">MLwiN_path=</span><span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Program Files (x86)</span><span class="sc">\\</span><span class="st">MLwiN trial</span><span class="sc">\\</span><span class="st">i386</span><span class="sc">\\</span><span class="st">mlwin.exe&quot;</span>)</span>
+<span id="cb12-3"><a href="running-a-multiple-membership-model.html#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="running-a-multiple-membership-model.html#cb12-4" aria-hidden="true" tabindex="-1"></a>intonly <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
+<span id="cb12-5"><a href="running-a-multiple-membership-model.html#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="running-a-multiple-membership-model.html#cb12-6" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
+<span id="cb12-7"><a href="running-a-multiple-membership-model.html#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
+<span id="cb12-8"><a href="running-a-multiple-membership-model.html#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
+<span id="cb12-9"><a href="running-a-multiple-membership-model.html#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="running-a-multiple-membership-model.html#cb12-10" aria-hidden="true" tabindex="-1"></a>(MMembModel1 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonly, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
 </div>
 </div>
 <div id="the-output" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> The Output<a href="running-a-multiple-membership-model.html#the-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Looking at the output from our intercept only model, we have a lot of information. Skipping down to “The fixed part estimates:”</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="running-a-multiple-membership-model.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## The fixed part estimates:  </span></span>
-<span id="cb6-2"><a href="running-a-multiple-membership-model.html#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Coef.   Std. Err.       z   Pr(&gt;|z|)       [95% Cred.   Interval]   ESS </span></span>
-<span id="cb6-3"><a href="running-a-multiple-membership-model.html#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Intercept   431.52398     2.21944  194.43          0  ***   426.97449   435.91524   395 </span></span>
-<span id="cb6-4"><a href="running-a-multiple-membership-model.html#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  </span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="running-a-multiple-membership-model.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">## The fixed part estimates:  </span></span>
+<span id="cb13-2"><a href="running-a-multiple-membership-model.html#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="do">##                 Coef.   Std. Err.       z   Pr(&gt;|z|)       [95% Cred.   Interval]   ESS </span></span>
+<span id="cb13-3"><a href="running-a-multiple-membership-model.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Intercept   431.52398     2.21944  194.43          0  ***   426.97449   435.91524   395 </span></span>
+<span id="cb13-4"><a href="running-a-multiple-membership-model.html#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  </span></span></code></pre></div>
 <p>we see that the intercept is 431.52. This is the overall mean of math achievement across all the students and all the teachers. Conveniently, this output also provides us with a 95% credibility interval (NOT a confidence interval) of (426.97, 435.91) indicating STUFF******.</p>
 </div>
 <div id="adding-in-level-1-predictors" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Adding in level 1 predictors<a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="running-a-multiple-membership-model.html#cb7-1" aria-hidden="true" tabindex="-1"></a>lev1 <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> S_SES <span class="sc">+</span> female <span class="sc">+</span> NB <span class="sc">+</span> SAT_M <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
-<span id="cb7-2"><a href="running-a-multiple-membership-model.html#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="running-a-multiple-membership-model.html#cb7-3" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
-<span id="cb7-4"><a href="running-a-multiple-membership-model.html#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
-<span id="cb7-5"><a href="running-a-multiple-membership-model.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
-<span id="cb7-6"><a href="running-a-multiple-membership-model.html#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="running-a-multiple-membership-model.html#cb7-7" aria-hidden="true" tabindex="-1"></a>(MMembModel2 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> lev1, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="running-a-multiple-membership-model.html#cb14-1" aria-hidden="true" tabindex="-1"></a>lev1 <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> S_SES <span class="sc">+</span> female <span class="sc">+</span> NB <span class="sc">+</span> SAT_M <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
+<span id="cb14-2"><a href="running-a-multiple-membership-model.html#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="running-a-multiple-membership-model.html#cb14-3" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
+<span id="cb14-4"><a href="running-a-multiple-membership-model.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
+<span id="cb14-5"><a href="running-a-multiple-membership-model.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
+<span id="cb14-6"><a href="running-a-multiple-membership-model.html#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="running-a-multiple-membership-model.html#cb14-7" aria-hidden="true" tabindex="-1"></a>(MMembModel2 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> lev1, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
 </div>
 <div id="adding-in-level-2-predictors" class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> Adding in level 2 predictors<a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -336,9 +307,6 @@ Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd 
 </div>
 <div id="ref-R-bookdown" class="csl-entry">
 ———. 2023. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
-</div>
-<div id="ref-R-R2MLwiN" class="csl-entry">
-Zhang, Zhengzheng, Chris Charlton, Richard Parker, George Leckie, and William Browne. 2023. <em>R2MLwiN: Running MLwiN from Within r</em>. <a href="https://CRAN.R-project.org/package=R2MLwiN">https://CRAN.R-project.org/package=R2MLwiN</a>.
 </div>
 </div>
 <div class="footnotes">
@@ -407,6 +375,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
