@@ -24,13 +24,22 @@ knitr::write_bib(c(
   .packages(), 'bookdown', 'knitr', 'rmarkdown', 'R2MLwiN', 'tidyverse', 'ggplot2'
 ), 'packages.bib')
 ```
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
 
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
+Calculations and data manipulations performed in this tutorial made use of the following R packages:
+Bookdown (@R-bookdown)  
+knitr (@R-knitr)  
+Rmarkdown (@R-rmarkdown)  
+Tidyverse (@R-tidyverse)  
+ggplot2 (@R-ggplot2)  
+R2MLwiN (@R-R2MLwiN)  
 
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
 
-## Render book
+## Acknowledgements 
+Much of the background information about multiple membership models was gathered from the learning resources provided by the University of Bristol's Center for Multilevel Modelling (@LEMMA).
+
+## A Disclaimer
+The data used in this tutorial were simulated by me, and I am certain that a better job could have been done to better reflect some dependencies that should be in the data.  One known omission is variance components were not specified prior to estimating the outcome.  However, these data were simulated to reflect a student population at JMU to the best of my ability at the time and no intentional errors or misrepresentations were intended.  Data-generating code is included in the Appendix.
+
 
 You can render the HTML version of this example book without changing anything:
 

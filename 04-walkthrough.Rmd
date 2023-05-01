@@ -28,11 +28,11 @@ After we have defined `MultiMemb`, we can actually run the model.  This line is 
 (MMembModel1 <- runMLwiN(Formula = intonly, data = StudData, estoptions = list(EstM = 1, drop.data = FALSE, mm = MultiMemb)))
 ```
 
-Looking at it, we are calling MLwiN with `runMLwiN`, defining what the model should be with `Formula`, and defining our data set with `data`.  `estoptions` is our estimation options.  When `EstM` is equal to 1, we are using MCMC estimation.  And lastly, within that same statement, `mm` is calling our `MultiMemb` object to match everything up and weight appropriately.
+Looking at it, we are calling MLwiN with `runMLwiN`, defining what the model should be with `Formula`, and defining our data set with `data`.  `estoptions` is our estimation options.  When `EstM` is equal to 1, we are using MCMC estimation.  And lastly, within that same statement, `mm` is calling our `MultiMemb` object to match everything up and weight appropriately [@R-R2MLwiN].
 
 ### Put it all together
 Taking everything from above and putting it all together, we get the following code chunk, and then output.
-```{r intercept only, include = TRUE, message = FALSE, eval = FALSE}
+```{r intercept only, include = TRUE, message = FALSE, eval = TRUE, warning = FALSE}
 library(R2MLwiN)
 options(MLwiN_path="C:\\Program Files (x86)\\MLwiN trial\\i386\\mlwin.exe")
 
@@ -47,14 +47,62 @@ MultiMemb <- list(list(
 ```
 
 ## The Output
-Looking at the output from our intercept only model, we have a lot of information.  Skipping down to "The fixed part estimates:"
-```{r output intonly, include = TRUE, eval = FALSE}
-## The fixed part estimates:  
-##                 Coef.   Std. Err.       z   Pr(>|z|)       [95% Cred.   Interval]   ESS 
-## Intercept   431.52398     2.21944  194.43          0  ***   426.97449   435.91524   395 
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1  
+Looking at the output from our intercept only model, we have a lot of information.  First, R and MLwiN are reminding us what we put in:
+```{r output intonly part1, include = TRUE, eval = FALSE}
+MLwiN (version: 2.36)  multilevel model (Normal) 
+       N min     mean max N_complete min_complete mean_complete max_complete
+tchr1 56  75 92.85714 122         56           75      92.85714          122
+Estimation algorithm:  MCMC      Cross-classified              Elapsed time : 9.42s 
+Number of obs:  5200 (from total 5200)          Number of iter.: 5000  Chains: 1  Burn-in: 500 
 ```
-we see that the intercept is 431.52.  This is the overall mean of math achievement across all the students and all the teachers.  Conveniently, this output also provides us with a 95% credibility interval (NOT a confidence interval) of (426.97, 435.91) indicating STUFF******.
+Since this is using Baysian MCMC estimation, we also get the number of iterations and burn-in count.  This is adjustable if you felt your model needed different parameters, but for this tutorial, I stuck with the default setting as shown.
+
+
+We then get the DIC:
+```{r output intonly DIC, include = TRUE, eval = FALSE}
+Bayesian Deviance Information Criterion (DIC)
+Dbar      D(thetabar)    pD      DIC
+56499.285  56453.141  46.146     56545.430  
+```
+Again, since this is MCMC estimation, we do not get any likelihood ratios, nor can we perform any likelihood ration tests.  This DIC is our baseline, to which other models including predictors will be compared to.  If a predictor is useful at explaining variance, we expect the DIC to decrease.  We can also use the DIC to determine if the multiple membership model is preferred to a single level model.  The single model would be specified and run as follows:
+```{r single level, include = TRUE, eval = TRUE}
+intonlyred <- Math ~ 1 + (1|S_ID)
+(MMembModelRed <- runMLwiN(Formula = intonlyred, data = StudData, estoptions = list(EstM = 1)))
+```
+From the output, we see that the DIC for the single level model is 56721.641, which is 176.211 higher than the multiple membership model.  This indicates that the multiple membership model is statistically preferred over the single level model.
+
+
+We next get reminded of our model formula, and what the grouping predictors were:
+```{r output intonly model, include = TRUE, eval = FALSE}
+The model formula:
+Math ~ 1 + (1 | tchr1) + (1 | S_ID)
+Level 2: tchr1     Level 1: S_ID  
+```
+
+
+Skipping down to "The fixed part estimates:"
+```{r output intonly, include = TRUE, eval = FALSE}
+The fixed part estimates:  
+                Coef.   Std. Err.       z   Pr(>|z|)       [95% Cred.   Interval]   ESS 
+Intercept   431.52398     2.21944  194.43          0  ***   426.97449   435.91524   395 
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1   
+```
+we see that the intercept is 431.52.  This is the overall mean of math achievement across all the students and all the teachers.  Conveniently, this output also provides us with a 95% credibility interval of (426.97, 435.91) indicating STUFF******.
+
+Going further down, we come to the random part estimates at level 2 and level 1, or the variance components:
+```{r output intonly var, include = TRUE, eval = FALSE}
+The random part estimates at the tchr1 level: 
+                    Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+var_Intercept   238.96526    57.92255    147.42228   374.11760   2080 
+--------------------------------------------------------------------------------------------------- 
+The random part estimates at the S_ID level: 
+                     Coef.   Std. Err.   [95% Cred.    Interval]    ESS 
+var_Intercept   3064.65607    59.68536   2948.33898   3181.76541   4681 
+```
+
+
+Using these, we can calculate the variance partition coefficient (VPC) for this model, which will tell us the proportion of variance in Math scores that is at each level of our model.  However, as previously mentioned in \@ref(vpc), using only the values in the table will only tell us the variance partition coefficient for students who only had a single teacher.
+
 
 ## Adding in level 1 predictors
 
@@ -71,9 +119,6 @@ MultiMemb <- list(list(
 ## Adding in level 2 predictors
 
 
-## Footnotes
-
-Footnotes are put inside the square brackets after a caret `^[]`. Like this one ^[This is a footnote.]. 
 
 ## Citations
 
