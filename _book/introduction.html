@@ -12,7 +12,7 @@
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 2 Introduction | Multiple Membership Models: A tutorial" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Laura Lambert" />
 
 
-<meta name="date" content="2023-05-01" />
+<meta name="date" content="2023-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,7 +163,6 @@ div.csl-indent {
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.1</b> R packages used</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.2</b> Acknowledgements</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#a-disclaimer"><i class="fa fa-check"></i><b>1.3</b> A Disclaimer</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.4</b> Preview book</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
 <ul>
@@ -171,20 +170,28 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. long forms</a></li>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. wide forms</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#compact-1"><i class="fa fa-check"></i><b>3.1.1</b> Compact</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#wide"><i class="fa fa-check"></i><b>3.1.2</b> Wide</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#examining-the-data"><i class="fa fa-check"></i><b>3.2</b> Examining the Data</a></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#software"><i class="fa fa-check"></i><b>3.3</b> Software Considerations</a></li>
-<li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.4</b> Captioned figures and tables</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html"><i class="fa fa-check"></i><b>4</b> Multiple Membership models: the details</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a>
+<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a></li>
+<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.1.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.2.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-1"><i class="fa fa-check"></i><b>4.2.2</b> Student 1</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a></li>
 <li class="chapter" data-level="4.3" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
-<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a></li>
+<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc-and-icc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#icc"><i class="fa fa-check"></i><b>4.4.1</b> ICC</a></li>
+<li class="chapter" data-level="4.4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4.2</b> VPC</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html"><i class="fa fa-check"></i><b>5</b> Running a Multiple Membership Model</a>
 <ul>
@@ -198,21 +205,15 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#the-output"><i class="fa fa-check"></i><b>5.2</b> The Output</a></li>
 <li class="chapter" data-level="5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors"><i class="fa fa-check"></i><b>5.3</b> Adding in level 1 predictors</a></li>
 <li class="chapter" data-level="5.4" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors"><i class="fa fa-check"></i><b>5.4</b> Adding in level 2 predictors</a></li>
-<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#footnotes"><i class="fa fa-check"></i><b>5.5</b> Footnotes</a></li>
-<li class="chapter" data-level="5.6" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#citations"><i class="fa fa-check"></i><b>5.6</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a>
+<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#circling-back-to-the-research-questions"><i class="fa fa-check"></i><b>5.5</b> Circling back to the research questions</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
-<li class="chapter" data-level="6.2" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
-<li class="chapter" data-level="6.3" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+<li class="chapter" data-level="5.5.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq1-do-teacher-characteristics-influence-student-math-scores-ie-do-we-need-to-factor-in-nesting-and-multiple-membership"><i class="fa fa-check"></i><b>5.5.1</b> RQ1: Do teacher characteristics influence student math scores? (ie, do we need to factor in nesting and multiple membership?)</a></li>
+<li class="chapter" data-level="5.5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq2-what-student-characteristics-predict-math-scores"><i class="fa fa-check"></i><b>5.5.2</b> RQ2: What student characteristics predict math scores?</a></li>
+<li class="chapter" data-level="5.5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq3-does-more-teacher-experience-lead-to-better-student-outcomes"><i class="fa fa-check"></i><b>5.5.3</b> RQ3: Does more teacher experience lead to better student outcomes?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="increasing-complexity.html"><a href="increasing-complexity.html"><i class="fa fa-check"></i><b>7</b> Increasing complexity</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="increasing-complexity.html"><a href="increasing-complexity.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
-<li class="chapter" data-level="7.2" data-path="increasing-complexity.html"><a href="increasing-complexity.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
-<li class="chapter" data-level="7.3" data-path="increasing-complexity.html"><a href="increasing-complexity.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a></li>
+<li class="chapter" data-level="" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i>Appendix 1</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -236,7 +237,13 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="introduction" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>When evaluating data in the educational field and in many other fields, researchers often run into the problem of their data being nested or clustered. When this occurs, they are no longer able to use multiple regression, as they would be violating the independent observations assumption, and may instead turn to multilevel modeling. With multilevel modeling, a researcher is able to handle students nested in schools and patients nested in nurses, as well as longitudinal models where time points are nested within individuals. However, a key facet to all of these models is the strict hierarchical nature of the data: each level one unit (students, patients, or time points) is nested within one, and only one, level 2 unit (school, nurse, individual). If we were to draw this relationship, it would look like Figure 1: there are no lines that are crossed, and each level one unit is associated with only one level two unit. This can also be represented in table form; a true hierarchical model will only have one row (cite rr thing…maybe LEMMA thing?).</p>
+<p>When evaluating data in the educational field and in many other fields, researchers often run into the problem of their data being nested or clustered. When this occurs, they are no longer able to use multiple regression, as they would be violating the independent observations assumption, and may instead turn to multilevel modeling. With multilevel modeling, a researcher is able to handle students nested in schools and patients nested in nurses, as well as longitudinal models where time points are nested within individuals. However, a key facet to all of these models is the strict hierarchical nature of the data: each level one unit (students, patients, or time points) is nested within one, and only one, level 2 unit (school, nurse, individual). If we were to draw this relationship, it would look like Figure 1: there are no lines that are crossed, and each level one unit is associated with only one level two unit. This can also be represented in table form; a true hierarchical model will only have one row.</p>
+<div class="figure">
+<img src="Slide1.PNG" alt="Figure 1: A pure hierarchical model" width="640" />
+<p class="caption">
+(#fig:fig 1)Figure 1: A pure hierarchical model
+</p>
+</div>
 <table>
 <caption>(#tab:true hierarchical table)Data distribution indicating a true hierarchical model</caption>
 <thead>
@@ -259,39 +266,34 @@ div.csl-indent {
 <p>Two level strict hierarchical models can be written as two separate equations, each representing a level of the model.<br />
 <span class="math display">\[y_{ij} = \beta_{0j} + r_{ij}\]</span>
 <span class="math display">\[\beta_{0j} = \gamma_{00} + u_{0j}\]</span>,</p>
-<p>With these equations, <span class="math inline">\(y_{ij}\)</span> is outcome and <span class="math inline">\(\beta_{0j}\)</span> represents intercepts. In the intercept-only model presented, there are no slope components, but if we were to add in predictors, we could examine how slopes vary. <span class="math inline">\(r_{ij}\)</span> is the random variation in level one, while <span class="math inline">\(u_{0j}\)</span> is random variation in level 2 (Raudenbush &amp; Bryk, 2002; Snijders &amp; Bosker, 2012).</p>
+<p>With these equations, <span class="math inline">\(y_{ij}\)</span> is outcome and <span class="math inline">\(\beta_{0j}\)</span> represents intercepts. In the intercept-only model presented, there are no slope components, but if we were to add in predictors, we could examine how slopes vary. <span class="math inline">\(r_{ij}\)</span> is the random variation in level one, while <span class="math inline">\(u_{0j}\)</span> is random variation in level 2 <span class="citation">(<a href="#ref-SnijdersICC" role="doc-biblioref">Snijders and Bosker 2012</a>)</span>.</p>
 <div id="non-hierarchical-models-in-brief" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Non-hierarchical models in brief<a href="introduction.html#non-hierarchical-models-in-brief" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>While data can be purely hierarchical as described above, situations often arise when level 1 units do not fit neatly into one and only one level 2 cluster. One example of this type of non-hierarchical model is a cross-classified model. In this instance, level 1 units are members of more than one level two cluster, but there is not a pure hierarchy. For example, students may be nested within both biology classes and chemistry classes, with the outcome measurement being science knowledge. It would seem wise to take into account both the impact of biology classes as well as chemistry classes. However, students who were in the same biology class are not all in the same chemistry class. This situation would require the use of a cross-classified model. Cross-classified models, like pure hierarchical models, can also be represented in table or visual form. In table form, the cross classified structure becomes evident when there are level one units in more than one row and column. In the simple example below, there are multiple cells filled in both rows (Physics Teacher 1 and 2) and in columns (Math Teacher 2).</p>
-<table>
-<caption>(#tab:cross classified table)Data distribution indicating a cross-classified model</caption>
-<thead>
-<tr class="header">
-<th align="left">X.</th>
-<th align="left">Physics.Teacher.1</th>
-<th align="left">Physics.Teacher.2</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Math Teacher 1</td>
-<td align="left">1, 2</td>
-<td align="left"></td>
-</tr>
-<tr class="even">
-<td align="left">Math Teacher 2</td>
-<td align="left">3</td>
-<td align="left">4</td>
-</tr>
-<tr class="odd">
-<td align="left">Math Teacher 3</td>
-<td align="left"></td>
-<td align="left">5, 6</td>
-</tr>
-</tbody>
-</table>
-<p>Another type of non-hierarchical model is a multiple membership model. In this instance, there is only one level 2 cluster being considered, but the level 1 units do not all belong to one and only one cluster. These types of models are frequently employed in education to model what are termed mobile students: students who attend more than one school over a school year, or more than one elementary school prior to a state-wide 5th grade test. Multiple membership data are less evident in table form unless you are paying careful attention to the population in each cell, but becomes more evident in a unit diagram. As with the other diagrams, however, these can quickly become visually confusing with large data sets. Moving forward, we will focus exclusively on multiple membership models.</p>
+While data can be purely hierarchical as described above, situations often arise when level 1 units do not fit neatly into one and only one level 2 cluster. One example of this type of non-hierarchical model is a cross-classified model. In this instance, level 1 units are members of more than one level two cluster, but there is not a pure hierarchy. For example, students may be nested within both biology classes and chemistry classes, with the outcome measurement being science knowledge. It would seem wise to take into account both the impact of biology classes as well as chemistry classes. However, students who were in the same biology class are not all in the same chemistry class. This situation would require the use of a cross-classified model. Cross-classified models, like pure hierarchical models, can also be represented in table or visual form. In table form, the cross classified structure becomes evident when there are level one units in more than one row and column. In the simple example below, there are multiple cells filled in both rows (Physics Teacher 1 and 2) and in columns (Math Teacher 2) <span class="citation">(<a href="#ref-Beretvas" role="doc-biblioref">Beretvas 2011</a>)</span>.
+<div class="figure">
+<img src="Slide2.PNG" alt="Figure 2: A Cross-classified model" width="640" />
+<p class="caption">
+(#fig:fig 2)Figure 2: A Cross-classified model
+</p>
+</div>
+Another type of non-hierarchical model is a multiple membership model. In this instance, there is only one level 2 cluster being considered, but the level 1 units do not all belong to one and only one cluster. These types of models are frequently employed in education to model what are termed mobile students: students who attend more than one school over a given time frame. An example of mobile students might be those who attend more than one elementary school prior to a state-wide 5th grade test. Multiple membership data are also evident in table form, as well as in a unit diagram. As with the other diagrams, however, these can quickly become visually confusing with large data sets <span class="citation">Beretvas (<a href="#ref-Beretvas" role="doc-biblioref">2011</a>)</span>.
+<div class="figure">
+<img src="Slide3.PNG" alt="Figure 3: A Multiple Membership model" width="640" />
+<p class="caption">
+(#fig:fig 3)Figure 3: A Multiple Membership model
+</p>
+</div>
+<p>Moving forward, we will focus exclusively on multiple membership models, going more in-depth into their intricacies as well as walking through a tutorial running a model and interpreting the output.</p>
 
+</div>
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Beretvas" class="csl-entry">
+Beretvas, S. Natasha. 2011. <span>“Cross-Classified and Multiple-Membership Models.”</span> In <em>Handbook for Advanced Multilevel Analysis</em>, 313–34. Routledge/Taylor &amp; Francis Group.
+</div>
+<div id="ref-SnijdersICC" class="csl-entry">
+Snijders, T. A. B., and R. J. Bosker. 2012. <span>“The Random Intercept Model.”</span> In <em>Multilevel ANalysis: An Introduction to Basic and Advanced Multilevel Modeling</em>, 41–73. SAGE Publications Inc.
 </div>
 </div>
             </section>

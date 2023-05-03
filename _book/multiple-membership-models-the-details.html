@@ -12,7 +12,7 @@
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 4 Multiple Membership models: the details | Multiple Membership Models: A tutorial" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Laura Lambert" />
 
 
-<meta name="date" content="2023-05-01" />
+<meta name="date" content="2023-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,7 +163,6 @@ div.csl-indent {
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.1</b> R packages used</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.2</b> Acknowledgements</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#a-disclaimer"><i class="fa fa-check"></i><b>1.3</b> A Disclaimer</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.4</b> Preview book</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
 <ul>
@@ -171,20 +170,28 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. long forms</a></li>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. wide forms</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#compact-1"><i class="fa fa-check"></i><b>3.1.1</b> Compact</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#wide"><i class="fa fa-check"></i><b>3.1.2</b> Wide</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#examining-the-data"><i class="fa fa-check"></i><b>3.2</b> Examining the Data</a></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#software"><i class="fa fa-check"></i><b>3.3</b> Software Considerations</a></li>
-<li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.4</b> Captioned figures and tables</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html"><i class="fa fa-check"></i><b>4</b> Multiple Membership models: the details</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a>
+<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a></li>
+<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.1.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.2.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-1"><i class="fa fa-check"></i><b>4.2.2</b> Student 1</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a></li>
 <li class="chapter" data-level="4.3" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
-<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a></li>
+<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc-and-icc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#icc"><i class="fa fa-check"></i><b>4.4.1</b> ICC</a></li>
+<li class="chapter" data-level="4.4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4.2</b> VPC</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html"><i class="fa fa-check"></i><b>5</b> Running a Multiple Membership Model</a>
 <ul>
@@ -198,21 +205,15 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#the-output"><i class="fa fa-check"></i><b>5.2</b> The Output</a></li>
 <li class="chapter" data-level="5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors"><i class="fa fa-check"></i><b>5.3</b> Adding in level 1 predictors</a></li>
 <li class="chapter" data-level="5.4" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors"><i class="fa fa-check"></i><b>5.4</b> Adding in level 2 predictors</a></li>
-<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#footnotes"><i class="fa fa-check"></i><b>5.5</b> Footnotes</a></li>
-<li class="chapter" data-level="5.6" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#citations"><i class="fa fa-check"></i><b>5.6</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a>
+<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#circling-back-to-the-research-questions"><i class="fa fa-check"></i><b>5.5</b> Circling back to the research questions</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
-<li class="chapter" data-level="6.2" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
-<li class="chapter" data-level="6.3" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+<li class="chapter" data-level="5.5.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq1-do-teacher-characteristics-influence-student-math-scores-ie-do-we-need-to-factor-in-nesting-and-multiple-membership"><i class="fa fa-check"></i><b>5.5.1</b> RQ1: Do teacher characteristics influence student math scores? (ie, do we need to factor in nesting and multiple membership?)</a></li>
+<li class="chapter" data-level="5.5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq2-what-student-characteristics-predict-math-scores"><i class="fa fa-check"></i><b>5.5.2</b> RQ2: What student characteristics predict math scores?</a></li>
+<li class="chapter" data-level="5.5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq3-does-more-teacher-experience-lead-to-better-student-outcomes"><i class="fa fa-check"></i><b>5.5.3</b> RQ3: Does more teacher experience lead to better student outcomes?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="increasing-complexity.html"><a href="increasing-complexity.html"><i class="fa fa-check"></i><b>7</b> Increasing complexity</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="increasing-complexity.html"><a href="increasing-complexity.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
-<li class="chapter" data-level="7.2" data-path="increasing-complexity.html"><a href="increasing-complexity.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
-<li class="chapter" data-level="7.3" data-path="increasing-complexity.html"><a href="increasing-complexity.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a></li>
+<li class="chapter" data-level="" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i>Appendix 1</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -236,54 +237,82 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="multiple-membership-models-the-details" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Multiple Membership models: the details<a href="multiple-membership-models-the-details.html#multiple-membership-models-the-details" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>The key feature of a multiple membership model is that level 1 units do not belong to one and only one level 2 cluster. There may be some units that exhibit true hierarchy, but there are others that are ‘multiple members’: they belong to 2 or more clusters. A classic example of this is mobile students in educational settings (eg. <span class="citation">Chung and Beretvas (<a href="#ref-Chung2012" role="doc-biblioref">2012</a>)</span>, <span class="citation">Heck, Reid, and Leckie (<a href="#ref-Heck2022" role="doc-biblioref">2022</a>)</span>, Leroux, 2018). Another example in the health care setting is patient outcomes, but each patient frequently sees more than one nurse <span class="citation">(<a href="#ref-Leckie2013" role="doc-biblioref">Leckie 2013b</a>)</span>. Using a multiple membership model allows the influence of multiple level 2 clusters to be taken into account. Additionally, just like ignoring hierarchical data violates the independent observations assumption and cause an inflated type I error rate, ignoring a multiple membership structure of your data will also cause an inflated type I error rate.</p>
+<p>The key feature of a multiple membership model is that level 1 units do not belong to one and only one level 2 cluster. There may be some units that exhibit true hierarchy, but there are others that are ‘multiple members’: they belong to 2 or more clusters. A classic example of this is mobile students in educational settings (eg. <span class="citation">Chung and Beretvas (<a href="#ref-Chung2012" role="doc-biblioref">2012</a>)</span>, <span class="citation">Heck, Reid, and Leckie (<a href="#ref-Heck2022" role="doc-biblioref">2022</a>)</span>, <span class="citation">Leroux (<a href="#ref-Leroux" role="doc-biblioref">2019</a>)</span>). Another example in the health care setting is patient outcomes, but each patient frequently sees more than one nurse <span class="citation">(<a href="#ref-Leckie2013" role="doc-biblioref">Leckie 2013b</a>)</span>. Using a multiple membership model allows the influence of multiple level 2 clusters to be taken into account. Additionally, just like ignoring hierarchical data violates the independent observations assumption and cause an inflated type I error rate, ignoring a multiple membership structure of your data will also cause an inflated type I error rate.</p>
 <p>Historically, when researchers encountered a multiple membership data structure (ie, mobile students) and were unable to model it correctly, there were a few options to handle this data that they would choose from, all of which resulted in mis-specified models. In one option, researchers would only consider the unit to be a member of their most recent cluster. As an example, only consider the school a child was in at the time of testing, rather than any other previous schools. Another option was to simply delete the mobile students from the data set, leaving only a pure hierarchy of students nested in schools. A third option was to acknowledge the mobility of students by including a dichotomous or ordinal “mobility” predictor to include in a regular hierarchical model. This would control for the influence of mobility on the outcome, but did not allow for the modeling of the effects of different schools on the student. However, none of these methods are an appropriate treatment of multiple membership data. The results obtained from the ‘delete mobile students’ approach, for example, can only be generalized to other non-mobile students as well as decreasing the power. In the study by <span class="citation">Chung and Beretvas (<a href="#ref-Chung2012" role="doc-biblioref">2012</a>)</span>, they reported negative bias in the level 2 predictor coefficients and in the level 2 variance components when employing the ‘only count the last school’ technique. In the same study, they also found that the level 1 variance components were positively biased. It is for these reasons that researchers investigating multiple membership data use a multiple membership model, in order to allow for generalization of results, proper capturing of mobile student effects, and validity of inferences about school effects <span class="citation">(<a href="#ref-Smith2017" role="doc-biblioref">Smith and Beretvas 2017</a>)</span>.</p>
 <div id="notation" class="section level2 hasAnchor" number="4.1">
 <h2><span class="header-section-number">4.1</span> Notation<a href="multiple-membership-models-the-details.html#notation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>There are three possibilities for how to depict these models, each with its own set of advantages and disadvantages. Standard hierarchical notation, which we are familiar with from truly hierarchical models, uses subscripts to identify individual and cluster level predictors and effects. The disadvantage of this notation is that, due to its familiarity, individuals may incorrectly assume that unit <span class="math inline">\(\textit{i}\)</span> is strictly nested within cluster <span class="math inline">\(\textit{j}\)</span>, which is not the case (Raudenbush &amp; Bryk, 2002; <span class="citation">Leckie (<a href="#ref-Leckie2013" role="doc-biblioref">2013b</a>)</span>). Another method is to use multiple subscript notation (Beretvas, 2010). This notation makes the non-hierarchical structure more apparent, however, it can quickly become challenging to read.<br />
-The notation we will use moving forward is classification notation <span class="citation">(<a href="#ref-Leckie2013" role="doc-biblioref">Leckie 2013b</a>)</span>:<br />
+<p>There are three possibilities for how to depict these models, each with its own set of advantages and disadvantages. Standard hierarchical notation, which we are familiar with from truly hierarchical models, uses subscripts to identify individual and cluster level predictors and effects. The disadvantage of this notation is that, due to its familiarity, individuals may incorrectly assume that unit <span class="math inline">\(\textit{i}\)</span> is strictly nested within cluster <span class="math inline">\(\textit{j}\)</span>, which is not the case (<span class="citation">Snijders and Bosker (<a href="#ref-SnijdersICC" role="doc-biblioref">2012</a>)</span>; <span class="citation">Leckie (<a href="#ref-Leckie2013" role="doc-biblioref">2013b</a>)</span>). Another method is to use multiple subscript notation (<span class="citation">Beretvas (<a href="#ref-Beretvas" role="doc-biblioref">2011</a>)</span>). This notation makes the non-hierarchical structure more apparent, however, it can quickly become challenging to read.</p>
+<p>The notation we will use moving forward is classification notation <span class="citation">(<a href="#ref-Leckie2013" role="doc-biblioref">Leckie 2013b</a>)</span>:<br />
 <span class="math display">\[y_{i} = \beta_{0} + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}\]</span>
 <span class="math display">\[u_{j}^{(2)} \sim N(0, \sigma_{u(2)}^{2})\]</span>
 <span class="math display">\[e_{i} \sim N(0, \sigma_{e}^{2})\]</span>
 With this notation, the multiple membership component is represented by <span class="math inline">\(\sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)}\)</span>, which represents the weighted (<span class="math inline">\(w_{j,i}^{(2)}\)</span>) cluster effects (<span class="math inline">\(u_{j}^{(2)}\)</span>). The weight component represents the amount of time unit <span class="math inline">\(\textit{i}\)</span> spent in cluster <span class="math inline">\(\textit{j}\)</span>, with the superscript (2) representing this is associated with the second level. All levels in the model are indicated, with level 1 (1) being implicit. The superscripts/subscripts for each level will identify to which level the random effects, variance parameters, and covariance parameters are associated with.</p>
-<p>If we look at the data, we can pull two students to see this model equation written out for each of them, student 1 and student 3. For student 1, we see that they had three teachers (24, 32, and 46) while student 3 only had one teacher (12). The equations for students 3 and 1 are shown below, indicating the role weights (discussed below) play in these models.</p>
-<div id="student-3" class="section level3 hasAnchor" number="4.1.1">
-<h3><span class="header-section-number">4.1.1</span> Student 3<a href="multiple-membership-models-the-details.html#student-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p><span class="math display">\[y_{3} = \beta_{0} + \sum_{j \in \{12\}}w_{j,3}^{(2)}u_{j}^{(2)} + e_{3}\]</span><br />
-<span class="math display">\[ = \beta_{0} + w_{12,3}^{(2)}u_{12}^{(2)} + e_{3}\]</span><br />
-<span class="math display">\[ = \beta_{0} + u_{12}^{(2)} + e_{3}\]</span><br />
-### Student 1
-<span class="math display">\[y_{1} = \beta_{0} + \sum_{j \in \{24, 32, 46\}}w_{j,1}^{(2)}u_{j}^{(2)} + e_{1}\]</span><br />
-<span class="math display">\[ = \beta_{0} + w_{24,1}^{(2)}u_{24}^{(2)} + w_{32,1}^{(2)}u_{32}^{(2)} + w_{46,1}^{(2)}u_{46}^{(2)}+ e_{1}\]</span><br />
-<span class="math display">\[ = \beta_{0} + 0.33u_{24}^{(2)} + 0.33u_{32}^{(2)} + 0.33u_{46}^{(2)}+ e_{1}\]</span></p>
-</div>
 </div>
 <div id="weights" class="section level2 hasAnchor" number="4.2">
 <h2><span class="header-section-number">4.2</span> Weights<a href="multiple-membership-models-the-details.html#weights" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Weights are assigned to the level two clusters to reflect the different influences, and sum to one for any given level 1 unit. These are decided by the researcher, who may take one of several approaches. One approach is to assign equal weights, regardless of time. This is the approach taken in the example data set for this tutorial: it was assumed that each teacher seen by a student had equal influence, and the data set was designed in such a way that students did not see any given teacher more than once. In a mobile student situation, it may be that if a student attended a school for any length of time, that school would be given an equal weight to all the other schools attended by the student, even if they attended other schools for longer. Another approach is to account for length of time. In the previous example, if a student spent 1 year at school 1 but 2 years at school two, a researcher may weight school one as 0.33 and school 2 as 0.67. This will take into account the fact that since the student spent more time at school 2, it likely had a larger impact. A third approach seen is weighting later educational settings more heavily than earlier ones, to reflect the fact that the more recent education may have a larger impact on test scores (for example) than earlier education <span class="citation">(<a href="#ref-Chung2012" role="doc-biblioref">Chung and Beretvas 2012</a>)</span>.</p>
+<p>Weights are assigned to the level two clusters to reflect the different influences each one has on the level 1 units, and sum to one for any given level 1 unit. These are decided by the researcher, who may take one of several approaches. One approach is to assign equal weights, regardless of time. This is the approach taken in the example data set for this tutorial: it was assumed that each teacher seen by a student had equal influence, and the data set was designed in such a way that students did not see any given teacher more than once. In a mobile student situation, it may be that if a student attended a school for any length of time, that school would be given an equal weight to all the other schools attended by the student, even if they attended other schools for longer. Another approach is to account for length of time. In the previous example, if a student spent 1 year at school 1 but 2 years at school two, a researcher may weight school one as 0.33 and school 2 as 0.67. This will take into account the fact that since the student spent more time at school 2, it likely had a larger impact. A third approach seen is weighting later educational settings more heavily than earlier ones, to reflect the fact that the more recent education may have a larger impact on test scores (for example) than earlier education <span class="citation">(<a href="#ref-Chung2012" role="doc-biblioref">Chung and Beretvas 2012</a>)</span>.</p>
+<p>If we look at the data (), we can pull two students to see the earlier equation written out for each of them, student 1 and student 3. For student 1, we see that they had three teachers (24, 32, and 46) while student 3 only had one teacher (12). The equations for students 3 and 1 are shown below, indicating the role cluster weights play in these models.</p>
+<div id="student-3" class="section level3 hasAnchor" number="4.2.1">
+<h3><span class="header-section-number">4.2.1</span> Student 3<a href="multiple-membership-models-the-details.html#student-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[y_{3} = \beta_{0} + \sum_{j \in \{12\}}w_{j,3}^{(2)}u_{j}^{(2)} + e_{3}\]</span><br />
+<span class="math display">\[ = \beta_{0} + w_{12,3}^{(2)}u_{12}^{(2)} + e_{3}\]</span><br />
+<span class="math display">\[ = \beta_{0} + u_{12}^{(2)} + e_{3}\]</span></p>
+</div>
+<div id="student-1" class="section level3 hasAnchor" number="4.2.2">
+<h3><span class="header-section-number">4.2.2</span> Student 1<a href="multiple-membership-models-the-details.html#student-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><span class="math display">\[y_{1} = \beta_{0} + \sum_{j \in \{24, 32, 46\}}w_{j,1}^{(2)}u_{j}^{(2)} + e_{1}\]</span><br />
+<span class="math display">\[ = \beta_{0} + w_{24,1}^{(2)}u_{24}^{(2)} + w_{32,1}^{(2)}u_{32}^{(2)} + w_{46,1}^{(2)}u_{46}^{(2)}+ e_{1}\]</span><br />
+<span class="math display">\[ = \beta_{0} + 0.33u_{24}^{(2)} + 0.33u_{32}^{(2)} + 0.33u_{46}^{(2)}+ e_{1}\]</span></p>
 <p>These weights are used both to identify amount of belonging to a particular level 2 cluster, but also to appropriately weight any level 2 predictors. For example, if we were to add in <code>t_exp</code> as teacher-level predictor, the resulting equations would look like this:</p>
 <p><span class="math display">\[y_{i} = \beta_{0} + \beta_{1}\sum_{j \in school(i)}w_{j,i}^{(2)}t\_exp_{2j}^{(2)} + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}\]</span>
 <span class="math display">\[u_{j}^{(2)} \sim N(0, \sigma_{u(2)}^{2})\]</span>
 <span class="math display">\[e_{i} \sim N(0, \sigma_{e}^{2})\]</span></p>
-<p>The term <span class="math inline">\(\sum_{j \in school(i)}w_{j,i}^{(2)}t\_exp_{2j}^{(2)}\)</span> is teacher experience (<code>t_exp</code>), taking into account that since students saw different teachers, the experience of those teachers will be different. This is called the weighted sum of this predictor, with _{1} being the slope coefficient. We are able to keep the term as-is in our equation, or to simplify the equation, we could calculate it in our data set to be <span class="math inline">\(\bar x_{2i}\)</span>. The resulting equation would then be</p>
+<p>The term <span class="math inline">\(\sum_{j \in school(i)}w_{j,i}^{(2)}t\_exp_{2j}^{(2)}\)</span> is teacher experience (<code>t_exp</code>), taking into account that since students saw different teachers, the experience of those teachers will be different. This is called the weighted sum of this predictor, with <span class="math inline">\(\beta_{1}\)</span> being the slope coefficient. We are able to keep the term as-is in our equation, or to simplify the equation, we could calculate it in our data set to be <span class="math inline">\(\bar x_{2i}\)</span>. The resulting equation would then be</p>
 <p><span class="math display">\[y_{i} = \beta_{0} + \beta_{1}\overline{(t\_exp)}_{2i} + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}\]</span></p>
+</div>
 </div>
 <div id="centering" class="section level2 hasAnchor" number="4.3">
 <h2><span class="header-section-number">4.3</span> Centering<a href="multiple-membership-models-the-details.html#centering" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In pure hierarchical models, predictors (typically at level 1) can either be group mean centered (CWC) or grand mean centered (CGM), with CWC being the generally preferred option due to the resulting interpretability of the coefficients <span class="citation">(<a href="#ref-Enders2013" role="doc-biblioref">Enders 2013</a>)</span>. However, in a multiple membership model, level 1 units belong to one or more level 2 clusters, meaning group mean centering can get really complicated really fast and indeed may not be possible. If centering is mentioned in the literature surrounding multiple membership models, it is only grand mean centering that is referenced. This may be due to ease, or due to lack of exploration using group mean centering. Much of the literature using multiple membership models (eg. XXXXX) did not mention any type of centering; an example where it was mentioned is <span class="citation">Smith and Beretvas (<a href="#ref-Smith2017" role="doc-biblioref">2017</a>)</span>, where it is specifically addressed in their model descriptions.</p>
+<p>In pure hierarchical models, predictors (typically at level 1) can either be group mean centered (CWC) or grand mean centered (CGM), with CWC being the generally preferred option due to the resulting interpretability of the coefficients <span class="citation">(<a href="#ref-Enders2013" role="doc-biblioref">Enders 2013</a>)</span>. However, in a multiple membership model, level 1 units belong to one or more level 2 clusters, meaning group mean centering can get really complicated really fast and indeed may not be possible. If centering is mentioned in the literature surrounding multiple membership models, it is only grand mean centering that is referenced. This may be due to ease, or due to lack of exploration using group mean centering. It may also be due to requiring a large sample size to have enough units in each unique ‘cluster’ combination. For example, students who just had teacher 1 would be a cluster, while students who had teacher 1 and teacher 2 would be another cluster, etc. In our example with 56 teachers, and a max draw of 12 teachers, there are slightly more combinations than our sample size by several orders of magnitude. Much of the literature using multiple membership models (eg. <span class="citation">Gero et al. (<a href="#ref-Gero2020" role="doc-biblioref">2020</a>)</span>) did not mention any type of centering; an example where it was mentioned is <span class="citation">Smith and Beretvas (<a href="#ref-Smith2017" role="doc-biblioref">2017</a>)</span>, where grand mean centering is specifically addressed in their model descriptions.</p>
 </div>
-<div id="vpc" class="section level2 hasAnchor" number="4.4">
-<h2><span class="header-section-number">4.4</span> VPC and ICC<a href="multiple-membership-models-the-details.html#vpc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="vpc-and-icc" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> VPC and ICC<a href="multiple-membership-models-the-details.html#vpc-and-icc" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="icc" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> ICC<a href="multiple-membership-models-the-details.html#icc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Again comparing to pure hierarchical models, one of the first things that is calculated after running an intercept-only model is the ICC, or intraclass correlation. When calculated as <span class="math inline">\(\frac{\tau_{00}}{\tau_{00} + \sigma^{2}}\)</span>, the ICC represents the amount of variance in the outcome variable that can be attributed to the fact that level 1 units are nested in level 2 clusters <span class="citation">(<a href="#ref-SnijdersICC" role="doc-biblioref">Snijders and Bosker 2012</a>)</span>. As with most things thus far, calculating an ICC for a multiple membership model is not so straightforward. The equation for a multiple membership model is more complex, and takes into account the cluster ‘profile’ of two units. If we are looking at the cluster level ICC for two different units, <span class="math inline">\(\textit{i}\)</span> and <span class="math inline">\(\textit{i&#39;}\)</span>, we would calculate it as a correlation like so:
+<span class="math display">\[corr(y_{i}, y_{i&#39;}) = \frac{\sigma_{u(2)}^{2}\sum_{j \in cluster(i) \cup cluster(i&#39;)}w_{j,i}^{(2)}w_{j, i&#39;}^{(2)}}{\sqrt{\sigma_{u(2)}^{2}\sum_{j \in cluster(i)}w_{j,i}^{(2)} + \sigma_{e}^2}\sqrt{\sigma_{u(2)}^{2}\sum_{j \in cluster(i&#39;)}w_{j,i&#39;}^{(2)} + \sigma_{e}^2}}\]</span></p>
+<p>Interpreting the ICC as the correlation between the outcomes of two students who had the same teacher, and only that teacher, it would be calculated as
+<span class="math display">\[ICC = \frac{\sigma_{u(2)}^{2}}{\sigma_{u(2)}^{2} + \sigma_{e}^{2}}\]</span>
+However, if these students had two teachers each, and only shared one of them, the calculation for the ICC becomes
+<span class="math display">\[ICC = \frac{0.25\sigma_{u(2)}^{2}}{0.5\sigma_{u(2)}^{2} + \sigma_{e}^{2}}\]</span>
+This is because the weights for each teacher are incorporated to reflect the amount of time two students had similar teachers and the amount of time they had different teachers <span class="citation">(<a href="#ref-Leckie2013" role="doc-biblioref">Leckie 2013b</a>)</span>.</p>
+</div>
+<div id="vpc" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> VPC<a href="multiple-membership-models-the-details.html#vpc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Another way to determine how variance is partitioned in a model is the variance partition coefficient. This reports the proportion of observed variation in the outcome that is at each level. The VPC is different from the ICC in that it is not the model implied correlation within a cluster, but the observed variation. As with the ICC, the multiple membership model is more complex in this calculation as well. The variation in outcomes that can be attributed to clusters depends on how much the level 1 units are spread across clusters: are they members of one cluster or multiple clusters? The cluster-level VPC equation representing the amount of variation in outcomes that is attributed to clusters in a multiple membership model is <span class="citation">(<a href="#ref-Leckie2013" role="doc-biblioref">Leckie 2013b</a>)</span>
+<span class="math display">\[VPC_{u(2)} = \frac{\sigma_{u(2)}^{2}\sum_{j \in cluster(i)}(w_{j,i}^{(2)})^2}{\sigma_{u(2)}^{2}\sum_{j \in cluster(i)}(w_{j,i}^{(2)})^2 + \sigma_{e}^{2}}\]</span></p>
+<p>If we consider the level 1 units that were members of only one cluster, the VPC is equivalent to the ICC for two individuals that had the same, single, teacher above:<br />
+<span class="math display">\[VPC_{u(2)} = \frac{\sigma_{u(2)}^{2}}{\sigma_{u(2)}^{2} + \sigma_{e}^{2}}\]</span>
+As above, however, it gets more complex when level 1 units are members of more than one cluster, and it no longer equals the ICC. Following a similar pattern to above, if we consider the population of level 1 units that were members of two different clusters (which one is not important here; we are looking only at cluster-level variance), the VPC calculation becomes
+<span class="math display">\[VPC_{u(2)} = \frac{0.5\sigma_{u(2)}^{2}}{0.5\sigma_{u(2)}^{2} + \sigma_{e}^{2}}\]</span>
+What this illustrates is that as level 1 units are members of more clusters, the amount of variance in outcomes that is attributed to clusters decreases. Additionally, with a multiple membership model, this is perhaps the easier of the two to both compute and calculate, as we are not considering how the cluster pattern of two individuals compares but rather how many clusters an individual is a member of.</p>
 
+</div>
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Beretvas" class="csl-entry">
+Beretvas, S. Natasha. 2011. <span>“Cross-Classified and Multiple-Membership Models.”</span> In <em>Handbook for Advanced Multilevel Analysis</em>, 313–34. Routledge/Taylor &amp; Francis Group.
+</div>
 <div id="ref-Chung2012" class="csl-entry">
 Chung, Hyewon, and S. Natasha Beretvas. 2012. <span>“The Impact of Ignoring Multiple Membership Data Structures in Multilevel Models.”</span> <em>British Journal of Mathematical and Statistical Psychology</em> 65: 185–200.
 </div>
 <div id="ref-Enders2013" class="csl-entry">
 Enders, Craig K. 2013. <span>“Centering Predictors and Contextual Effects.”</span> In <em>The SAGE Handbook of Multilevel Modeling</em>, 89–108. SAGE Publications Inc. <a href="https://doi.org/10.4135/9781446247600.n6">https://doi.org/10.4135/9781446247600.n6</a>.
+</div>
+<div id="ref-Gero2020" class="csl-entry">
+Gero, Krisztina, Hiroyuki Hikichi, Jun Aida, Katsunori Kondo, and Ichiro Kawachi. 2020. <span>“Associations Between Community Social Capital and Preservation of Functional Capacity in the Aftermath of a Major Disaster.”</span> <em>American Journal of Epidemiology</em> 189: 1369–78.
 </div>
 <div id="ref-Heck2022" class="csl-entry">
 Heck, Ronald H., Tingting Reid, and George Leckie. 2022. <span>“Incorporating Student Mobility in Studying Academic Growth in Math: Comparing Several Alternative Multilevel Formulations.”</span> <em>School Effectiveness and School Improvement</em> 33: 516–43.
@@ -291,8 +320,14 @@ Heck, Ronald H., Tingting Reid, and George Leckie. 2022. <span>“Incorporating 
 <div id="ref-Leckie2013" class="csl-entry">
 ———. 2013b. <em>Multiple Membership Multilevel Models - Concepts.</em> LEMMA VLE Module 13, p. 1-57.
 </div>
+<div id="ref-Leroux" class="csl-entry">
+Leroux, Audrey J. 2019. <span>“Student Mobility in Multilevel Growth Modeling: A Multiple Membership Piecewise Growth Model.”</span> <em>The Journal of Experimental Education</em> 87: 430–48.
+</div>
 <div id="ref-Smith2017" class="csl-entry">
 Smith, Lindsey J. Wolff, and S. Natasha Beretvas. 2017. <span>“A Comparison of Techniques for Handling and Assessing the Influence of Mobility on Student Achievement.”</span> <em>The Journal of Experimental Education</em> 85: 3–23.
+</div>
+<div id="ref-SnijdersICC" class="csl-entry">
+Snijders, T. A. B., and R. J. Bosker. 2012. <span>“The Random Intercept Model.”</span> In <em>Multilevel ANalysis: An Introduction to Basic and Advanced Multilevel Modeling</em>, 41–73. SAGE Publications Inc.
 </div>
 </div>
             </section>

@@ -12,7 +12,7 @@
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 5 Running a Multiple Membership Model | Multiple Membership Models: A tutorial" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Laura Lambert" />
 
 
-<meta name="date" content="2023-05-01" />
+<meta name="date" content="2023-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,7 +163,6 @@ div.csl-indent {
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.1</b> R packages used</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.2</b> Acknowledgements</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#a-disclaimer"><i class="fa fa-check"></i><b>1.3</b> A Disclaimer</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.4</b> Preview book</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
 <ul>
@@ -171,20 +170,28 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. long forms</a></li>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. wide forms</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#compact-1"><i class="fa fa-check"></i><b>3.1.1</b> Compact</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#wide"><i class="fa fa-check"></i><b>3.1.2</b> Wide</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#examining-the-data"><i class="fa fa-check"></i><b>3.2</b> Examining the Data</a></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#software"><i class="fa fa-check"></i><b>3.3</b> Software Considerations</a></li>
-<li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.4</b> Captioned figures and tables</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html"><i class="fa fa-check"></i><b>4</b> Multiple Membership models: the details</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a>
+<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a></li>
+<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.1.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.2.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-1"><i class="fa fa-check"></i><b>4.2.2</b> Student 1</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a></li>
 <li class="chapter" data-level="4.3" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
-<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a></li>
+<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc-and-icc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#icc"><i class="fa fa-check"></i><b>4.4.1</b> ICC</a></li>
+<li class="chapter" data-level="4.4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4.2</b> VPC</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html"><i class="fa fa-check"></i><b>5</b> Running a Multiple Membership Model</a>
 <ul>
@@ -198,21 +205,15 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#the-output"><i class="fa fa-check"></i><b>5.2</b> The Output</a></li>
 <li class="chapter" data-level="5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors"><i class="fa fa-check"></i><b>5.3</b> Adding in level 1 predictors</a></li>
 <li class="chapter" data-level="5.4" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors"><i class="fa fa-check"></i><b>5.4</b> Adding in level 2 predictors</a></li>
-<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#footnotes"><i class="fa fa-check"></i><b>5.5</b> Footnotes</a></li>
-<li class="chapter" data-level="5.6" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#citations"><i class="fa fa-check"></i><b>5.6</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a>
+<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#circling-back-to-the-research-questions"><i class="fa fa-check"></i><b>5.5</b> Circling back to the research questions</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
-<li class="chapter" data-level="6.2" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
-<li class="chapter" data-level="6.3" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+<li class="chapter" data-level="5.5.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq1-do-teacher-characteristics-influence-student-math-scores-ie-do-we-need-to-factor-in-nesting-and-multiple-membership"><i class="fa fa-check"></i><b>5.5.1</b> RQ1: Do teacher characteristics influence student math scores? (ie, do we need to factor in nesting and multiple membership?)</a></li>
+<li class="chapter" data-level="5.5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq2-what-student-characteristics-predict-math-scores"><i class="fa fa-check"></i><b>5.5.2</b> RQ2: What student characteristics predict math scores?</a></li>
+<li class="chapter" data-level="5.5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq3-does-more-teacher-experience-lead-to-better-student-outcomes"><i class="fa fa-check"></i><b>5.5.3</b> RQ3: Does more teacher experience lead to better student outcomes?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="increasing-complexity.html"><a href="increasing-complexity.html"><i class="fa fa-check"></i><b>7</b> Increasing complexity</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="increasing-complexity.html"><a href="increasing-complexity.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
-<li class="chapter" data-level="7.2" data-path="increasing-complexity.html"><a href="increasing-complexity.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
-<li class="chapter" data-level="7.3" data-path="increasing-complexity.html"><a href="increasing-complexity.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a></li>
+<li class="chapter" data-level="" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i>Appendix 1</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -236,10 +237,13 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="running-a-multiple-membership-model" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Running a Multiple Membership Model<a href="running-a-multiple-membership-model.html#running-a-multiple-membership-model" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>As noted in <a href="data.html#software">3.3</a>, the only software currently able to run a multiple membership model is MLwiN (add ref). There is an R package, R2MLwiN <span class="citation">(<a href="#ref-R-R2MLwiN" role="doc-biblioref">Zhang et al. 2023</a>)</span> that allows for an R-interface which runs MLwiN in the background. This allows users to work with a program they are already familiar with while accessing the capabilities of MLwiN. However, as also previously noted, you must have an active MLwiN license, and have the program installed on your computer for your R code to work.</p>
+<p>As noted in <a href="data.html#software">3.3</a>, we will be using MLwiN to evaluate the multiple membership models. There is an R package, R2MLwiN <span class="citation">(<a href="#ref-R-R2MLwiN" role="doc-biblioref">Zhang et al. 2023</a>)</span> that allows for an R-interface which runs MLwiN in the background. This allows users to work with a program they are already familiar with while accessing the capabilities of MLwiN. However, as also previously noted, you must have an active MLwiN license, and have the program installed on your computer for your R code to work.</p>
 <div id="intercept-only-model" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Intercept-only Model<a href="running-a-multiple-membership-model.html#intercept-only-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>We will first run an intercept-only model, looking at Math as an outcome and only including the intercept and the multiple membership effect of teachers. This model will inform us as to how the variance in Math scores is divided between teacher variance components (level 2) and student variance components (level 1).</p>
+<p>We will first run an intercept-only model, looking at Math as an outcome and only including the intercept and the multiple membership effect of teachers. This model will inform us as to how the variance in Math scores is divided between teacher variance components (level 2) and student variance components (level 1).<br />
+<span class="math display">\[y_{i} = \beta_{0} + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}\]</span>
+<span class="math display">\[u_{j}^{(2)} \sim N(0, \sigma_{u(2)}^{2})\]</span>
+<span class="math display">\[e_{i} \sim N(0, \sigma_{e}^{2})\]</span></p>
 <div id="first-steps" class="section level3 hasAnchor" number="5.1.1">
 <h3><span class="header-section-number">5.1.1</span> First Steps<a href="running-a-multiple-membership-model.html#first-steps" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Setting this up to run in R, we first need to make sure we have MLwiN installed, as well as call the <code>R2MLwiN</code> package. Additionally, R2MLwiN defaults the path to MLwiN as “C:/Program Files/MLwiN v3.06/”. If yours, like mine, is installed elsewhere, you need to include <code>options(MLwiN_pah = "path/to/MLwiN")</code>. An easy way to copy the path is to find it in your computer, hold ‘shift’ and right click the program. The option “copy as path” comes up as an option, and you can just paste it in.</p>
@@ -251,151 +255,307 @@ div.csl-indent {
 <div id="set-up-and-send-to-mlwin" class="section level3 hasAnchor" number="5.1.3">
 <h3><span class="header-section-number">5.1.3</span> Set up and send to MLwiN<a href="running-a-multiple-membership-model.html#set-up-and-send-to-mlwin" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The next step is to define the multiple membership variables (teacher columns for us) and the associated weights. To do this, we make an object that is a list of list of lists. I named it <code>MultiMemb</code> in the code chunk below:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="running-a-multiple-membership-model.html#cb11-1" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
-<span id="cb11-2"><a href="running-a-multiple-membership-model.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
-<span id="cb11-3"><a href="running-a-multiple-membership-model.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="running-a-multiple-membership-model.html#cb5-1" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
+<span id="cb5-2"><a href="running-a-multiple-membership-model.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
+<span id="cb5-3"><a href="running-a-multiple-membership-model.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span></code></pre></div>
 <p>Within this, <code>mmvar</code> specifies classification units (unit of multiple membership). <code>weights</code> is where the associated weights go, and is the student-level weighting (in our case) given to each teacher they had. The final <code>NA</code> indicates that level 1 has no multiple membership classification. This set-up is why our data needed to be in compact rather than long form (<a href="data.html#compact">3.1</a>).</p>
 <p>After we have defined <code>MultiMemb</code>, we can actually run the model. This line is putting everything together:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="running-a-multiple-membership-model.html#cb12-1" aria-hidden="true" tabindex="-1"></a>(MMembModel1 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonly, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
-<p>Looking at it, we are calling MLwiN with <code>runMLwiN</code>, defining what the model should be with <code>Formula</code>, and defining our data set with <code>data</code>. <code>estoptions</code> is our estimation options. When <code>EstM</code> is equal to 1, we are using MCMC estimation. And lastly, within that same statement, <code>mm</code> is calling our <code>MultiMemb</code> object to match everything up and weight appropriately.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="running-a-multiple-membership-model.html#cb6-1" aria-hidden="true" tabindex="-1"></a>(MMembModel1 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonly, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
+<p>Looking at it, we are calling MLwiN with <code>runMLwiN</code>, defining what the model should be with <code>Formula</code>, and defining our data set with <code>data</code>. <code>estoptions</code> is our estimation options. When <code>EstM</code> is equal to 1, we are using MCMC estimation. And lastly, within that same statement, <code>mm</code> is calling our <code>MultiMemb</code> object to match everything up and weight appropriately <span class="citation">(<a href="#ref-R-R2MLwiN" role="doc-biblioref">Zhang et al. 2023</a>)</span>.</p>
 </div>
 <div id="put-it-all-together" class="section level3 hasAnchor" number="5.1.4">
 <h3><span class="header-section-number">5.1.4</span> Put it all together<a href="running-a-multiple-membership-model.html#put-it-all-together" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Taking everything from above and putting it all together, we get the following code chunk, and then output.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="running-a-multiple-membership-model.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(R2MLwiN)</span></code></pre></div>
-<pre><code>## Warning: package &#39;R2MLwiN&#39; was built under R version 4.1.3</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="running-a-multiple-membership-model.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">MLwiN_path=</span><span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Program Files (x86)</span><span class="sc">\\</span><span class="st">MLwiN trial</span><span class="sc">\\</span><span class="st">i386</span><span class="sc">\\</span><span class="st">mlwin.exe&quot;</span>)</span>
-<span id="cb15-2"><a href="running-a-multiple-membership-model.html#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="running-a-multiple-membership-model.html#cb15-3" aria-hidden="true" tabindex="-1"></a>intonly <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
-<span id="cb15-4"><a href="running-a-multiple-membership-model.html#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-5"><a href="running-a-multiple-membership-model.html#cb15-5" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
-<span id="cb15-6"><a href="running-a-multiple-membership-model.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
-<span id="cb15-7"><a href="running-a-multiple-membership-model.html#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
-<span id="cb15-8"><a href="running-a-multiple-membership-model.html#cb15-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="running-a-multiple-membership-model.html#cb15-9" aria-hidden="true" tabindex="-1"></a>(MMembModel1 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonly, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="running-a-multiple-membership-model.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(R2MLwiN)</span>
+<span id="cb7-2"><a href="running-a-multiple-membership-model.html#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">MLwiN_path=</span><span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Program Files (x86)</span><span class="sc">\\</span><span class="st">MLwiN trial</span><span class="sc">\\</span><span class="st">i386</span><span class="sc">\\</span><span class="st">mlwin.exe&quot;</span>)</span>
+<span id="cb7-3"><a href="running-a-multiple-membership-model.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="running-a-multiple-membership-model.html#cb7-4" aria-hidden="true" tabindex="-1"></a>intonly <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
+<span id="cb7-5"><a href="running-a-multiple-membership-model.html#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="running-a-multiple-membership-model.html#cb7-6" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
+<span id="cb7-7"><a href="running-a-multiple-membership-model.html#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
+<span id="cb7-8"><a href="running-a-multiple-membership-model.html#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
+<span id="cb7-9"><a href="running-a-multiple-membership-model.html#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="running-a-multiple-membership-model.html#cb7-10" aria-hidden="true" tabindex="-1"></a>(MMembModel1 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonly, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
 <pre><code>## MLwiN is running, please wait......</code></pre>
 <pre><code>## 
 ## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
 ## MLwiN (version: 2.36)  multilevel model (Normal) 
 ##        N min     mean max N_complete min_complete mean_complete max_complete
 ## tchr1 56  75 92.85714 122         56           75      92.85714          122
-## Estimation algorithm:  MCMC      Cross-classified              Elapsed time : 7.74s 
+## Estimation algorithm:  MCMC      Cross-classified              Elapsed time : 11.17s 
 ## Number of obs:  5200 (from total 5200)          Number of iter.: 5000  Chains: 1  Burn-in: 500 
 ## Bayesian Deviance Information Criterion (DIC)
 ## Dbar      D(thetabar)    pD      DIC
-## 56499.020  56452.727  46.295     56545.316  
+## 56520.996  56473.520  47.479     56568.477  
 ## --------------------------------------------------------------------------------------------------- 
 ## The model formula:
 ## Math ~ 1 + (1 | tchr1) + (1 | S_ID)
+## &lt;environment: 0x000002a252aa1dc8&gt;
 ## Level 2: tchr1     Level 1: S_ID      
 ## --------------------------------------------------------------------------------------------------- 
 ## The fixed part estimates:  
 ##                 Coef.   Std. Err.       z   Pr(&gt;|z|)       [95% Cred.   Interval]   ESS 
-## Intercept   431.40460     2.19878  196.20          0  ***   427.12021   435.63257   400 
+## Intercept   441.78207     2.38716  185.07          0  ***   436.82835   446.43202   346 
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  
 ## --------------------------------------------------------------------------------------------------- 
 ## The random part estimates at the tchr1 level: 
 ##                     Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
-## var_Intercept   242.27295    59.40378    148.16777   380.94221   2247 
+## var_Intercept   281.90093    66.21423    176.86386   432.97710   2258 
 ## --------------------------------------------------------------------------------------------------- 
 ## The random part estimates at the S_ID level: 
 ##                      Coef.   Std. Err.   [95% Cred.    Interval]    ESS 
-## var_Intercept   3064.03716    60.17766   2947.00892   3182.79320   5000 
+## var_Intercept   3077.47965    59.92732   2960.59277   3194.83199   4679 
 ## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</code></pre>
 </div>
 </div>
 <div id="the-output" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> The Output<a href="running-a-multiple-membership-model.html#the-output" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Looking at the output from our intercept only model, we have a lot of information. First, R and MLwiN are reminding us what we put in:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="running-a-multiple-membership-model.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MLwiN</span> (version<span class="sc">:</span> <span class="fl">2.36</span>)  multilevel <span class="fu">model</span> (Normal) </span>
-<span id="cb18-2"><a href="running-a-multiple-membership-model.html#cb18-2" aria-hidden="true" tabindex="-1"></a>       N min     mean max N_complete min_complete mean_complete max_complete</span>
-<span id="cb18-3"><a href="running-a-multiple-membership-model.html#cb18-3" aria-hidden="true" tabindex="-1"></a>tchr1 <span class="dv">56</span>  <span class="dv">75</span> <span class="fl">92.85714</span> <span class="dv">122</span>         <span class="dv">56</span>           <span class="dv">75</span>      <span class="fl">92.85714</span>          <span class="dv">122</span></span>
-<span id="cb18-4"><a href="running-a-multiple-membership-model.html#cb18-4" aria-hidden="true" tabindex="-1"></a>Estimation algorithm<span class="sc">:</span>  MCMC      Cross<span class="sc">-</span>classified              Elapsed time <span class="sc">:</span> <span class="fl">9.42</span>s </span>
-<span id="cb18-5"><a href="running-a-multiple-membership-model.html#cb18-5" aria-hidden="true" tabindex="-1"></a>Number of obs<span class="sc">:</span>  <span class="dv">5200</span> (from total <span class="dv">5200</span>)          Number of iter.<span class="sc">:</span> <span class="dv">5000</span>  Chains<span class="sc">:</span> <span class="dv">1</span>  Burn<span class="sc">-</span><span class="cf">in</span><span class="sc">:</span> <span class="dv">500</span> </span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="running-a-multiple-membership-model.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">MLwiN</span> (version<span class="sc">:</span> <span class="fl">2.36</span>)  multilevel <span class="fu">model</span> (Normal) </span>
+<span id="cb10-2"><a href="running-a-multiple-membership-model.html#cb10-2" aria-hidden="true" tabindex="-1"></a>       N min     mean max N_complete min_complete mean_complete max_complete</span>
+<span id="cb10-3"><a href="running-a-multiple-membership-model.html#cb10-3" aria-hidden="true" tabindex="-1"></a>tchr1 <span class="dv">56</span>  <span class="dv">75</span> <span class="fl">92.85714</span> <span class="dv">122</span>         <span class="dv">56</span>           <span class="dv">75</span>      <span class="fl">92.85714</span>          <span class="dv">122</span></span>
+<span id="cb10-4"><a href="running-a-multiple-membership-model.html#cb10-4" aria-hidden="true" tabindex="-1"></a>Estimation algorithm<span class="sc">:</span>  MCMC      Cross<span class="sc">-</span>classified              Elapsed time <span class="sc">:</span> <span class="fl">7.78</span>s </span>
+<span id="cb10-5"><a href="running-a-multiple-membership-model.html#cb10-5" aria-hidden="true" tabindex="-1"></a>Number of obs<span class="sc">:</span>  <span class="dv">5200</span> (from total <span class="dv">5200</span>)          Number of iter.<span class="sc">:</span> <span class="dv">5000</span>  Chains<span class="sc">:</span> <span class="dv">1</span>  Burn<span class="sc">-</span><span class="cf">in</span><span class="sc">:</span> <span class="dv">500</span>  </span></code></pre></div>
+<p>Since this is using Baysian MCMC estimation, we also get the number of iterations and burn-in count. This is adjustable if you felt your model needed different parameters, but for this tutorial, I stuck with the default setting as shown.</p>
 <p>We then get the DIC:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="running-a-multiple-membership-model.html#cb19-1" aria-hidden="true" tabindex="-1"></a>Bayesian Deviance Information <span class="fu">Criterion</span> (DIC)</span>
-<span id="cb19-2"><a href="running-a-multiple-membership-model.html#cb19-2" aria-hidden="true" tabindex="-1"></a>Dbar      <span class="fu">D</span>(thetabar)    pD      DIC</span>
-<span id="cb19-3"><a href="running-a-multiple-membership-model.html#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="fl">56499.285</span>  <span class="fl">56453.141</span>  <span class="fl">46.146</span>     <span class="fl">56545.430</span>  </span></code></pre></div>
-<p>This is our baseline, to which other models including predictors will be compared to. If a predictor is useful at explaining variance, we expect the DIC to decrease. We can also use the DIC to determine if the multiple membership model is preferred to a single level model. The single model would be specified and run as follows:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="running-a-multiple-membership-model.html#cb20-1" aria-hidden="true" tabindex="-1"></a>intonlyred <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
-<span id="cb20-2"><a href="running-a-multiple-membership-model.html#cb20-2" aria-hidden="true" tabindex="-1"></a>(MMembModelRed <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonlyred, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="running-a-multiple-membership-model.html#cb11-1" aria-hidden="true" tabindex="-1"></a>Bayesian Deviance Information <span class="fu">Criterion</span> (DIC)</span>
+<span id="cb11-2"><a href="running-a-multiple-membership-model.html#cb11-2" aria-hidden="true" tabindex="-1"></a>Dbar      <span class="fu">D</span>(thetabar)    pD      DIC</span>
+<span id="cb11-3"><a href="running-a-multiple-membership-model.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fl">56520.996</span>  <span class="fl">56473.520</span>  <span class="fl">47.479</span>     <span class="fl">56568.477</span>  </span></code></pre></div>
+<p>Again, since this is MCMC estimation, we do not get any likelihood ratios, nor can we perform any likelihood ration tests. This DIC is our baseline, to which other models including predictors will be compared to. If a predictor is useful at explaining variance, we expect the DIC to decrease. We can also use the DIC to determine if the multiple membership model is preferred to a single level model. The single model would be specified and run as follows:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="running-a-multiple-membership-model.html#cb12-1" aria-hidden="true" tabindex="-1"></a>intonlyred <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
+<span id="cb12-2"><a href="running-a-multiple-membership-model.html#cb12-2" aria-hidden="true" tabindex="-1"></a>(MMembModelRed <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> intonlyred, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>)))</span></code></pre></div>
 <pre><code>## MLwiN is running, please wait......</code></pre>
 <pre><code>## 
 ## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
 ## MLwiN (version: 2.36)  multilevel model (Normal) 
-## Estimation algorithm:  MCMC      Elapsed time : 4.02s 
+## Estimation algorithm:  MCMC      Elapsed time : 6.21s 
 ## Number of obs:  5200 (from total 5200)          Number of iter.: 5000  Chains: 1  Burn-in: 500 
 ## Bayesian Deviance Information Criterion (DIC)
 ## Dbar      D(thetabar)    pD      DIC
-## 56719.672  56717.707  1.968      56721.641  
+## 56780.219  56778.250  1.968      56782.184  
 ## --------------------------------------------------------------------------------------------------- 
 ## The model formula:
 ## Math ~ 1 + (1 | S_ID)
+## &lt;environment: 0x000002a252aa1dc8&gt;
 ## Level 1: S_ID      
 ## --------------------------------------------------------------------------------------------------- 
 ## The fixed part estimates:  
 ##                 Coef.   Std. Err.       z   Pr(&gt;|z|)       [95% Cred.   Interval]    ESS 
-## Intercept   431.66063     0.77682  555.67          0  ***   430.13493   433.16530   5000 
+## Intercept   441.95409     0.78136  565.62          0  ***   440.41947   443.46758   5000 
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  
 ## --------------------------------------------------------------------------------------------------- 
 ## The random part estimates at the S_ID level: 
 ##                      Coef.   Std. Err.   [95% Cred.    Interval]    ESS 
-## var_Intercept   3198.48491    62.42396   3080.30035   3325.47068   5000 
+## var_Intercept   3235.94230    63.15501   3116.37379   3364.41530   5000 
 ## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</code></pre>
-<p>From the output, we see that the DIC for the single level model is 56721.641, which is 176.211 higher than the multiple membership model. This indicates that the multiple membership model is statistically preferred over the single level model.</p>
+<p>From the output, we see that the DIC for the single level model is 56721.641, which is 200.645 higher than the multiple membership model. This indicates that the multiple membership model is statistically preferred over the single level model.</p>
 <p>We next get reminded of our model formula, and what the grouping predictors were:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="running-a-multiple-membership-model.html#cb23-1" aria-hidden="true" tabindex="-1"></a>The model formula<span class="sc">:</span></span>
-<span id="cb23-2"><a href="running-a-multiple-membership-model.html#cb23-2" aria-hidden="true" tabindex="-1"></a>Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> tchr1) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> S_ID)</span>
-<span id="cb23-3"><a href="running-a-multiple-membership-model.html#cb23-3" aria-hidden="true" tabindex="-1"></a>Level <span class="dv">2</span><span class="sc">:</span> tchr1     Level <span class="dv">1</span><span class="sc">:</span> S_ID  </span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="running-a-multiple-membership-model.html#cb15-1" aria-hidden="true" tabindex="-1"></a>The model formula<span class="sc">:</span></span>
+<span id="cb15-2"><a href="running-a-multiple-membership-model.html#cb15-2" aria-hidden="true" tabindex="-1"></a>Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> tchr1) <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> S_ID)</span>
+<span id="cb15-3"><a href="running-a-multiple-membership-model.html#cb15-3" aria-hidden="true" tabindex="-1"></a>Level <span class="dv">2</span><span class="sc">:</span> tchr1     Level <span class="dv">1</span><span class="sc">:</span> S_ID  </span></code></pre></div>
 <p>Skipping down to “The fixed part estimates:”</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="running-a-multiple-membership-model.html#cb24-1" aria-hidden="true" tabindex="-1"></a>The fixed part estimates<span class="sc">:</span>  </span>
-<span id="cb24-2"><a href="running-a-multiple-membership-model.html#cb24-2" aria-hidden="true" tabindex="-1"></a>                Coef.   Std. Err.       z   <span class="fu">Pr</span>(<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>)       [<span class="dv">95</span>% Cred.   Interval]   ESS </span>
-<span id="cb24-3"><a href="running-a-multiple-membership-model.html#cb24-3" aria-hidden="true" tabindex="-1"></a>Intercept   <span class="fl">431.52398</span>     <span class="fl">2.21944</span>  <span class="fl">194.43</span>          <span class="dv">0</span>  <span class="sc">**</span><span class="er">*</span>   <span class="fl">426.97449</span>   <span class="fl">435.91524</span>   <span class="dv">395</span> </span>
-<span id="cb24-4"><a href="running-a-multiple-membership-model.html#cb24-4" aria-hidden="true" tabindex="-1"></a>Signif. codes<span class="sc">:</span>  <span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>   </span></code></pre></div>
-<p>we see that the intercept is 431.52. This is the overall mean of math achievement across all the students and all the teachers. Conveniently, this output also provides us with a 95% credibility interval of (426.97, 435.91) indicating STUFF******.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="running-a-multiple-membership-model.html#cb16-1" aria-hidden="true" tabindex="-1"></a>The fixed part estimates<span class="sc">:</span>  </span>
+<span id="cb16-2"><a href="running-a-multiple-membership-model.html#cb16-2" aria-hidden="true" tabindex="-1"></a>                Coef.   Std. Err.       z   <span class="fu">Pr</span>(<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>)       [<span class="dv">95</span>% Cred.   Interval]   ESS </span>
+<span id="cb16-3"><a href="running-a-multiple-membership-model.html#cb16-3" aria-hidden="true" tabindex="-1"></a>Intercept   <span class="fl">441.78207</span>     <span class="fl">2.38716</span>  <span class="fl">185.07</span>          <span class="dv">0</span>  <span class="sc">**</span><span class="er">*</span>   <span class="fl">436.82835</span>   <span class="fl">446.43202</span>   <span class="dv">346</span> </span>
+<span id="cb16-4"><a href="running-a-multiple-membership-model.html#cb16-4" aria-hidden="true" tabindex="-1"></a>Signif. codes<span class="sc">:</span>  <span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>  </span></code></pre></div>
+<p>we see that the intercept is 441.78. This is the overall mean of math achievement across all the students and all the teachers. This output also provides us with a 95% credibility interval of (436.83, 446.43). Keeping in mind that Bayesian techniques were used, we interpret this as there is a 95% probability that the true estimate of the intercept would lie within this range, given our observed data.</p>
 <p>Going further down, we come to the random part estimates at level 2 and level 1, or the variance components:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="running-a-multiple-membership-model.html#cb25-1" aria-hidden="true" tabindex="-1"></a>The random part estimates at the tchr1 level<span class="sc">:</span> </span>
-<span id="cb25-2"><a href="running-a-multiple-membership-model.html#cb25-2" aria-hidden="true" tabindex="-1"></a>                    Coef.   Std. Err.   [<span class="dv">95</span>% Cred.   Interval]    ESS </span>
-<span id="cb25-3"><a href="running-a-multiple-membership-model.html#cb25-3" aria-hidden="true" tabindex="-1"></a>var_Intercept   <span class="fl">238.96526</span>    <span class="fl">57.92255</span>    <span class="fl">147.42228</span>   <span class="fl">374.11760</span>   <span class="dv">2080</span> </span>
-<span id="cb25-4"><a href="running-a-multiple-membership-model.html#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="sc">---------------------------------------------------------------------------------------------------</span> </span>
-<span id="cb25-5"><a href="running-a-multiple-membership-model.html#cb25-5" aria-hidden="true" tabindex="-1"></a>The random part estimates at the S_ID level<span class="sc">:</span> </span>
-<span id="cb25-6"><a href="running-a-multiple-membership-model.html#cb25-6" aria-hidden="true" tabindex="-1"></a>                     Coef.   Std. Err.   [<span class="dv">95</span>% Cred.    Interval]    ESS </span>
-<span id="cb25-7"><a href="running-a-multiple-membership-model.html#cb25-7" aria-hidden="true" tabindex="-1"></a>var_Intercept   <span class="fl">3064.65607</span>    <span class="fl">59.68536</span>   <span class="fl">2948.33898</span>   <span class="fl">3181.76541</span>   <span class="dv">4681</span> </span></code></pre></div>
-<p>Using these, we can calculate the variance partition coefficient (VPC) for this model, which will tell us the proportion of variance in Math scores that is at each level of our model. However, as previously mentioned in <a href="multiple-membership-models-the-details.html#vpc">4.4</a>, using only the values in the table will only tell us the variance partition coefficient for students who only had a single teacher.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="running-a-multiple-membership-model.html#cb17-1" aria-hidden="true" tabindex="-1"></a>The random part estimates at the tchr1 level<span class="sc">:</span> </span>
+<span id="cb17-2"><a href="running-a-multiple-membership-model.html#cb17-2" aria-hidden="true" tabindex="-1"></a>                    Coef.   Std. Err.   [<span class="dv">95</span>% Cred.   Interval]    ESS </span>
+<span id="cb17-3"><a href="running-a-multiple-membership-model.html#cb17-3" aria-hidden="true" tabindex="-1"></a>var_Intercept   <span class="fl">281.90093</span>    <span class="fl">66.21423</span>    <span class="fl">176.86386</span>   <span class="fl">432.97710</span>   <span class="dv">2258</span> </span>
+<span id="cb17-4"><a href="running-a-multiple-membership-model.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="sc">---------------------------------------------------------------------------------------------------</span> </span>
+<span id="cb17-5"><a href="running-a-multiple-membership-model.html#cb17-5" aria-hidden="true" tabindex="-1"></a>The random part estimates at the S_ID level<span class="sc">:</span> </span>
+<span id="cb17-6"><a href="running-a-multiple-membership-model.html#cb17-6" aria-hidden="true" tabindex="-1"></a>                     Coef.   Std. Err.   [<span class="dv">95</span>% Cred.    Interval]    ESS </span>
+<span id="cb17-7"><a href="running-a-multiple-membership-model.html#cb17-7" aria-hidden="true" tabindex="-1"></a>var_Intercept   <span class="fl">3077.47965</span>    <span class="fl">59.92732</span>   <span class="fl">2960.59277</span>   <span class="fl">3194.83199</span>   <span class="dv">4679</span> </span></code></pre></div>
+<p>Using these, we can calculate the variance partition coefficient (VPC) for this model. However, as previously mentioned in <a href="multiple-membership-models-the-details.html#vpc">4.4.2</a>, using only the values in the table will only tell us the variance partition coefficient for students who only had a single teacher.</p>
+<p><span class="math display">\[VPC_{u(2)} = \frac{\sigma_{u(2)}^{2}}{\sigma_{u(2)}^{2} + \sigma_{e}^{2}} = \frac{281.90}{3077.48 + 281.90} = 8.4\%\]</span>
+From this, we can say that for students that had a single teacher, 8.4% of the variation in their math scores is between teachers while the remaining 91.6% is between students. <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> This is also going to be the maximum amount of variation in student math scores that will be between teachers. As students have more teachers, less of the variation in math scores will be between teachers and more will be between students. Knowing this, predictors at level 1 will have the most impact, while level 2 predictors in this instance will have less of an impact.</p>
 </div>
 <div id="adding-in-level-1-predictors" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Adding in level 1 predictors<a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="running-a-multiple-membership-model.html#cb26-1" aria-hidden="true" tabindex="-1"></a>lev1 <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> S_SES <span class="sc">+</span> female <span class="sc">+</span> NB <span class="sc">+</span> SAT_M <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
-<span id="cb26-2"><a href="running-a-multiple-membership-model.html#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-3"><a href="running-a-multiple-membership-model.html#cb26-3" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
-<span id="cb26-4"><a href="running-a-multiple-membership-model.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
-<span id="cb26-5"><a href="running-a-multiple-membership-model.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
-<span id="cb26-6"><a href="running-a-multiple-membership-model.html#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-7"><a href="running-a-multiple-membership-model.html#cb26-7" aria-hidden="true" tabindex="-1"></a>(MMembModel2 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> lev1, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
+<p>We can add in level 1 predictors as predictors of student level variance in Math scores. Our data set has SES, gender, and SAT math scores as student-level predictors. Gender was dummy coded since there were three levels, with males being the reference for both NB and female. We use the same set up as for the intercept only model, only this time we add in our level 1 predictors. We do not need to adjust anything for the multiple membership part of the code, as that is staying the same.</p>
+<p>Prior to adding in SES and SAT math, we will grand mean center them.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="running-a-multiple-membership-model.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(misty)</span></code></pre></div>
+<pre><code>## |-------------------------------------|
+## | misty 0.4.7 (2023-01-06)            |
+## | Miscellaneous Functions T. Yanagida |
+## |-------------------------------------|</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="running-a-multiple-membership-model.html#cb20-1" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>SESc <span class="ot">&lt;-</span> <span class="fu">center</span>(StudData<span class="sc">$</span>S_SES, <span class="at">type =</span> <span class="st">&quot;CGM&quot;</span>)</span>
+<span id="cb20-2"><a href="running-a-multiple-membership-model.html#cb20-2" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>SATc <span class="ot">&lt;-</span> <span class="fu">center</span>(StudData<span class="sc">$</span>SAT_M, <span class="at">type =</span> <span class="st">&quot;CGM&quot;</span>)</span></code></pre></div>
+<p>This results in a final model, which can be written as
+<span class="math display">\[y_{i} = \beta_{0} + \beta_{1}(SESc) + \beta_{2}(female) + \beta_{3}(NB) + \beta_{4}(SATc) + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}\]</span>
+<span class="math display">\[u_{j}^{(2)} \sim N(0, \sigma_{u(2)}^{2})\]</span>
+<span class="math display">\[e_{i} \sim N(0, \sigma_{e}^{2})\]</span></p>
+<p>Putting the centered predictors into our model, we get the following input: (NOTE: I tried adding in random effects, but the model was unable to converge, so we are staying with fixed effects of SES and SAT only)</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="running-a-multiple-membership-model.html#cb21-1" aria-hidden="true" tabindex="-1"></a>lev1 <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> SESc <span class="sc">+</span> female <span class="sc">+</span> NB <span class="sc">+</span> SATc <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
+<span id="cb21-2"><a href="running-a-multiple-membership-model.html#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="running-a-multiple-membership-model.html#cb21-3" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
+<span id="cb21-4"><a href="running-a-multiple-membership-model.html#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
+<span id="cb21-5"><a href="running-a-multiple-membership-model.html#cb21-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
+<span id="cb21-6"><a href="running-a-multiple-membership-model.html#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="running-a-multiple-membership-model.html#cb21-7" aria-hidden="true" tabindex="-1"></a>(MMembModel2 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> lev1, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
+<pre><code>## MLwiN is running, please wait......</code></pre>
+<pre><code>## 
+## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
+## MLwiN (version: 2.36)  multilevel model (Normal) 
+##        N min     mean max N_complete min_complete mean_complete max_complete
+## tchr1 56  75 92.85714 122         56           75      92.85714          122
+## Estimation algorithm:  MCMC      Cross-classified              Elapsed time : 18.29s 
+## Number of obs:  5200 (from total 5200)          Number of iter.: 5000  Chains: 1  Burn-in: 500 
+## Bayesian Deviance Information Criterion (DIC)
+## Dbar      D(thetabar)    pD      DIC
+## 45953.879  45894.098  59.781     46013.660  
+## --------------------------------------------------------------------------------------------------- 
+## The model formula:
+## Math ~ 1 + SESc + female + NB + SATc + (1 | tchr1) + (1 | S_ID)
+## &lt;environment: 0x000002a252aa1dc8&gt;
+## Level 2: tchr1     Level 1: S_ID      
+## --------------------------------------------------------------------------------------------------- 
+## The fixed part estimates:  
+##                 Coef.   Std. Err.       z   Pr(&gt;|z|)       [95% Cred.   Interval]    ESS 
+## Intercept   442.34444     2.08061  212.60          0  ***   438.28115   446.29587     58 
+## SESc          0.30067     0.13997    2.15    0.03171  *       0.02828     0.58208   4762 
+## female       -0.54715     0.58243   -0.94     0.3475         -1.67917     0.58191   5000 
+## NB           -0.19573     1.44259   -0.14     0.8921         -2.99360     2.58687   5000 
+## SATc          0.30025     0.00164  183.56          0  ***     0.29711     0.30344   5000 
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  
+## --------------------------------------------------------------------------------------------------- 
+## The random part estimates at the tchr1 level: 
+##                     Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+## var_Intercept   301.45458    60.80637    204.20305   440.78723   4371 
+## --------------------------------------------------------------------------------------------------- 
+## The random part estimates at the S_ID level: 
+##                     Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+## var_Intercept   403.48601     7.96562    388.56632   419.39902   5000 
+## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</code></pre>
+<p>Looking at the output for this model, we can first look at the fixed part, to see which predictors are significant and which are not:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="running-a-multiple-membership-model.html#cb24-1" aria-hidden="true" tabindex="-1"></a>The fixed part estimates<span class="sc">:</span>  </span>
+<span id="cb24-2"><a href="running-a-multiple-membership-model.html#cb24-2" aria-hidden="true" tabindex="-1"></a>                Coef.   Std. Err.       z    <span class="fu">Pr</span>(<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>)       [<span class="dv">95</span>% Cred.   Interval]    ESS </span>
+<span id="cb24-3"><a href="running-a-multiple-membership-model.html#cb24-3" aria-hidden="true" tabindex="-1"></a>Intercept   <span class="fl">432.14999</span>     <span class="fl">2.13888</span>  <span class="fl">202.04</span>           <span class="dv">0</span>  <span class="sc">**</span><span class="er">*</span>   <span class="fl">428.14288</span>   <span class="fl">436.35112</span>     <span class="dv">60</span> </span>
+<span id="cb24-4"><a href="running-a-multiple-membership-model.html#cb24-4" aria-hidden="true" tabindex="-1"></a>SESc          <span class="fl">0.19067</span>     <span class="fl">0.13910</span>    <span class="fl">1.37</span>      <span class="fl">0.1705</span>         <span class="sc">-</span><span class="fl">0.08307</span>     <span class="fl">0.46388</span>   <span class="dv">4667</span> </span>
+<span id="cb24-5"><a href="running-a-multiple-membership-model.html#cb24-5" aria-hidden="true" tabindex="-1"></a>female        <span class="fl">0.07923</span>     <span class="fl">0.58179</span>    <span class="fl">0.14</span>      <span class="fl">0.8917</span>         <span class="sc">-</span><span class="fl">1.05906</span>     <span class="fl">1.23982</span>   <span class="dv">5000</span> </span>
+<span id="cb24-6"><a href="running-a-multiple-membership-model.html#cb24-6" aria-hidden="true" tabindex="-1"></a>NB           <span class="sc">-</span><span class="fl">5.54371</span>     <span class="fl">1.43551</span>   <span class="sc">-</span><span class="fl">3.86</span>   <span class="fl">0.0001125</span>  <span class="sc">**</span><span class="er">*</span>    <span class="sc">-</span><span class="fl">8.44713</span>    <span class="sc">-</span><span class="fl">2.76427</span>   <span class="dv">5000</span> </span>
+<span id="cb24-7"><a href="running-a-multiple-membership-model.html#cb24-7" aria-hidden="true" tabindex="-1"></a>SATc          <span class="fl">0.29936</span>     <span class="fl">0.00164</span>  <span class="fl">182.35</span>           <span class="dv">0</span>  <span class="sc">**</span><span class="er">*</span>     <span class="fl">0.29614</span>     <span class="fl">0.30264</span>   <span class="dv">4640</span> </span>
+<span id="cb24-8"><a href="running-a-multiple-membership-model.html#cb24-8" aria-hidden="true" tabindex="-1"></a>Signif. codes<span class="sc">:</span>  <span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>  </span></code></pre></div>
+<p>From this, we see that SAT scores are significant, as is the NB gender code. The intercept represents that the average student math score across all teachers is 432.15. The slope was not allowed to randomly vary across clusters (see above), so all clusters have the same slope. SAT has a positive effect: for every point increase in SAT math scores, Math outcome scores are predicted to be 0.3 points higher, holding all else constant. Being nonbinary, however, has a negative effect when compared to males: they are predicted to score 5.5 points less than males, holding everything else constant. This is likely not due to math ability, but a number of other situational, structural, and social factors outside of the direct control of these students.</p>
+<p>We can also see how well our model did overall by examining the DIC.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="running-a-multiple-membership-model.html#cb25-1" aria-hidden="true" tabindex="-1"></a>Bayesian Deviance Information <span class="fu">Criterion</span> (DIC)</span>
+<span id="cb25-2"><a href="running-a-multiple-membership-model.html#cb25-2" aria-hidden="true" tabindex="-1"></a>Dbar      <span class="fu">D</span>(thetabar)    pD      DIC</span>
+<span id="cb25-3"><a href="running-a-multiple-membership-model.html#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fl">45975.020</span>  <span class="fl">45915.676</span>  <span class="fl">59.346</span>     <span class="fl">46034.367</span>  </span></code></pre></div>
+<p>There was a decrease of over 10000 in the DIC between the intercept only model and this model, indicating that it is highly significant.</p>
+<p>We can also examine the random effects, just for intercepts, and use this to calculate the percent reduction in variance at each level.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="running-a-multiple-membership-model.html#cb26-1" aria-hidden="true" tabindex="-1"></a>The random part estimates at the tchr1 level<span class="sc">:</span> </span>
+<span id="cb26-2"><a href="running-a-multiple-membership-model.html#cb26-2" aria-hidden="true" tabindex="-1"></a>                    Coef.   Std. Err.   [<span class="dv">95</span>% Cred.   Interval]    ESS </span>
+<span id="cb26-3"><a href="running-a-multiple-membership-model.html#cb26-3" aria-hidden="true" tabindex="-1"></a>var_Intercept   <span class="fl">258.75691</span>    <span class="fl">52.28955</span>    <span class="fl">177.05400</span>   <span class="fl">377.15343</span>   <span class="dv">4283</span> </span>
+<span id="cb26-4"><a href="running-a-multiple-membership-model.html#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="sc">---------------------------------------------------------------------------------------------------</span> </span>
+<span id="cb26-5"><a href="running-a-multiple-membership-model.html#cb26-5" aria-hidden="true" tabindex="-1"></a>The random part estimates at the S_ID level<span class="sc">:</span> </span>
+<span id="cb26-6"><a href="running-a-multiple-membership-model.html#cb26-6" aria-hidden="true" tabindex="-1"></a>                    Coef.   Std. Err.   [<span class="dv">95</span>% Cred.   Interval]    ESS </span>
+<span id="cb26-7"><a href="running-a-multiple-membership-model.html#cb26-7" aria-hidden="true" tabindex="-1"></a>var_Intercept   <span class="fl">404.72528</span>     <span class="fl">7.93413</span>    <span class="fl">389.22146</span>   <span class="fl">420.44359</span>   <span class="dv">5000</span>  </span></code></pre></div>
+<p>Here, the teacher-level variance is now interpreted as how much variance between teachers remains after accounting for the predictor variables. Similarly, the student-level variance is interpreted as how much variance between students remains after accounting for the predictor variables. As we only added in student-level predictors, we would most anticipate that the student-level variance would decrease. Calculating the percent reduction in student-level variance, we get
+<span class="math display">\[\frac{\sigma^{2}(intonly) - \sigma^{2}(level1)}{\sigma^{2}(intonly)} = \frac{3077.48-404.73}{3077.48} = 86.8\%\]</span>
+86.8% reduction in level 1 variance, which by most definitions is quite a lot!</p>
+<p>We can also look at the level 2 variance reduction, though we are guessing it will not be much reduced at all.
+<span class="math display">\[\frac{\sigma^{2}(intonly) - \sigma^{2}(level1)}{\sigma^{2}(intonly)} = \frac{281.9-258.76}{281.9} = 8.2\%\]</span></p>
+<p>We get that there was an 8.2% reduction in the level 2 variance. Keeping in mind that there wasn’t much variance at level 2 to begin with, this is not very practically significant.</p>
 </div>
 <div id="adding-in-level-2-predictors" class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> Adding in level 2 predictors<a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>It is also possible to add in level 2 predictors to our model, to try and explain the (small) amount of teacher level variance. However, as this is a multiple membership model, and we are accounting for the fact that students may have encountered one or more teachers, we will incorporate weights into these predictors. In our data set, we have teacher experience as a teacher level predictor. Since both the values on the predictor and the weight are known, we can calculate a new predictor incorporating these items.
+<span class="math display">\[\overline{t\_exp_{2i}} = \sum_{j \in teacher(i)}w_{j,i}^{(2)}(t\_exp)_{2j}^{(2)}\]</span></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="running-a-multiple-membership-model.html#cb27-1" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tot_exp <span class="ot">&lt;-</span> (StudData<span class="sc">$</span>t1_exp<span class="sc">*</span>StudData<span class="sc">$</span>w1 <span class="sc">+</span> StudData<span class="sc">$</span>t2_exp<span class="sc">*</span>StudData<span class="sc">$</span>w2 <span class="sc">+</span> StudData<span class="sc">$</span>t3_exp<span class="sc">*</span>StudData<span class="sc">$</span>w3 <span class="sc">+</span> StudData<span class="sc">$</span>t4_exp<span class="sc">*</span>StudData<span class="sc">$</span>w4 <span class="sc">+</span> StudData<span class="sc">$</span>t5_exp<span class="sc">*</span>StudData<span class="sc">$</span>w5 <span class="sc">+</span> StudData<span class="sc">$</span>t6_exp<span class="sc">*</span>StudData<span class="sc">$</span>w6 <span class="sc">+</span> StudData<span class="sc">$</span>t7_exp<span class="sc">*</span>StudData<span class="sc">$</span>w7 <span class="sc">+</span> StudData<span class="sc">$</span>t8_exp<span class="sc">*</span>StudData<span class="sc">$</span>w8 <span class="sc">+</span> StudData<span class="sc">$</span>t9_exp<span class="sc">*</span>StudData<span class="sc">$</span>w9 <span class="sc">+</span> StudData<span class="sc">$</span>t10_exp<span class="sc">*</span>StudData<span class="sc">$</span>w10 <span class="sc">+</span> StudData<span class="sc">$</span>t11_exp<span class="sc">*</span>StudData<span class="sc">$</span>w11 <span class="sc">+</span> StudData<span class="sc">$</span>t12_exp<span class="sc">*</span>StudData<span class="sc">$</span>w12)</span></code></pre></div>
+<p>After calculating the weighted average of teacher experience, we can put it in our model, which will now be represented as the equation:
+<span class="math display">\[y_{i} = \beta_{0} + \beta_{1}(SESc) + \beta_{2}(female) + \beta_{3}(NB) + \beta_{4}(SATc) + \beta_{5}(\overline{t\_exp_{2i}}) + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}\]</span></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="running-a-multiple-membership-model.html#cb28-1" aria-hidden="true" tabindex="-1"></a>lev2 <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> SESc <span class="sc">+</span> female <span class="sc">+</span> NB <span class="sc">+</span> SATc <span class="sc">+</span> tot_exp <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
+<span id="cb28-2"><a href="running-a-multiple-membership-model.html#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="running-a-multiple-membership-model.html#cb28-3" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
+<span id="cb28-4"><a href="running-a-multiple-membership-model.html#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
+<span id="cb28-5"><a href="running-a-multiple-membership-model.html#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
+<span id="cb28-6"><a href="running-a-multiple-membership-model.html#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="running-a-multiple-membership-model.html#cb28-7" aria-hidden="true" tabindex="-1"></a>(MMembModel2 <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> lev2, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
+<pre><code>## MLwiN is running, please wait......</code></pre>
+<pre><code>## 
+## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*- 
+## MLwiN (version: 2.36)  multilevel model (Normal) 
+##        N min     mean max N_complete min_complete mean_complete max_complete
+## tchr1 56  75 92.85714 122         56           75      92.85714          122
+## Estimation algorithm:  MCMC      Cross-classified              Elapsed time : 17.92s 
+## Number of obs:  5200 (from total 5200)          Number of iter.: 5000  Chains: 1  Burn-in: 500 
+## Bayesian Deviance Information Criterion (DIC)
+## Dbar      D(thetabar)    pD      DIC
+## 45955.359  45895.484  59.875     46015.234  
+## --------------------------------------------------------------------------------------------------- 
+## The model formula:
+## Math ~ 1 + SESc + female + NB + SATc + tot_exp + (1 | tchr1) + 
+##     (1 | S_ID)
+## &lt;environment: 0x000002a252aa1dc8&gt;
+## Level 2: tchr1     Level 1: S_ID      
+## --------------------------------------------------------------------------------------------------- 
+## The fixed part estimates:  
+##                 Coef.   Std. Err.       z     Pr(&gt;|z|)       [95% Cred.   Interval]    ESS 
+## Intercept   416.34406    11.86173   35.10   6.796e-270  ***   392.63960   438.36022     74 
+## SESc          0.29967     0.13931    2.15      0.03147  *       0.02538     0.56744   4690 
+## female       -0.53750     0.57763   -0.93       0.3521         -1.67365     0.58375   5000 
+## NB           -0.26779     1.41534   -0.19       0.8499         -3.01926     2.50454   5000 
+## SATc          0.30029     0.00161  186.27            0  ***     0.29717     0.30337   5000 
+## tot_exp       2.48257     1.09498    2.27      0.02338  *       0.47155     4.77992     78 
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1  
+## --------------------------------------------------------------------------------------------------- 
+## The random part estimates at the tchr1 level: 
+##                     Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+## var_Intercept   276.54452    55.33169    185.96627   405.82281   3217 
+## --------------------------------------------------------------------------------------------------- 
+## The random part estimates at the S_ID level: 
+##                     Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+## var_Intercept   403.45930     8.05699    388.21652   419.58182   5110 
+## -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-</code></pre>
+<p>Again looking at the output, we can start with the fixed effects, where we see that teacher experience is a significant predictor of math outcomes. The more experience a teacher has, the better their student math outcomes.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="running-a-multiple-membership-model.html#cb31-1" aria-hidden="true" tabindex="-1"></a>The fixed part estimates<span class="sc">:</span>  </span>
+<span id="cb31-2"><a href="running-a-multiple-membership-model.html#cb31-2" aria-hidden="true" tabindex="-1"></a>                Coef.   Std. Err.       z     <span class="fu">Pr</span>(<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>)       [<span class="dv">95</span>% Cred.   Interval]    ESS </span>
+<span id="cb31-3"><a href="running-a-multiple-membership-model.html#cb31-3" aria-hidden="true" tabindex="-1"></a>Intercept   <span class="fl">416.34406</span>    <span class="fl">11.86173</span>   <span class="fl">35.10</span>   <span class="fl">6.796e-270</span>  <span class="sc">**</span><span class="er">*</span>   <span class="fl">392.63960</span>   <span class="fl">438.36022</span>     <span class="dv">74</span> </span>
+<span id="cb31-4"><a href="running-a-multiple-membership-model.html#cb31-4" aria-hidden="true" tabindex="-1"></a>SESc          <span class="fl">0.29967</span>     <span class="fl">0.13931</span>    <span class="fl">2.15</span>      <span class="fl">0.03147</span>  <span class="sc">*</span>       <span class="fl">0.02538</span>     <span class="fl">0.56744</span>   <span class="dv">4690</span> </span>
+<span id="cb31-5"><a href="running-a-multiple-membership-model.html#cb31-5" aria-hidden="true" tabindex="-1"></a>female       <span class="sc">-</span><span class="fl">0.53750</span>     <span class="fl">0.57763</span>   <span class="sc">-</span><span class="fl">0.93</span>       <span class="fl">0.3521</span>         <span class="sc">-</span><span class="fl">1.67365</span>     <span class="fl">0.58375</span>   <span class="dv">5000</span> </span>
+<span id="cb31-6"><a href="running-a-multiple-membership-model.html#cb31-6" aria-hidden="true" tabindex="-1"></a>NB           <span class="sc">-</span><span class="fl">0.26779</span>     <span class="fl">1.41534</span>   <span class="sc">-</span><span class="fl">0.19</span>       <span class="fl">0.8499</span>         <span class="sc">-</span><span class="fl">3.01926</span>     <span class="fl">2.50454</span>   <span class="dv">5000</span> </span>
+<span id="cb31-7"><a href="running-a-multiple-membership-model.html#cb31-7" aria-hidden="true" tabindex="-1"></a>SATc          <span class="fl">0.30029</span>     <span class="fl">0.00161</span>  <span class="fl">186.27</span>            <span class="dv">0</span>  <span class="sc">**</span><span class="er">*</span>     <span class="fl">0.29717</span>     <span class="fl">0.30337</span>   <span class="dv">5000</span> </span>
+<span id="cb31-8"><a href="running-a-multiple-membership-model.html#cb31-8" aria-hidden="true" tabindex="-1"></a>tot_exp       <span class="fl">2.48257</span>     <span class="fl">1.09498</span>    <span class="fl">2.27</span>      <span class="fl">0.02338</span>  <span class="sc">*</span>       <span class="fl">0.47155</span>     <span class="fl">4.77992</span>     <span class="dv">78</span> </span>
+<span id="cb31-9"><a href="running-a-multiple-membership-model.html#cb31-9" aria-hidden="true" tabindex="-1"></a>Signif. codes<span class="sc">:</span>  <span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>  </span></code></pre></div>
+<p>Interestingly, once including teacher experience as a predictor, NB is no longer significant, but student SES is. However, looking at the ESS, or Effective Sample Size, we can see that it is very low for <code>tot_exp</code>, meaning that while 5000 draws were taken, they had as little information as might be expected in a sample of only 78 independent values, indicating a high level of autocorrelation <span class="citation">(<a href="#ref-Leckie2013" role="doc-biblioref">Leckie 2013b</a>)</span>.</p>
+<p>Examining the model as a whole, we can compare the DIC of this model to the DIC of the model only containing level 1 predictors:</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="running-a-multiple-membership-model.html#cb32-1" aria-hidden="true" tabindex="-1"></a>Bayesian Deviance Information <span class="fu">Criterion</span> (DIC)</span>
+<span id="cb32-2"><a href="running-a-multiple-membership-model.html#cb32-2" aria-hidden="true" tabindex="-1"></a>Dbar      <span class="fu">D</span>(thetabar)    pD      DIC</span>
+<span id="cb32-3"><a href="running-a-multiple-membership-model.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fl">45955.359</span>  <span class="fl">45895.484</span>  <span class="fl">59.875</span>     <span class="fl">46015.234</span>   </span></code></pre></div>
+<p>While not as an extreme lowering of the DIC as we saw in the level 1 model, the DIC is still 19.133 less. While there are no “hard” guidelines, it is generally accepted that a difference larger than 10 indicate that the model with the lower DIC should be used. So, in this case, the model incorporating the level 2 predictor is a better fit than the model without.</p>
+<p>Lastly, we can look at the reduction in variance components by looking at the random parts (again, we held all slopes constant).</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="running-a-multiple-membership-model.html#cb33-1" aria-hidden="true" tabindex="-1"></a>The random part estimates at the tchr1 level<span class="sc">:</span> </span>
+<span id="cb33-2"><a href="running-a-multiple-membership-model.html#cb33-2" aria-hidden="true" tabindex="-1"></a>                    Coef.   Std. Err.   [<span class="dv">95</span>% Cred.   Interval]    ESS </span>
+<span id="cb33-3"><a href="running-a-multiple-membership-model.html#cb33-3" aria-hidden="true" tabindex="-1"></a>var_Intercept   <span class="fl">276.54452</span>    <span class="fl">55.33169</span>    <span class="fl">185.96627</span>   <span class="fl">405.82281</span>   <span class="dv">3217</span> </span>
+<span id="cb33-4"><a href="running-a-multiple-membership-model.html#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="sc">---------------------------------------------------------------------------------------------------</span> </span>
+<span id="cb33-5"><a href="running-a-multiple-membership-model.html#cb33-5" aria-hidden="true" tabindex="-1"></a>The random part estimates at the S_ID level<span class="sc">:</span> </span>
+<span id="cb33-6"><a href="running-a-multiple-membership-model.html#cb33-6" aria-hidden="true" tabindex="-1"></a>                    Coef.   Std. Err.   [<span class="dv">95</span>% Cred.   Interval]    ESS </span>
+<span id="cb33-7"><a href="running-a-multiple-membership-model.html#cb33-7" aria-hidden="true" tabindex="-1"></a>var_Intercept   <span class="fl">403.45930</span>     <span class="fl">8.05699</span>    <span class="fl">388.21652</span>   <span class="fl">419.58182</span>   <span class="dv">5110</span> </span></code></pre></div>
+<p>Performing the same calculations as above, we see that student level variance decreased by an additional 0.3%. This would make sense, since no additional level 1 predictors were added to the model, so we were not anticipating a large decrease in student level variance. However, teacher level variance INCREASED by 6.87%, indicating that perhaps this is not a good predictor to be using.</p>
 </div>
-<div id="footnotes" class="section level2 hasAnchor" number="5.5">
-<h2><span class="header-section-number">5.5</span> Footnotes<a href="running-a-multiple-membership-model.html#footnotes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Footnotes are put inside the square brackets after a caret <code>^[]</code>. Like this one <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
+<div id="circling-back-to-the-research-questions" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Circling back to the research questions<a href="running-a-multiple-membership-model.html#circling-back-to-the-research-questions" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>At the outset of this fictional study, JMU said they had three research questions they would like to answer with these data and models.</p>
+<div id="rq1-do-teacher-characteristics-influence-student-math-scores-ie-do-we-need-to-factor-in-nesting-and-multiple-membership" class="section level3 hasAnchor" number="5.5.1">
+<h3><span class="header-section-number">5.5.1</span> RQ1: Do teacher characteristics influence student math scores? (ie, do we need to factor in nesting and multiple membership?)<a href="running-a-multiple-membership-model.html#rq1-do-teacher-characteristics-influence-student-math-scores-ie-do-we-need-to-factor-in-nesting-and-multiple-membership" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We can answer this question with the intercept-only model. We saw that while there wasn’t much variation at the teacher level, there was more than zero, indicating that including the nesting and the multiple membership structure is important. This was further verified by comparing the DIC of the intercept-only model to the single level model and finding that incorporating nesting caused a significant reduction of DIC (200).</p>
 </div>
-<div id="citations" class="section level2 hasAnchor" number="5.6">
-<h2><span class="header-section-number">5.6</span> Citations<a href="running-a-multiple-membership-model.html#citations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Reference items in your bibliography file(s) using <code>@key</code>.</p>
-<p>For example, we are using the <strong>bookdown</strong> package <span class="citation">(<a href="#ref-R-bookdown" role="doc-biblioref">Xie 2023</a>)</span> (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and <strong>knitr</strong> <span class="citation">(<a href="#ref-xie2015" role="doc-biblioref">Xie 2015</a>)</span> (this citation was added manually in an external file book.bib).
-Note that the <code>.bib</code> files need to be listed in the index.Rmd with the YAML <code>bibliography</code> key.</p>
-<p>The RStudio Visual Markdown Editor can also make it easier to insert citations: <a href="https://rstudio.github.io/visual-markdown-editing/#/citations" class="uri">https://rstudio.github.io/visual-markdown-editing/#/citations</a></p>
+<div id="rq2-what-student-characteristics-predict-math-scores" class="section level3 hasAnchor" number="5.5.2">
+<h3><span class="header-section-number">5.5.2</span> RQ2: What student characteristics predict math scores?<a href="running-a-multiple-membership-model.html#rq2-what-student-characteristics-predict-math-scores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This was answered when we added in level 1 predictors. We saw that adding in SES, SAT math, and gender dummy codes produced a significantly better model than the intercept only model. Of these predictors, SAT math and the nonbinary gender code were significant predictors of math scores. The model including these predictors resulted in an 86.8% reduction in student level variance, and a model that fit significantly better than the intercept only model.</p>
+</div>
+<div id="rq3-does-more-teacher-experience-lead-to-better-student-outcomes" class="section level3 hasAnchor" number="5.5.3">
+<h3><span class="header-section-number">5.5.3</span> RQ3: Does more teacher experience lead to better student outcomes?<a href="running-a-multiple-membership-model.html#rq3-does-more-teacher-experience-lead-to-better-student-outcomes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Answering this is a bit more complicated. Looking at model fit and significance of teacher experience, we would conclude that as teacher experience increases, so too does student math outcomes. Additionally, this is a significant predictor, and leads to a better fitting model. However, inclusion of this predictor does not reduce teacher level variance and in fact increases it. There may be other, better, teacher level predictors that should be added to the model to create a better fit.</p>
 
+</div>
 </div>
 </div>
 <h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-xie2015" class="csl-entry">
-Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.org/knitr/">http://yihui.org/knitr/</a>.
-</div>
-<div id="ref-R-bookdown" class="csl-entry">
-———. 2023. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
+<div id="ref-Leckie2013" class="csl-entry">
+———. 2013b. <em>Multiple Membership Multilevel Models - Concepts.</em> LEMMA VLE Module 13, p. 1-57.
 </div>
 <div id="ref-R-R2MLwiN" class="csl-entry">
 Zhang, Zhengzheng, Chris Charlton, Richard Parker, George Leckie, and William Browne. 2023. <em>R2MLwiN: Running MLwiN from Within r</em>. <a href="https://CRAN.R-project.org/package=R2MLwiN">https://CRAN.R-project.org/package=R2MLwiN</a>.
@@ -404,7 +564,7 @@ Zhang, Zhengzheng, Chris Charlton, Richard Parker, George Leckie, and William Br
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>This is a footnote.<a href="running-a-multiple-membership-model.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn1"><p>This is why I believe the data could have been simulated better.<a href="running-a-multiple-membership-model.html#fnref1" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
             </section>

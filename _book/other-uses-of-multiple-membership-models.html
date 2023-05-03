@@ -12,7 +12,7 @@
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 6 Other uses of Multiple Membership Models | Multiple Membership Models: A tutorial" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Laura Lambert" />
 
 
-<meta name="date" content="2023-05-01" />
+<meta name="date" content="2023-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="running-a-multiple-membership-model.html"/>
-<link rel="next" href="increasing-complexity.html"/>
+<link rel="next" href="appendix-1.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -163,7 +163,6 @@ div.csl-indent {
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.1</b> R packages used</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.2</b> Acknowledgements</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#a-disclaimer"><i class="fa fa-check"></i><b>1.3</b> A Disclaimer</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.4</b> Preview book</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
 <ul>
@@ -171,20 +170,28 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. long forms</a></li>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. wide forms</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#compact-1"><i class="fa fa-check"></i><b>3.1.1</b> Compact</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#wide"><i class="fa fa-check"></i><b>3.1.2</b> Wide</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#examining-the-data"><i class="fa fa-check"></i><b>3.2</b> Examining the Data</a></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#software"><i class="fa fa-check"></i><b>3.3</b> Software Considerations</a></li>
-<li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.4</b> Captioned figures and tables</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html"><i class="fa fa-check"></i><b>4</b> Multiple Membership models: the details</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a>
+<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a></li>
+<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.1.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.2.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-1"><i class="fa fa-check"></i><b>4.2.2</b> Student 1</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a></li>
 <li class="chapter" data-level="4.3" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
-<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a></li>
+<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc-and-icc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#icc"><i class="fa fa-check"></i><b>4.4.1</b> ICC</a></li>
+<li class="chapter" data-level="4.4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4.2</b> VPC</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html"><i class="fa fa-check"></i><b>5</b> Running a Multiple Membership Model</a>
 <ul>
@@ -198,21 +205,15 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#the-output"><i class="fa fa-check"></i><b>5.2</b> The Output</a></li>
 <li class="chapter" data-level="5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors"><i class="fa fa-check"></i><b>5.3</b> Adding in level 1 predictors</a></li>
 <li class="chapter" data-level="5.4" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors"><i class="fa fa-check"></i><b>5.4</b> Adding in level 2 predictors</a></li>
-<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#footnotes"><i class="fa fa-check"></i><b>5.5</b> Footnotes</a></li>
-<li class="chapter" data-level="5.6" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#citations"><i class="fa fa-check"></i><b>5.6</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a>
+<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#circling-back-to-the-research-questions"><i class="fa fa-check"></i><b>5.5</b> Circling back to the research questions</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
-<li class="chapter" data-level="6.2" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
-<li class="chapter" data-level="6.3" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+<li class="chapter" data-level="5.5.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq1-do-teacher-characteristics-influence-student-math-scores-ie-do-we-need-to-factor-in-nesting-and-multiple-membership"><i class="fa fa-check"></i><b>5.5.1</b> RQ1: Do teacher characteristics influence student math scores? (ie, do we need to factor in nesting and multiple membership?)</a></li>
+<li class="chapter" data-level="5.5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq2-what-student-characteristics-predict-math-scores"><i class="fa fa-check"></i><b>5.5.2</b> RQ2: What student characteristics predict math scores?</a></li>
+<li class="chapter" data-level="5.5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq3-does-more-teacher-experience-lead-to-better-student-outcomes"><i class="fa fa-check"></i><b>5.5.3</b> RQ3: Does more teacher experience lead to better student outcomes?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="increasing-complexity.html"><a href="increasing-complexity.html"><i class="fa fa-check"></i><b>7</b> Increasing complexity</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="increasing-complexity.html"><a href="increasing-complexity.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
-<li class="chapter" data-level="7.2" data-path="increasing-complexity.html"><a href="increasing-complexity.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
-<li class="chapter" data-level="7.3" data-path="increasing-complexity.html"><a href="increasing-complexity.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a></li>
+<li class="chapter" data-level="" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i>Appendix 1</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -236,29 +237,20 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="other-uses-of-multiple-membership-models" class="section level1 hasAnchor" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Other uses of Multiple Membership Models<a href="other-uses-of-multiple-membership-models.html#other-uses-of-multiple-membership-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="equations" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> Equations<a href="other-uses-of-multiple-membership-models.html#equations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Here is an equation.</p>
-<p><span class="math display" id="eq:binom">\[\begin{equation}
-  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
-  \tag{6.1}
-\end{equation}\]</span></p>
-<p>You may refer to using <code>\@ref(eq:binom)</code>, like see Equation <a href="other-uses-of-multiple-membership-models.html#eq:binom">(6.1)</a>.</p>
-</div>
-<div id="theorems-and-proofs" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> Theorems and proofs<a href="other-uses-of-multiple-membership-models.html#theorems-and-proofs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Labeled theorems can be referenced in text using <code>\@ref(thm:tri)</code>, for example, check out this smart theorem <a href="other-uses-of-multiple-membership-models.html#thm:tri">6.1</a>.</p>
-<div class="theorem">
-<p><span id="thm:tri" class="theorem"><strong>Theorem 6.1  </strong></span>For a right triangle, if <span class="math inline">\(c\)</span> denotes the <em>length</em> of the hypotenuse
-and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> denote the lengths of the <strong>other</strong> two sides, we have
-<span class="math display">\[a^2 + b^2 = c^2\]</span></p>
-</div>
-<p>Read more here <a href="https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html" class="uri">https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html</a>.</p>
-</div>
-<div id="callout-blocks" class="section level2 hasAnchor" number="6.3">
-<h2><span class="header-section-number">6.3</span> Callout blocks<a href="other-uses-of-multiple-membership-models.html#callout-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>The R Markdown Cookbook provides more help on how to use custom blocks to design your own callouts: <a href="https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html" class="uri">https://bookdown.org/yihui/rmarkdown-cookbook/custom-blocks.html</a></p>
+<p>Multiple membership models can be combined with a number of other model types, and they are not restricted to only one level. It is possible to have multiple membership at level 2, but a pure hierarchy at level 3. Multiple membership models can be combined with a three level model to incorporate longitudinal data as well <span class="citation">(for example <a href="#ref-Leroux" role="doc-biblioref">Leroux 2019</a>)</span>. They can also be combined with cross-classified models <span class="citation">Beretvas (<a href="#ref-Beretvas" role="doc-biblioref">2011</a>)</span> to handle even more complex data structures.</p>
+<p>A use I found particularly interesting for multiple membership models was to handle missing data. <span class="citation">Hill and Goldstein (<a href="#ref-Hill1998" role="doc-biblioref">1998</a>)</span> proposed using a multiple membership structure to equally weight all possible schools for a student when actual school enrollment was unknown. For students who had a known school membership, they were simply members of one school, with a weight of 1. I found this an interesting approach to missing data, as you are still able to use the student information, though with less school information than those students who have a known membership.</p>
 
+</div>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Beretvas" class="csl-entry">
+Beretvas, S. Natasha. 2011. <span>“Cross-Classified and Multiple-Membership Models.”</span> In <em>Handbook for Advanced Multilevel Analysis</em>, 313–34. Routledge/Taylor &amp; Francis Group.
+</div>
+<div id="ref-Hill1998" class="csl-entry">
+Hill, Peter, and Harvey Goldstein. 1998. <span>“Multilevel Modeling of Educational Data with Cross-Classification and Missing Identification for Units.”</span> <em>Journal of Educational and Behavioral Statistics</em> 23: 117–28.
+</div>
+<div id="ref-Leroux" class="csl-entry">
+Leroux, Audrey J. 2019. <span>“Student Mobility in Multilevel Growth Modeling: A Multiple Membership Piecewise Growth Model.”</span> <em>The Journal of Experimental Education</em> 87: 430–48.
 </div>
 </div>
             </section>
@@ -267,7 +259,7 @@ and <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</
         </div>
       </div>
 <a href="running-a-multiple-membership-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="increasing-complexity.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="appendix-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -298,7 +290,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-blocks.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-otheruse.Rmd",
 "text": "Edit"
 },
 "history": {

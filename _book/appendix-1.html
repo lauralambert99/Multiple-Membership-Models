@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Appendix 1 | Multiple Membership Models: A tutorial</title>
+  <meta name="description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  <meta name="generator" content="bookdown 0.33 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Appendix 1 | Multiple Membership Models: A tutorial" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Appendix 1 | Multiple Membership Models: A tutorial" />
+  
+  <meta name="twitter:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
+  
+
+<meta name="author" content="Laura Lambert" />
+
+
+<meta name="date" content="2023-05-02" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="other-uses-of-multiple-membership-models.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Multiple Membership Models: A tutorial</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.1</b> R packages used</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.2</b> Acknowledgements</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#a-disclaimer"><i class="fa fa-check"></i><b>1.3</b> A Disclaimer</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#non-hierarchical-models-in-brief"><i class="fa fa-check"></i><b>2.1</b> Non-hierarchical models in brief</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. wide forms</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#compact-1"><i class="fa fa-check"></i><b>3.1.1</b> Compact</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#wide"><i class="fa fa-check"></i><b>3.1.2</b> Wide</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#examining-the-data"><i class="fa fa-check"></i><b>3.2</b> Examining the Data</a></li>
+<li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#software"><i class="fa fa-check"></i><b>3.3</b> Software Considerations</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html"><i class="fa fa-check"></i><b>4</b> Multiple Membership models: the details</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a></li>
+<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.2.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-1"><i class="fa fa-check"></i><b>4.2.2</b> Student 1</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
+<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc-and-icc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#icc"><i class="fa fa-check"></i><b>4.4.1</b> ICC</a></li>
+<li class="chapter" data-level="4.4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4.2</b> VPC</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html"><i class="fa fa-check"></i><b>5</b> Running a Multiple Membership Model</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#intercept-only-model"><i class="fa fa-check"></i><b>5.1</b> Intercept-only Model</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#first-steps"><i class="fa fa-check"></i><b>5.1.1</b> First Steps</a></li>
+<li class="chapter" data-level="5.1.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#define-the-model"><i class="fa fa-check"></i><b>5.1.2</b> Define the model</a></li>
+<li class="chapter" data-level="5.1.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#set-up-and-send-to-mlwin"><i class="fa fa-check"></i><b>5.1.3</b> Set up and send to MLwiN</a></li>
+<li class="chapter" data-level="5.1.4" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#put-it-all-together"><i class="fa fa-check"></i><b>5.1.4</b> Put it all together</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#the-output"><i class="fa fa-check"></i><b>5.2</b> The Output</a></li>
+<li class="chapter" data-level="5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors"><i class="fa fa-check"></i><b>5.3</b> Adding in level 1 predictors</a></li>
+<li class="chapter" data-level="5.4" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors"><i class="fa fa-check"></i><b>5.4</b> Adding in level 2 predictors</a></li>
+<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#circling-back-to-the-research-questions"><i class="fa fa-check"></i><b>5.5</b> Circling back to the research questions</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq1-do-teacher-characteristics-influence-student-math-scores-ie-do-we-need-to-factor-in-nesting-and-multiple-membership"><i class="fa fa-check"></i><b>5.5.1</b> RQ1: Do teacher characteristics influence student math scores? (ie, do we need to factor in nesting and multiple membership?)</a></li>
+<li class="chapter" data-level="5.5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq2-what-student-characteristics-predict-math-scores"><i class="fa fa-check"></i><b>5.5.2</b> RQ2: What student characteristics predict math scores?</a></li>
+<li class="chapter" data-level="5.5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq3-does-more-teacher-experience-lead-to-better-student-outcomes"><i class="fa fa-check"></i><b>5.5.3</b> RQ3: Does more teacher experience lead to better student outcomes?</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a></li>
+<li class="chapter" data-level="" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i>Appendix 1</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Multiple Membership Models: A tutorial</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix-1" class="section level1 unnumbered hasAnchor">
+<h1>Appendix 1<a href="appendix-1.html#appendix-1" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="appendix-1.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">setwd</span>(<span class="st">&quot;path</span><span class="sc">\\</span><span class="st">goes</span><span class="sc">\\</span><span class="st">here&quot;</span>)</span>
+<span id="cb34-2"><a href="appendix-1.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb34-3"><a href="appendix-1.html#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb34-4"><a href="appendix-1.html#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(R2MLwiN)</span>
+<span id="cb34-5"><a href="appendix-1.html#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">MLwiN_path=</span><span class="st">&quot;C:</span><span class="sc">\\</span><span class="st">Program Files (x86)</span><span class="sc">\\</span><span class="st">MLwiN trial</span><span class="sc">\\</span><span class="st">i386</span><span class="sc">\\</span><span class="st">mlwin.exe&quot;</span>)</span>
+<span id="cb34-6"><a href="appendix-1.html#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="appendix-1.html#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="do">################################################################################</span></span>
+<span id="cb34-8"><a href="appendix-1.html#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="do">####Data Simulation and Saving out the .csv file for later analysis#############</span></span>
+<span id="cb34-9"><a href="appendix-1.html#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="do">################################################################################</span></span>
+<span id="cb34-10"><a href="appendix-1.html#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="appendix-1.html#cb34-11" aria-hidden="true" tabindex="-1"></a><span class="co">#Simulate data for use in project; just need one data file - not a simulation study</span></span>
+<span id="cb34-12"><a href="appendix-1.html#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb34-13"><a href="appendix-1.html#cb34-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-14"><a href="appendix-1.html#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="co">#Number of level 1 units</span></span>
+<span id="cb34-15"><a href="appendix-1.html#cb34-15" aria-hidden="true" tabindex="-1"></a>N <span class="ot">=</span> <span class="dv">5200</span></span>
+<span id="cb34-16"><a href="appendix-1.html#cb34-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-17"><a href="appendix-1.html#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="co">#Student ID</span></span>
+<span id="cb34-18"><a href="appendix-1.html#cb34-18" aria-hidden="true" tabindex="-1"></a>S_ID <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span>N</span>
+<span id="cb34-19"><a href="appendix-1.html#cb34-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-20"><a href="appendix-1.html#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="co">#SAT Math - as a &quot;pre&quot; </span></span>
+<span id="cb34-21"><a href="appendix-1.html#cb34-21" aria-hidden="true" tabindex="-1"></a><span class="co">#Scores range from 200-800</span></span>
+<span id="cb34-22"><a href="appendix-1.html#cb34-22" aria-hidden="true" tabindex="-1"></a>sat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">200</span><span class="sc">:</span><span class="dv">800</span>)</span>
+<span id="cb34-23"><a href="appendix-1.html#cb34-23" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>SAT_M <span class="ot">&lt;-</span> <span class="fu">sample</span>(sat, N, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-24"><a href="appendix-1.html#cb34-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-25"><a href="appendix-1.html#cb34-25" aria-hidden="true" tabindex="-1"></a><span class="co">#Student gender</span></span>
+<span id="cb34-26"><a href="appendix-1.html#cb34-26" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>)</span>
+<span id="cb34-27"><a href="appendix-1.html#cb34-27" aria-hidden="true" tabindex="-1"></a>S_gend <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> gender, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb34-28"><a href="appendix-1.html#cb34-28" aria-hidden="true" tabindex="-1"></a>                 <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.56</span>, <span class="fl">0.40</span>, <span class="fl">0.04</span>))</span>
+<span id="cb34-29"><a href="appendix-1.html#cb34-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-30"><a href="appendix-1.html#cb34-30" aria-hidden="true" tabindex="-1"></a><span class="co">#Since have 3 codes, will need dummy coding</span></span>
+<span id="cb34-31"><a href="appendix-1.html#cb34-31" aria-hidden="true" tabindex="-1"></a><span class="co">#Use &#39;male&#39; as reference</span></span>
+<span id="cb34-32"><a href="appendix-1.html#cb34-32" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>female <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(StudData<span class="sc">$</span>S_gend <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb34-33"><a href="appendix-1.html#cb34-33" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>NB <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(StudData<span class="sc">$</span>S_gend <span class="sc">==</span> <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb34-34"><a href="appendix-1.html#cb34-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-35"><a href="appendix-1.html#cb34-35" aria-hidden="true" tabindex="-1"></a><span class="co">#Student SES</span></span>
+<span id="cb34-36"><a href="appendix-1.html#cb34-36" aria-hidden="true" tabindex="-1"></a><span class="co">#Random generation - between 2 and 29; using the Kuppuswamy SES scale </span></span>
+<span id="cb34-37"><a href="appendix-1.html#cb34-37" aria-hidden="true" tabindex="-1"></a>S_SES <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> N, <span class="at">mean =</span> <span class="dv">13</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb34-38"><a href="appendix-1.html#cb34-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-39"><a href="appendix-1.html#cb34-39" aria-hidden="true" tabindex="-1"></a><span class="co">#Number of different math teachers had by each student</span></span>
+<span id="cb34-40"><a href="appendix-1.html#cb34-40" aria-hidden="true" tabindex="-1"></a><span class="co">#Treat as count data</span></span>
+<span id="cb34-41"><a href="appendix-1.html#cb34-41" aria-hidden="true" tabindex="-1"></a>tchrs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span>
+<span id="cb34-42"><a href="appendix-1.html#cb34-42" aria-hidden="true" tabindex="-1"></a>num_tchrs <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> tchrs, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb34-43"><a href="appendix-1.html#cb34-43" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.3325</span>, <span class="fl">0.3325</span>, <span class="fl">0.08</span>, <span class="fl">0.08</span>, <span class="fl">0.08</span>, <span class="fl">0.08</span>,</span>
+<span id="cb34-44"><a href="appendix-1.html#cb34-44" aria-hidden="true" tabindex="-1"></a>                             <span class="fl">0.001</span>, <span class="fl">0.001</span>, <span class="fl">0.001</span>, <span class="fl">0.001</span>, <span class="fl">0.001</span>, <span class="fl">0.01</span>))</span>
+<span id="cb34-45"><a href="appendix-1.html#cb34-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-46"><a href="appendix-1.html#cb34-46" aria-hidden="true" tabindex="-1"></a><span class="co">#Physics teachers (as an example of cross-classified data)</span></span>
+<span id="cb34-47"><a href="appendix-1.html#cb34-47" aria-hidden="true" tabindex="-1"></a><span class="co">#Should work to make this better - match physics class with likelihood of STEM major </span></span>
+<span id="cb34-48"><a href="appendix-1.html#cb34-48" aria-hidden="true" tabindex="-1"></a><span class="co">#based on math classes.</span></span>
+<span id="cb34-49"><a href="appendix-1.html#cb34-49" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb34-50"><a href="appendix-1.html#cb34-50" aria-hidden="true" tabindex="-1"></a>phys <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> p, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb34-51"><a href="appendix-1.html#cb34-51" aria-hidden="true" tabindex="-1"></a>               <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.75</span>, <span class="fl">0.25</span>))</span>
+<span id="cb34-52"><a href="appendix-1.html#cb34-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-53"><a href="appendix-1.html#cb34-53" aria-hidden="true" tabindex="-1"></a><span class="co">#Join what we have so far in a dataframe</span></span>
+<span id="cb34-54"><a href="appendix-1.html#cb34-54" aria-hidden="true" tabindex="-1"></a>StudData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(S_ID, S_gend, S_SES, num_tchrs, phys)</span>
+<span id="cb34-55"><a href="appendix-1.html#cb34-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-56"><a href="appendix-1.html#cb34-56" aria-hidden="true" tabindex="-1"></a><span class="co">#22 physics teachers at JMU</span></span>
+<span id="cb34-57"><a href="appendix-1.html#cb34-57" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>phys_tchr <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(StudData<span class="sc">$</span>phys <span class="sc">==</span> <span class="dv">1</span>, (StudData<span class="sc">$</span><span class="at">phys_tchr =</span> (<span class="fu">sample</span>(<span class="dv">22</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), <span class="dv">0</span>)</span>
+<span id="cb34-58"><a href="appendix-1.html#cb34-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-59"><a href="appendix-1.html#cb34-59" aria-hidden="true" tabindex="-1"></a><span class="co">#Teacher experience</span></span>
+<span id="cb34-60"><a href="appendix-1.html#cb34-60" aria-hidden="true" tabindex="-1"></a><span class="co">#This gets added to the df later; kept as a variable for right now.</span></span>
+<span id="cb34-61"><a href="appendix-1.html#cb34-61" aria-hidden="true" tabindex="-1"></a>T_exp <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="at">n =</span> <span class="dv">56</span>, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)</span>
+<span id="cb34-62"><a href="appendix-1.html#cb34-62" aria-hidden="true" tabindex="-1"></a>T_ID <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">56</span>)</span>
+<span id="cb34-63"><a href="appendix-1.html#cb34-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-64"><a href="appendix-1.html#cb34-64" aria-hidden="true" tabindex="-1"></a>TData <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(T_ID, T_exp)</span>
+<span id="cb34-65"><a href="appendix-1.html#cb34-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-66"><a href="appendix-1.html#cb34-66" aria-hidden="true" tabindex="-1"></a><span class="co">#Teachers - 56 of them to choose from</span></span>
+<span id="cb34-67"><a href="appendix-1.html#cb34-67" aria-hidden="true" tabindex="-1"></a><span class="co">#Need to reference num_tchrs column.  Everyone has tchr1.  </span></span>
+<span id="cb34-68"><a href="appendix-1.html#cb34-68" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr1 <span class="ot">=</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb34-69"><a href="appendix-1.html#cb34-69" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">2</span>, (StudData<span class="sc">$</span><span class="at">tchr2 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr2 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-70"><a href="appendix-1.html#cb34-70" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr3 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">3</span>, (StudData<span class="sc">$</span><span class="at">tchr3 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr3 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-71"><a href="appendix-1.html#cb34-71" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr4 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">4</span>, (StudData<span class="sc">$</span><span class="at">tchr4 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr4 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-72"><a href="appendix-1.html#cb34-72" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr5 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">5</span>, (StudData<span class="sc">$</span><span class="at">tchr5 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr5 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-73"><a href="appendix-1.html#cb34-73" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr6 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">6</span>, (StudData<span class="sc">$</span><span class="at">tchr6 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr6 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-74"><a href="appendix-1.html#cb34-74" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr7 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">7</span>, (StudData<span class="sc">$</span><span class="at">tchr7 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr7 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-75"><a href="appendix-1.html#cb34-75" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr8 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">8</span>, (StudData<span class="sc">$</span><span class="at">tchr8 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr8 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-76"><a href="appendix-1.html#cb34-76" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr9 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">9</span>, (StudData<span class="sc">$</span><span class="at">tchr9 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr9 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-77"><a href="appendix-1.html#cb34-77" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr10 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">10</span>, (StudData<span class="sc">$</span><span class="at">tchr10 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr10 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-78"><a href="appendix-1.html#cb34-78" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr11 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">11</span>, (StudData<span class="sc">$</span><span class="at">tchr11 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr11 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-79"><a href="appendix-1.html#cb34-79" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr12 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(num_tchrs <span class="sc">&gt;=</span> <span class="dv">12</span>, (StudData<span class="sc">$</span><span class="at">tchr12 =</span> (<span class="fu">sample</span>(<span class="dv">56</span>, <span class="at">size =</span> N, <span class="at">replace =</span> <span class="cn">TRUE</span>))), (StudData<span class="sc">$</span><span class="at">tchr12 =</span> <span class="dv">0</span>))</span>
+<span id="cb34-80"><a href="appendix-1.html#cb34-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-81"><a href="appendix-1.html#cb34-81" aria-hidden="true" tabindex="-1"></a><span class="co">#Need to clean out same numbers in one row - go through and check if values exist in any prior columns.  If not,</span></span>
+<span id="cb34-82"><a href="appendix-1.html#cb34-82" aria-hidden="true" tabindex="-1"></a><span class="co">#do nothing.  If so, add one.  Not the most elegant, but will do for now.  Should fix to be better later.</span></span>
+<span id="cb34-83"><a href="appendix-1.html#cb34-83" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">select</span>(StudData, <span class="fu">c</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, </span>
+<span id="cb34-84"><a href="appendix-1.html#cb34-84" aria-hidden="true" tabindex="-1"></a>                           <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>))</span>
+<span id="cb34-85"><a href="appendix-1.html#cb34-85" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(c<span class="sc">$</span>tchr2 <span class="sc">==</span> c<span class="sc">$</span>tchr1, (c<span class="sc">$</span>tchr2 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr2)</span>
+<span id="cb34-86"><a href="appendix-1.html#cb34-86" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr3 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((c<span class="sc">$</span>tchr3 <span class="sc">!=</span> <span class="dv">0</span>), </span>
+<span id="cb34-87"><a href="appendix-1.html#cb34-87" aria-hidden="true" tabindex="-1"></a>                  (<span class="fu">ifelse</span>((c<span class="sc">$</span>tchr3 <span class="sc">==</span> c<span class="sc">$</span>tchr2<span class="sc">|</span>c<span class="sc">$</span>tchr3 <span class="sc">==</span> c<span class="sc">$</span>tchr1), (c<span class="sc">$</span>tchr3 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr3)), <span class="dv">0</span>)</span>
+<span id="cb34-88"><a href="appendix-1.html#cb34-88" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr4 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((c<span class="sc">$</span>tchr4 <span class="sc">!=</span> <span class="dv">0</span>), </span>
+<span id="cb34-89"><a href="appendix-1.html#cb34-89" aria-hidden="true" tabindex="-1"></a>                   (<span class="fu">ifelse</span>((c<span class="sc">$</span>tchr4 <span class="sc">==</span> c<span class="sc">$</span>tchr3<span class="sc">|</span>c<span class="sc">$</span>tchr4 <span class="sc">==</span> c<span class="sc">$</span>tchr2<span class="sc">|</span>c<span class="sc">$</span>tchr4 <span class="sc">==</span> c<span class="sc">$</span>tchr1), (c<span class="sc">$</span>tchr4 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr4)), <span class="dv">0</span>)</span>
+<span id="cb34-90"><a href="appendix-1.html#cb34-90" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr5 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((c<span class="sc">$</span>tchr5 <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb34-91"><a href="appendix-1.html#cb34-91" aria-hidden="true" tabindex="-1"></a>                  (<span class="fu">ifelse</span>((c<span class="sc">$</span>tchr5 <span class="sc">==</span> c<span class="sc">$</span>tchr4<span class="sc">|</span>c<span class="sc">$</span>tchr5 <span class="sc">==</span> c<span class="sc">$</span>tchr3<span class="sc">|</span>c<span class="sc">$</span>tchr5 <span class="sc">==</span> c<span class="sc">$</span>tchr2<span class="sc">|</span>c<span class="sc">$</span>tchr5 <span class="sc">==</span> c<span class="sc">$</span>tchr1), (c<span class="sc">$</span>tchr5 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr5)), <span class="dv">0</span>)</span>
+<span id="cb34-92"><a href="appendix-1.html#cb34-92" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr6 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((c<span class="sc">$</span>tchr6 <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb34-93"><a href="appendix-1.html#cb34-93" aria-hidden="true" tabindex="-1"></a>                  (<span class="fu">ifelse</span>((c<span class="sc">$</span>tchr6 <span class="sc">==</span> c<span class="sc">$</span>tchr5<span class="sc">|</span>c<span class="sc">$</span>tchr6 <span class="sc">==</span> c<span class="sc">$</span>tchr4<span class="sc">|</span>c<span class="sc">$</span>tchr6 <span class="sc">==</span> c<span class="sc">$</span>tchr3<span class="sc">|</span>c<span class="sc">$</span>tchr6 <span class="sc">==</span> c<span class="sc">$</span>tchr2<span class="sc">|</span>c<span class="sc">$</span>tchr6 <span class="sc">==</span> c<span class="sc">$</span>tchr1), (c<span class="sc">$</span>tchr6 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr6)), <span class="dv">0</span>)</span>
+<span id="cb34-94"><a href="appendix-1.html#cb34-94" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr7 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((c<span class="sc">$</span>tchr7 <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb34-95"><a href="appendix-1.html#cb34-95" aria-hidden="true" tabindex="-1"></a>                  (<span class="fu">ifelse</span>((c<span class="sc">$</span>tchr7 <span class="sc">==</span> c<span class="sc">$</span>tchr6<span class="sc">|</span>c<span class="sc">$</span>tchr7 <span class="sc">==</span> c<span class="sc">$</span>tchr5<span class="sc">|</span>c<span class="sc">$</span>tchr7 <span class="sc">==</span> c<span class="sc">$</span>tchr4<span class="sc">|</span>c<span class="sc">$</span>tchr7 <span class="sc">==</span> c<span class="sc">$</span>tchr3<span class="sc">|</span>c<span class="sc">$</span>tchr7 <span class="sc">==</span> c<span class="sc">$</span>tchr2<span class="sc">|</span>c<span class="sc">$</span>tchr7 <span class="sc">==</span> c<span class="sc">$</span>tchr1), (c<span class="sc">$</span>tchr7 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr7)), <span class="dv">0</span>)</span>
+<span id="cb34-96"><a href="appendix-1.html#cb34-96" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr8 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((c<span class="sc">$</span>tchr8 <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb34-97"><a href="appendix-1.html#cb34-97" aria-hidden="true" tabindex="-1"></a>                  (<span class="fu">ifelse</span>((c<span class="sc">$</span>tchr8 <span class="sc">==</span> c<span class="sc">$</span>tchr7<span class="sc">|</span>c<span class="sc">$</span>tchr8 <span class="sc">==</span> c<span class="sc">$</span>tchr6<span class="sc">|</span>c<span class="sc">$</span>tchr8 <span class="sc">==</span> c<span class="sc">$</span>tchr5<span class="sc">|</span>c<span class="sc">$</span>tchr8 <span class="sc">==</span> c<span class="sc">$</span>tchr4<span class="sc">|</span>c<span class="sc">$</span>tchr8 <span class="sc">==</span> c<span class="sc">$</span>tchr3<span class="sc">|</span>c<span class="sc">$</span>tchr8 <span class="sc">==</span> c<span class="sc">$</span>tchr2<span class="sc">|</span>c<span class="sc">$</span>tchr8 <span class="sc">==</span> c<span class="sc">$</span>tchr1), (c<span class="sc">$</span>tchr8 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr8)), <span class="dv">0</span>)</span>
+<span id="cb34-98"><a href="appendix-1.html#cb34-98" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr9 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((c<span class="sc">$</span>tchr9 <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb34-99"><a href="appendix-1.html#cb34-99" aria-hidden="true" tabindex="-1"></a>                  (<span class="fu">ifelse</span>((c<span class="sc">$</span>tchr9 <span class="sc">==</span> c<span class="sc">$</span>tchr8<span class="sc">|</span>c<span class="sc">$</span>tchr9 <span class="sc">==</span> c<span class="sc">$</span>tchr7<span class="sc">|</span>c<span class="sc">$</span>tchr9 <span class="sc">==</span> c<span class="sc">$</span>tchr6<span class="sc">|</span>c<span class="sc">$</span>tchr9 <span class="sc">==</span> c<span class="sc">$</span>tchr5<span class="sc">|</span>c<span class="sc">$</span>tchr9 <span class="sc">==</span> c<span class="sc">$</span>tchr4<span class="sc">|</span>c<span class="sc">$</span>tchr9 <span class="sc">==</span> c<span class="sc">$</span>tchr3<span class="sc">|</span>c<span class="sc">$</span>tchr9 <span class="sc">==</span> c<span class="sc">$</span>tchr2<span class="sc">|</span>c<span class="sc">$</span>tchr9 <span class="sc">==</span> c<span class="sc">$</span>tchr1), (c<span class="sc">$</span>tchr9 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr9)), <span class="dv">0</span>)</span>
+<span id="cb34-100"><a href="appendix-1.html#cb34-100" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr10 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((c<span class="sc">$</span>tchr10 <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb34-101"><a href="appendix-1.html#cb34-101" aria-hidden="true" tabindex="-1"></a>                  (<span class="fu">ifelse</span>((c<span class="sc">$</span>tchr10 <span class="sc">==</span> c<span class="sc">$</span>tchr9<span class="sc">|</span>c<span class="sc">$</span>tchr10 <span class="sc">==</span> c<span class="sc">$</span>tchr8<span class="sc">|</span>c<span class="sc">$</span>tchr10 <span class="sc">==</span> c<span class="sc">$</span>tchr7<span class="sc">|</span>c<span class="sc">$</span>tchr10 <span class="sc">==</span> c<span class="sc">$</span>tchr6<span class="sc">|</span>c<span class="sc">$</span>tchr10 <span class="sc">==</span> c<span class="sc">$</span>tchr5<span class="sc">|</span>c<span class="sc">$</span>tchr10 <span class="sc">==</span> c<span class="sc">$</span>tchr4<span class="sc">|</span>c<span class="sc">$</span>tchr10 <span class="sc">==</span> c<span class="sc">$</span>tchr3<span class="sc">|</span>c<span class="sc">$</span>tchr10 <span class="sc">==</span> c<span class="sc">$</span>tchr2<span class="sc">|</span>c<span class="sc">$</span>tchr10 <span class="sc">==</span> c<span class="sc">$</span>tchr1), (c<span class="sc">$</span>tchr10 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr10)), <span class="dv">0</span>)</span>
+<span id="cb34-102"><a href="appendix-1.html#cb34-102" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr11 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((c<span class="sc">$</span>tchr11 <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb34-103"><a href="appendix-1.html#cb34-103" aria-hidden="true" tabindex="-1"></a>                  (<span class="fu">ifelse</span>((c<span class="sc">$</span>tchr11 <span class="sc">==</span> c<span class="sc">$</span>tchr10<span class="sc">|</span>c<span class="sc">$</span>tchr11 <span class="sc">==</span> c<span class="sc">$</span>tchr9<span class="sc">|</span>c<span class="sc">$</span>tchr11 <span class="sc">==</span> c<span class="sc">$</span>tchr8<span class="sc">|</span>c<span class="sc">$</span>tchr11 <span class="sc">==</span> c<span class="sc">$</span>tchr7<span class="sc">|</span>c<span class="sc">$</span>tchr11 <span class="sc">==</span> c<span class="sc">$</span>tchr6<span class="sc">|</span>c<span class="sc">$</span>tchr11 <span class="sc">==</span> c<span class="sc">$</span>tchr5<span class="sc">|</span>c<span class="sc">$</span>tchr11 <span class="sc">==</span> c<span class="sc">$</span>tchr4<span class="sc">|</span>c<span class="sc">$</span>tchr11 <span class="sc">==</span> c<span class="sc">$</span>tchr3<span class="sc">|</span>c<span class="sc">$</span>tchr11 <span class="sc">==</span> c<span class="sc">$</span>tchr2<span class="sc">|</span>c<span class="sc">$</span>tchr11 <span class="sc">==</span> c<span class="sc">$</span>tchr1), (c<span class="sc">$</span>tchr11 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr11)), <span class="dv">0</span>)</span>
+<span id="cb34-104"><a href="appendix-1.html#cb34-104" aria-hidden="true" tabindex="-1"></a>c<span class="sc">$</span>tchr12 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>((c<span class="sc">$</span>tchr12 <span class="sc">!=</span> <span class="dv">0</span>),</span>
+<span id="cb34-105"><a href="appendix-1.html#cb34-105" aria-hidden="true" tabindex="-1"></a>                  (<span class="fu">ifelse</span>((c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr11<span class="sc">|</span>c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr10<span class="sc">|</span>c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr9<span class="sc">|</span>c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr8<span class="sc">|</span>c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr7<span class="sc">|</span>c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr6<span class="sc">|</span>c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr5<span class="sc">|</span>c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr4<span class="sc">|</span>c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr3<span class="sc">|</span>c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr2<span class="sc">|</span>c<span class="sc">$</span>tchr12 <span class="sc">==</span> c<span class="sc">$</span>tchr1), (c<span class="sc">$</span>tchr12 <span class="sc">+</span> <span class="dv">1</span>), c<span class="sc">$</span>tchr12)), <span class="dv">0</span>)</span>
+<span id="cb34-106"><a href="appendix-1.html#cb34-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-107"><a href="appendix-1.html#cb34-107" aria-hidden="true" tabindex="-1"></a><span class="co">#Had to go through a few iterations of the above to get MLwiN to accept</span></span>
+<span id="cb34-108"><a href="appendix-1.html#cb34-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-109"><a href="appendix-1.html#cb34-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-110"><a href="appendix-1.html#cb34-110" aria-hidden="true" tabindex="-1"></a><span class="co">#Assigning variables back</span></span>
+<span id="cb34-111"><a href="appendix-1.html#cb34-111" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr2 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr2</span>
+<span id="cb34-112"><a href="appendix-1.html#cb34-112" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr3 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr3</span>
+<span id="cb34-113"><a href="appendix-1.html#cb34-113" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr4 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr4</span>
+<span id="cb34-114"><a href="appendix-1.html#cb34-114" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr5 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr5</span>
+<span id="cb34-115"><a href="appendix-1.html#cb34-115" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr6 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr6</span>
+<span id="cb34-116"><a href="appendix-1.html#cb34-116" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr7 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr7</span>
+<span id="cb34-117"><a href="appendix-1.html#cb34-117" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr8 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr8</span>
+<span id="cb34-118"><a href="appendix-1.html#cb34-118" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr9 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr9</span>
+<span id="cb34-119"><a href="appendix-1.html#cb34-119" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr10 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr10</span>
+<span id="cb34-120"><a href="appendix-1.html#cb34-120" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr11 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr11</span>
+<span id="cb34-121"><a href="appendix-1.html#cb34-121" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>tchr12 <span class="ot">&lt;-</span> c<span class="sc">$</span>tchr12</span>
+<span id="cb34-122"><a href="appendix-1.html#cb34-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-123"><a href="appendix-1.html#cb34-123" aria-hidden="true" tabindex="-1"></a><span class="co">#Weight</span></span>
+<span id="cb34-124"><a href="appendix-1.html#cb34-124" aria-hidden="true" tabindex="-1"></a><span class="co">#Proportion of time had each teacher - need to reference num_tchrs column for this</span></span>
+<span id="cb34-125"><a href="appendix-1.html#cb34-125" aria-hidden="true" tabindex="-1"></a>Weight <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">num_tchrs =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>,</span>
+<span id="cb34-126"><a href="appendix-1.html#cb34-126" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="fl">0.5</span>, <span class="fl">0.33</span>, <span class="fl">0.25</span>, <span class="fl">0.2</span>, <span class="fl">0.166</span>, <span class="fl">0.1428</span>, <span class="fl">0.125</span>, <span class="fl">0.11</span>, <span class="fl">0.1</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-127"><a href="appendix-1.html#cb34-127" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w2 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.5</span>, <span class="fl">0.33</span>, <span class="fl">0.25</span>, <span class="fl">0.2</span>, <span class="fl">0.166</span>, <span class="fl">0.1428</span>, <span class="fl">0.125</span>, <span class="fl">0.11</span>, <span class="fl">0.1</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-128"><a href="appendix-1.html#cb34-128" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w3 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.33</span>, <span class="fl">0.25</span>, <span class="fl">0.2</span>, <span class="fl">0.166</span>, <span class="fl">0.1428</span>, <span class="fl">0.125</span>, <span class="fl">0.11</span>, <span class="fl">0.1</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-129"><a href="appendix-1.html#cb34-129" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w4 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.25</span>, <span class="fl">0.2</span>, <span class="fl">0.166</span>, <span class="fl">0.1428</span>, <span class="fl">0.125</span>, <span class="fl">0.11</span>, <span class="fl">0.1</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-130"><a href="appendix-1.html#cb34-130" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w5 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.2</span>, <span class="fl">0.166</span>, <span class="fl">0.1428</span>, <span class="fl">0.125</span>, <span class="fl">0.11</span>, <span class="fl">0.1</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-131"><a href="appendix-1.html#cb34-131" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w6 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.166</span>, <span class="fl">0.1428</span>, <span class="fl">0.125</span>, <span class="fl">0.11</span>, <span class="fl">0.1</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-132"><a href="appendix-1.html#cb34-132" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w7 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.1428</span>, <span class="fl">0.125</span>, <span class="fl">0.11</span>, <span class="fl">0.1</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-133"><a href="appendix-1.html#cb34-133" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w8 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.125</span>, <span class="fl">0.11</span>, <span class="fl">0.1</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-134"><a href="appendix-1.html#cb34-134" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w9 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.11</span>, <span class="fl">0.1</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-135"><a href="appendix-1.html#cb34-135" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w10 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.1</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-136"><a href="appendix-1.html#cb34-136" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w11 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.09</span>, <span class="fl">0.083</span>),</span>
+<span id="cb34-137"><a href="appendix-1.html#cb34-137" aria-hidden="true" tabindex="-1"></a>                     <span class="at">w12 =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="fl">0.083</span>))</span>
+<span id="cb34-138"><a href="appendix-1.html#cb34-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-139"><a href="appendix-1.html#cb34-139" aria-hidden="true" tabindex="-1"></a><span class="co">#Merge the two dataframes to add in weights</span></span>
+<span id="cb34-140"><a href="appendix-1.html#cb34-140" aria-hidden="true" tabindex="-1"></a>StudData <span class="ot">&lt;-</span> <span class="fu">left_join</span>(StudData, Weight, <span class="at">by =</span> <span class="st">&quot;num_tchrs&quot;</span>)</span>
+<span id="cb34-141"><a href="appendix-1.html#cb34-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-142"><a href="appendix-1.html#cb34-142" aria-hidden="true" tabindex="-1"></a><span class="co">#Make teacher experience variables - need to check if there&#39;s a teacher in each column, then grab experience</span></span>
+<span id="cb34-143"><a href="appendix-1.html#cb34-143" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bruceR)</span>
+<span id="cb34-144"><a href="appendix-1.html#cb34-144" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t1_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr1&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-145"><a href="appendix-1.html#cb34-145" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t2_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr2&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-146"><a href="appendix-1.html#cb34-146" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t3_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr3&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-147"><a href="appendix-1.html#cb34-147" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t4_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr4&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-148"><a href="appendix-1.html#cb34-148" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t5_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr5&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-149"><a href="appendix-1.html#cb34-149" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t6_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr6&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-150"><a href="appendix-1.html#cb34-150" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t7_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr7&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-151"><a href="appendix-1.html#cb34-151" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t8_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr8&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-152"><a href="appendix-1.html#cb34-152" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t9_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr9&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-153"><a href="appendix-1.html#cb34-153" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t10_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr10&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-154"><a href="appendix-1.html#cb34-154" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t11_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr11&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-155"><a href="appendix-1.html#cb34-155" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>t12_exp <span class="ot">&lt;-</span> <span class="fu">LOOKUP</span>(StudData, <span class="st">&quot;tchr12&quot;</span>, TData, <span class="st">&quot;T_ID&quot;</span>, <span class="st">&quot;T_exp&quot;</span>, <span class="at">return =</span> <span class="st">&quot;new.value&quot;</span>)</span>
+<span id="cb34-156"><a href="appendix-1.html#cb34-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-157"><a href="appendix-1.html#cb34-157" aria-hidden="true" tabindex="-1"></a><span class="co">#Replace NA from teacher experience columns with 0</span></span>
+<span id="cb34-158"><a href="appendix-1.html#cb34-158" aria-hidden="true" tabindex="-1"></a>StudData[<span class="fu">is.na</span>(StudData)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb34-159"><a href="appendix-1.html#cb34-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-160"><a href="appendix-1.html#cb34-160" aria-hidden="true" tabindex="-1"></a><span class="co">#Make the outcome variables - for simulation</span></span>
+<span id="cb34-161"><a href="appendix-1.html#cb34-161" aria-hidden="true" tabindex="-1"></a>b0 <span class="ot">&lt;-</span> <span class="dv">250</span></span>
+<span id="cb34-162"><a href="appendix-1.html#cb34-162" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> .<span class="dv">25</span></span>
+<span id="cb34-163"><a href="appendix-1.html#cb34-163" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> .<span class="dv">3</span></span>
+<span id="cb34-164"><a href="appendix-1.html#cb34-164" aria-hidden="true" tabindex="-1"></a>b3 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">0.77</span></span>
+<span id="cb34-165"><a href="appendix-1.html#cb34-165" aria-hidden="true" tabindex="-1"></a>b4 <span class="ot">&lt;-</span> <span class="sc">-</span><span class="fl">1.3</span></span>
+<span id="cb34-166"><a href="appendix-1.html#cb34-166" aria-hidden="true" tabindex="-1"></a>SAT_M <span class="ot">&lt;-</span> StudData<span class="sc">$</span>SAT_M</span>
+<span id="cb34-167"><a href="appendix-1.html#cb34-167" aria-hidden="true" tabindex="-1"></a>S_SES <span class="ot">&lt;-</span> StudData<span class="sc">$</span>S_SES</span>
+<span id="cb34-168"><a href="appendix-1.html#cb34-168" aria-hidden="true" tabindex="-1"></a>female <span class="ot">&lt;-</span> StudData<span class="sc">$</span>female</span>
+<span id="cb34-169"><a href="appendix-1.html#cb34-169" aria-hidden="true" tabindex="-1"></a>NB <span class="ot">&lt;-</span> StudData<span class="sc">$</span>NB</span>
+<span id="cb34-170"><a href="appendix-1.html#cb34-170" aria-hidden="true" tabindex="-1"></a>tchr1 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr1</span>
+<span id="cb34-171"><a href="appendix-1.html#cb34-171" aria-hidden="true" tabindex="-1"></a>tchr2 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr2</span>
+<span id="cb34-172"><a href="appendix-1.html#cb34-172" aria-hidden="true" tabindex="-1"></a>tchr3 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr3</span>
+<span id="cb34-173"><a href="appendix-1.html#cb34-173" aria-hidden="true" tabindex="-1"></a>tchr4 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr4</span>
+<span id="cb34-174"><a href="appendix-1.html#cb34-174" aria-hidden="true" tabindex="-1"></a>tchr5 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr5</span>
+<span id="cb34-175"><a href="appendix-1.html#cb34-175" aria-hidden="true" tabindex="-1"></a>tchr6 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr6</span>
+<span id="cb34-176"><a href="appendix-1.html#cb34-176" aria-hidden="true" tabindex="-1"></a>tchr7 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr7</span>
+<span id="cb34-177"><a href="appendix-1.html#cb34-177" aria-hidden="true" tabindex="-1"></a>tchr8 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr8</span>
+<span id="cb34-178"><a href="appendix-1.html#cb34-178" aria-hidden="true" tabindex="-1"></a>tchr9 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr9</span>
+<span id="cb34-179"><a href="appendix-1.html#cb34-179" aria-hidden="true" tabindex="-1"></a>tchr10 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr10</span>
+<span id="cb34-180"><a href="appendix-1.html#cb34-180" aria-hidden="true" tabindex="-1"></a>tchr11 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr11</span>
+<span id="cb34-181"><a href="appendix-1.html#cb34-181" aria-hidden="true" tabindex="-1"></a>tchr12 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>tchr12</span>
+<span id="cb34-182"><a href="appendix-1.html#cb34-182" aria-hidden="true" tabindex="-1"></a>exp1 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t1_exp</span>
+<span id="cb34-183"><a href="appendix-1.html#cb34-183" aria-hidden="true" tabindex="-1"></a>exp2 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t2_exp</span>
+<span id="cb34-184"><a href="appendix-1.html#cb34-184" aria-hidden="true" tabindex="-1"></a>exp3 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t3_exp</span>
+<span id="cb34-185"><a href="appendix-1.html#cb34-185" aria-hidden="true" tabindex="-1"></a>exp4 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t4_exp</span>
+<span id="cb34-186"><a href="appendix-1.html#cb34-186" aria-hidden="true" tabindex="-1"></a>exp5 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t5_exp</span>
+<span id="cb34-187"><a href="appendix-1.html#cb34-187" aria-hidden="true" tabindex="-1"></a>exp6 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t6_exp</span>
+<span id="cb34-188"><a href="appendix-1.html#cb34-188" aria-hidden="true" tabindex="-1"></a>exp7 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t7_exp</span>
+<span id="cb34-189"><a href="appendix-1.html#cb34-189" aria-hidden="true" tabindex="-1"></a>exp8 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t8_exp</span>
+<span id="cb34-190"><a href="appendix-1.html#cb34-190" aria-hidden="true" tabindex="-1"></a>exp9 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t9_exp</span>
+<span id="cb34-191"><a href="appendix-1.html#cb34-191" aria-hidden="true" tabindex="-1"></a>exp10 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t10_exp</span>
+<span id="cb34-192"><a href="appendix-1.html#cb34-192" aria-hidden="true" tabindex="-1"></a>exp11 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t11_exp</span>
+<span id="cb34-193"><a href="appendix-1.html#cb34-193" aria-hidden="true" tabindex="-1"></a>exp12 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>t12_exp</span>
+<span id="cb34-194"><a href="appendix-1.html#cb34-194" aria-hidden="true" tabindex="-1"></a>w1 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w1</span>
+<span id="cb34-195"><a href="appendix-1.html#cb34-195" aria-hidden="true" tabindex="-1"></a>w2 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w2</span>
+<span id="cb34-196"><a href="appendix-1.html#cb34-196" aria-hidden="true" tabindex="-1"></a>w3 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w3</span>
+<span id="cb34-197"><a href="appendix-1.html#cb34-197" aria-hidden="true" tabindex="-1"></a>w4 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w4</span>
+<span id="cb34-198"><a href="appendix-1.html#cb34-198" aria-hidden="true" tabindex="-1"></a>w5 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w5</span>
+<span id="cb34-199"><a href="appendix-1.html#cb34-199" aria-hidden="true" tabindex="-1"></a>w6 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w6</span>
+<span id="cb34-200"><a href="appendix-1.html#cb34-200" aria-hidden="true" tabindex="-1"></a>w7 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w7</span>
+<span id="cb34-201"><a href="appendix-1.html#cb34-201" aria-hidden="true" tabindex="-1"></a>w8 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w8</span>
+<span id="cb34-202"><a href="appendix-1.html#cb34-202" aria-hidden="true" tabindex="-1"></a>w9 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w9</span>
+<span id="cb34-203"><a href="appendix-1.html#cb34-203" aria-hidden="true" tabindex="-1"></a>w10 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w10</span>
+<span id="cb34-204"><a href="appendix-1.html#cb34-204" aria-hidden="true" tabindex="-1"></a>w11 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w11</span>
+<span id="cb34-205"><a href="appendix-1.html#cb34-205" aria-hidden="true" tabindex="-1"></a>w12 <span class="ot">&lt;-</span> StudData<span class="sc">$</span>w12</span>
+<span id="cb34-206"><a href="appendix-1.html#cb34-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-207"><a href="appendix-1.html#cb34-207" aria-hidden="true" tabindex="-1"></a><span class="co">#Probably messed this up - doubtful I modeled the teacher weights correctly</span></span>
+<span id="cb34-208"><a href="appendix-1.html#cb34-208" aria-hidden="true" tabindex="-1"></a>Y <span class="ot">&lt;-</span> b0 <span class="sc">+</span> b1<span class="sc">*</span>S_SES  <span class="sc">+</span> b2<span class="sc">*</span>SAT_M <span class="sc">+</span> b3<span class="sc">*</span>female <span class="sc">+</span> b4<span class="sc">*</span>NB <span class="sc">+</span> (tchr1<span class="sc">*</span>w1 <span class="sc">+</span> tchr2<span class="sc">*</span>w2 <span class="sc">+</span> tchr3<span class="sc">*</span>w3 <span class="sc">+</span> tchr4<span class="sc">*</span>w4 <span class="sc">+</span> tchr5<span class="sc">*</span>w5 <span class="sc">+</span> tchr6<span class="sc">*</span>w6 <span class="sc">+</span> tchr7<span class="sc">*</span>w7 <span class="sc">+</span> tchr8<span class="sc">*</span>w8 <span class="sc">+</span> tchr9<span class="sc">*</span>w9 <span class="sc">+</span> tchr10<span class="sc">*</span>w10 <span class="sc">+</span> tchr11<span class="sc">*</span>w11 <span class="sc">+</span> tchr12<span class="sc">*</span>w12) <span class="sc">+</span> </span>
+<span id="cb34-209"><a href="appendix-1.html#cb34-209" aria-hidden="true" tabindex="-1"></a>  (exp1<span class="sc">*</span>w1 <span class="sc">+</span> exp2<span class="sc">*</span>w2 <span class="sc">+</span> exp3<span class="sc">*</span>w3 <span class="sc">+</span> exp4<span class="sc">*</span>w4 <span class="sc">+</span> exp5<span class="sc">*</span>w5 <span class="sc">+</span> exp6<span class="sc">*</span>w6 <span class="sc">+</span> exp7<span class="sc">*</span>w7 <span class="sc">+</span> exp8<span class="sc">*</span>w8 <span class="sc">+</span> exp9<span class="sc">*</span>w9 <span class="sc">+</span> exp10<span class="sc">*</span>w10 <span class="sc">+</span> exp11<span class="sc">*</span>w11 <span class="sc">+</span> exp12<span class="sc">*</span>w12) <span class="sc">+</span> <span class="fu">rnorm</span>(N, <span class="dv">0</span>, <span class="dv">20</span>)</span>
+<span id="cb34-210"><a href="appendix-1.html#cb34-210" aria-hidden="true" tabindex="-1"></a>StudData<span class="sc">$</span>Math <span class="ot">&lt;-</span> Y</span>
+<span id="cb34-211"><a href="appendix-1.html#cb34-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-212"><a href="appendix-1.html#cb34-212" aria-hidden="true" tabindex="-1"></a><span class="co">#See what outcome variable looks like</span></span>
+<span id="cb34-213"><a href="appendix-1.html#cb34-213" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> StudData) <span class="sc">+</span></span>
+<span id="cb34-214"><a href="appendix-1.html#cb34-214" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(Math))</span>
+<span id="cb34-215"><a href="appendix-1.html#cb34-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-216"><a href="appendix-1.html#cb34-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-217"><a href="appendix-1.html#cb34-217" aria-hidden="true" tabindex="-1"></a><span class="co">#Save out the file containing the outcome variable and others.</span></span>
+<span id="cb34-218"><a href="appendix-1.html#cb34-218" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(StudData, <span class="st">&quot;exampledata2.csv&quot;</span>)</span>
+<span id="cb34-219"><a href="appendix-1.html#cb34-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-220"><a href="appendix-1.html#cb34-220" aria-hidden="true" tabindex="-1"></a><span class="co">#Checking full model function; no level 2 predictors yet</span></span>
+<span id="cb34-221"><a href="appendix-1.html#cb34-221" aria-hidden="true" tabindex="-1"></a>model1 <span class="ot">&lt;-</span> Math <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> S_SES <span class="sc">+</span> female <span class="sc">+</span> NB <span class="sc">+</span> SAT_M <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>tchr1) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>S_ID)</span>
+<span id="cb34-222"><a href="appendix-1.html#cb34-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-223"><a href="appendix-1.html#cb34-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-224"><a href="appendix-1.html#cb34-224" aria-hidden="true" tabindex="-1"></a>MultiMemb <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">list</span>(</span>
+<span id="cb34-225"><a href="appendix-1.html#cb34-225" aria-hidden="true" tabindex="-1"></a>  <span class="at">mmvar =</span> <span class="fu">list</span>(<span class="st">&quot;tchr1&quot;</span>, <span class="st">&quot;tchr2&quot;</span>, <span class="st">&quot;tchr3&quot;</span>, <span class="st">&quot;tchr4&quot;</span>, <span class="st">&quot;tchr5&quot;</span>, <span class="st">&quot;tchr6&quot;</span>, <span class="st">&quot;tchr7&quot;</span>, <span class="st">&quot;tchr8&quot;</span>, <span class="st">&quot;tchr9&quot;</span>, <span class="st">&quot;tchr10&quot;</span>, <span class="st">&quot;tchr11&quot;</span>, <span class="st">&quot;tchr12&quot;</span>),</span>
+<span id="cb34-226"><a href="appendix-1.html#cb34-226" aria-hidden="true" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">list</span>(<span class="st">&quot;w1&quot;</span>, <span class="st">&quot;w2&quot;</span>, <span class="st">&quot;w3&quot;</span>, <span class="st">&quot;w4&quot;</span>, <span class="st">&quot;w5&quot;</span>, <span class="st">&quot;w6&quot;</span>, <span class="st">&quot;w7&quot;</span>, <span class="st">&quot;w8&quot;</span>, <span class="st">&quot;w9&quot;</span>, <span class="st">&quot;w10&quot;</span>, <span class="st">&quot;w11&quot;</span>, <span class="st">&quot;w12&quot;</span>)), <span class="cn">NA</span>)</span>
+<span id="cb34-227"><a href="appendix-1.html#cb34-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-228"><a href="appendix-1.html#cb34-228" aria-hidden="true" tabindex="-1"></a>(MMembModel <span class="ot">&lt;-</span> <span class="fu">runMLwiN</span>(<span class="at">Formula =</span> model1, <span class="at">data =</span> StudData, <span class="at">estoptions =</span> <span class="fu">list</span>(<span class="at">EstM =</span> <span class="dv">1</span>, <span class="at">drop.data =</span> <span class="cn">FALSE</span>, <span class="at">mm =</span> MultiMemb)))</span></code></pre></div>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="other-uses-of-multiple-membership-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-Appendix.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -12,7 +12,7 @@
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor. It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software." />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
+  
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Multiple Membership Models: A tutorial" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Laura Lambert" />
 
 
-<meta name="date" content="2023-05-01" />
+<meta name="date" content="2023-05-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -163,7 +163,6 @@ div.csl-indent {
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#r-packages-used"><i class="fa fa-check"></i><b>1.1</b> R packages used</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i><b>1.2</b> Acknowledgements</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#a-disclaimer"><i class="fa fa-check"></i><b>1.3</b> A Disclaimer</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.4</b> Preview book</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
 <ul>
@@ -171,20 +170,28 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="3" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>3</b> Data</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. long forms</a></li>
+<li class="chapter" data-level="3.1" data-path="data.html"><a href="data.html#compact"><i class="fa fa-check"></i><b>3.1</b> Compact vs. wide forms</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="data.html"><a href="data.html#compact-1"><i class="fa fa-check"></i><b>3.1.1</b> Compact</a></li>
+<li class="chapter" data-level="3.1.2" data-path="data.html"><a href="data.html#wide"><i class="fa fa-check"></i><b>3.1.2</b> Wide</a></li>
+</ul></li>
 <li class="chapter" data-level="3.2" data-path="data.html"><a href="data.html#examining-the-data"><i class="fa fa-check"></i><b>3.2</b> Examining the Data</a></li>
 <li class="chapter" data-level="3.3" data-path="data.html"><a href="data.html#software"><i class="fa fa-check"></i><b>3.3</b> Software Considerations</a></li>
-<li class="chapter" data-level="3.4" data-path="data.html"><a href="data.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.4</b> Captioned figures and tables</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html"><i class="fa fa-check"></i><b>4</b> Multiple Membership models: the details</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a>
+<li class="chapter" data-level="4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#notation"><i class="fa fa-check"></i><b>4.1</b> Notation</a></li>
+<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a>
 <ul>
-<li class="chapter" data-level="4.1.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.1.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-3"><i class="fa fa-check"></i><b>4.2.1</b> Student 3</a></li>
+<li class="chapter" data-level="4.2.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#student-1"><i class="fa fa-check"></i><b>4.2.2</b> Student 1</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#weights"><i class="fa fa-check"></i><b>4.2</b> Weights</a></li>
 <li class="chapter" data-level="4.3" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#centering"><i class="fa fa-check"></i><b>4.3</b> Centering</a></li>
-<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a></li>
+<li class="chapter" data-level="4.4" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc-and-icc"><i class="fa fa-check"></i><b>4.4</b> VPC and ICC</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#icc"><i class="fa fa-check"></i><b>4.4.1</b> ICC</a></li>
+<li class="chapter" data-level="4.4.2" data-path="multiple-membership-models-the-details.html"><a href="multiple-membership-models-the-details.html#vpc"><i class="fa fa-check"></i><b>4.4.2</b> VPC</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html"><i class="fa fa-check"></i><b>5</b> Running a Multiple Membership Model</a>
 <ul>
@@ -198,21 +205,15 @@ div.csl-indent {
 <li class="chapter" data-level="5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#the-output"><i class="fa fa-check"></i><b>5.2</b> The Output</a></li>
 <li class="chapter" data-level="5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-1-predictors"><i class="fa fa-check"></i><b>5.3</b> Adding in level 1 predictors</a></li>
 <li class="chapter" data-level="5.4" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#adding-in-level-2-predictors"><i class="fa fa-check"></i><b>5.4</b> Adding in level 2 predictors</a></li>
-<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#footnotes"><i class="fa fa-check"></i><b>5.5</b> Footnotes</a></li>
-<li class="chapter" data-level="5.6" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#citations"><i class="fa fa-check"></i><b>5.6</b> Citations</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a>
+<li class="chapter" data-level="5.5" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#circling-back-to-the-research-questions"><i class="fa fa-check"></i><b>5.5</b> Circling back to the research questions</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
-<li class="chapter" data-level="6.2" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
-<li class="chapter" data-level="6.3" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+<li class="chapter" data-level="5.5.1" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq1-do-teacher-characteristics-influence-student-math-scores-ie-do-we-need-to-factor-in-nesting-and-multiple-membership"><i class="fa fa-check"></i><b>5.5.1</b> RQ1: Do teacher characteristics influence student math scores? (ie, do we need to factor in nesting and multiple membership?)</a></li>
+<li class="chapter" data-level="5.5.2" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq2-what-student-characteristics-predict-math-scores"><i class="fa fa-check"></i><b>5.5.2</b> RQ2: What student characteristics predict math scores?</a></li>
+<li class="chapter" data-level="5.5.3" data-path="running-a-multiple-membership-model.html"><a href="running-a-multiple-membership-model.html#rq3-does-more-teacher-experience-lead-to-better-student-outcomes"><i class="fa fa-check"></i><b>5.5.3</b> RQ3: Does more teacher experience lead to better student outcomes?</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="increasing-complexity.html"><a href="increasing-complexity.html"><i class="fa fa-check"></i><b>7</b> Increasing complexity</a>
-<ul>
-<li class="chapter" data-level="7.1" data-path="increasing-complexity.html"><a href="increasing-complexity.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
-<li class="chapter" data-level="7.2" data-path="increasing-complexity.html"><a href="increasing-complexity.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
-<li class="chapter" data-level="7.3" data-path="increasing-complexity.html"><a href="increasing-complexity.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
 </ul></li>
+<li class="chapter" data-level="6" data-path="other-uses-of-multiple-membership-models.html"><a href="other-uses-of-multiple-membership-models.html"><i class="fa fa-check"></i><b>6</b> Other uses of Multiple Membership Models</a></li>
+<li class="chapter" data-level="" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i>Appendix 1</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -237,20 +238,22 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Multiple Membership Models: A tutorial</h1>
 <p class="author"><em>Laura Lambert</em></p>
-<p class="date"><em>2023-05-01</em></p>
+<p class="date"><em>2023-05-02</em></p>
 </div>
 <div id="about" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapter 1</span> About<a href="index.html#about" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports; for example, a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
+<p>This is a fictional scenario and data set designed for the sole purpose of illustrating the coding and interpretation of multiple membership models using the R2MLwiN package. These data were simulated by myself, and were designed to loosely resemble a population of students at JMU. These data were not actually gathered from JMU students. This is designed to be tutorial-style, with background information about the models presented prior to walking through model building and output interpretation.</p>
 <div id="r-packages-used" class="section level2 hasAnchor" number="1.1">
 <h2><span class="header-section-number">1.1</span> R packages used<a href="index.html#r-packages-used" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Calculations and data manipulations performed in this tutorial made use of the following R packages:
-Bookdown (<span class="citation">(<a href="#ref-bookdown" role="doc-biblioref"><strong>bookdown?</strong></a>)</span>)<br />
-knitr (<span class="citation">(<a href="#ref-knitr" role="doc-biblioref"><strong>knitr?</strong></a>)</span>)<br />
-Rmarkdown (<span class="citation">(<a href="#ref-rmarkdown" role="doc-biblioref"><strong>rmarkdown?</strong></a>)</span>)<br />
-Tidyverse (<span class="citation">(<a href="#ref-tidyverse" role="doc-biblioref"><strong>tidyverse?</strong></a>)</span>)<br />
-ggplot2 (<span class="citation">(<a href="#ref-ggplot2" role="doc-biblioref"><strong>ggplot2?</strong></a>)</span>)<br />
-R2MLwiN (<span class="citation">(<a href="#ref-R2MLwiN" role="doc-biblioref"><strong>R2MLwiN?</strong></a>)</span>)</p>
+Bookdown (<span class="citation">Xie (<a href="#ref-R-bookdown" role="doc-biblioref">2023</a>)</span>)<br />
+knitr (<span class="citation">Xie (<a href="#ref-R-knitr" role="doc-biblioref">2022</a>)</span>)<br />
+Rmarkdown (<span class="citation">Allaire et al. (<a href="#ref-R-rmarkdown" role="doc-biblioref">2022</a>)</span>)<br />
+Tidyverse (<span class="citation">Wickham (<a href="#ref-R-tidyverse" role="doc-biblioref">2021</a>)</span>)<br />
+ggplot2 (<span class="citation">Wickham et al. (<a href="#ref-R-ggplot2" role="doc-biblioref">2022</a>)</span>)<br />
+misty (<span class="citation">Yanagida (<a href="#ref-R-misty" role="doc-biblioref">2023</a>)</span>)
+R2MLwiN (<span class="citation">Zhang et al. (<a href="#ref-R-R2MLwiN" role="doc-biblioref">2023</a>)</span>)</p>
+<p>The software MLwiN, v3.06 <span class="citation">(<a href="#ref-MLwiN" role="doc-biblioref">Charlton et al., n.d.</a>)</span> was also used, with Bayesian MCMC estimation <span class="citation">(<a href="#ref-MCMC2022" role="doc-biblioref">W. J. Browne 2022</a>)</span></p>
 </div>
 <div id="acknowledgements" class="section level2 hasAnchor" number="1.2">
 <h2><span class="header-section-number">1.2</span> Acknowledgements<a href="index.html#acknowledgements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -259,19 +262,6 @@ R2MLwiN (<span class="citation">(<a href="#ref-R2MLwiN" role="doc-biblioref"><st
 <div id="a-disclaimer" class="section level2 hasAnchor" number="1.3">
 <h2><span class="header-section-number">1.3</span> A Disclaimer<a href="index.html#a-disclaimer" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>The data used in this tutorial were simulated by me, and I am certain that a better job could have been done to better reflect some dependencies that should be in the data. One known omission is variance components were not specified prior to estimating the outcome. However, these data were simulated to reflect a student population at JMU to the best of my ability at the time and no intentional errors or misrepresentations were intended. Data-generating code is included in the Appendix.</p>
-<p>You can render the HTML version of this example book without changing anything:</p>
-<ol style="list-style-type: decimal">
-<li><p>Find the <strong>Build</strong> pane in the RStudio IDE, and</p></li>
-<li><p>Click on <strong>Build Book</strong>, then select your output format, or select “All formats” if you’d like to use multiple formats from the same book source files.</p></li>
-</ol>
-<p>Or build the book from the R console:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
-<p>To render this example to PDF as a <code>bookdown::pdf_book</code>, you’ll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
-</div>
-<div id="preview-book" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Preview book<a href="index.html#preview-book" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in “Preview book”, or from the R console:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
 
 </div>
 </div>
@@ -279,6 +269,33 @@ R2MLwiN (<span class="citation">(<a href="#ref-R2MLwiN" role="doc-biblioref"><st
 <div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-LEMMA" class="csl-entry">
 n.d.a. <a href="http://www.bristol.ac.uk/cmm/learning/online-course">http://www.bristol.ac.uk/cmm/learning/online-course</a>.
+</div>
+<div id="ref-R-rmarkdown" class="csl-entry">
+Allaire, JJ, Yihui Xie, Jonathan McPherson, Javier Luraschi, Kevin Ushey, Aron Atkins, Hadley Wickham, Joe Cheng, Winston Chang, and Richard Iannone. 2022. <em>Rmarkdown: Dynamic Documents for r</em>. <a href="https://CRAN.R-project.org/package=rmarkdown">https://CRAN.R-project.org/package=rmarkdown</a>.
+</div>
+<div id="ref-MCMC2022" class="csl-entry">
+Browne, W. J. 2022. <em>MCMC Estimation in MLwiN V3.06</em>. Centre for Multilevel Modelling, University of Bristol.
+</div>
+<div id="ref-MLwiN" class="csl-entry">
+Charlton, C., J. Rasbash, W. J. Browne, M. Healy, and B. Cameron. n.d. <em>MLwiN Version 3.06</em>. Centre for Multilevel Modelling, University of Bristol.
+</div>
+<div id="ref-R-tidyverse" class="csl-entry">
+Wickham, Hadley. 2021. <em>Tidyverse: Easily Install and Load the Tidyverse</em>. <a href="https://CRAN.R-project.org/package=tidyverse">https://CRAN.R-project.org/package=tidyverse</a>.
+</div>
+<div id="ref-R-ggplot2" class="csl-entry">
+Wickham, Hadley, Winston Chang, Lionel Henry, Thomas Lin Pedersen, Kohske Takahashi, Claus Wilke, Kara Woo, Hiroaki Yutani, and Dewey Dunnington. 2022. <em>Ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics</em>. <a href="https://CRAN.R-project.org/package=ggplot2">https://CRAN.R-project.org/package=ggplot2</a>.
+</div>
+<div id="ref-R-knitr" class="csl-entry">
+Xie, Yihui. 2022. <em>Knitr: A General-Purpose Package for Dynamic Report Generation in r</em>. <a href="https://yihui.org/knitr/">https://yihui.org/knitr/</a>.
+</div>
+<div id="ref-R-bookdown" class="csl-entry">
+———. 2023. <em>Bookdown: Authoring Books and Technical Documents with r Markdown</em>. <a href="https://CRAN.R-project.org/package=bookdown">https://CRAN.R-project.org/package=bookdown</a>.
+</div>
+<div id="ref-R-misty" class="csl-entry">
+Yanagida, Takuya. 2023. <em>Misty: Miscellaneous Functions t. Yanagida</em>. <a href="https://CRAN.R-project.org/package=misty">https://CRAN.R-project.org/package=misty</a>.
+</div>
+<div id="ref-R-R2MLwiN" class="csl-entry">
+Zhang, Zhengzheng, Chris Charlton, Richard Parker, George Leckie, and William Browne. 2023. <em>R2MLwiN: Running MLwiN from Within r</em>. <a href="https://CRAN.R-project.org/package=R2MLwiN">https://CRAN.R-project.org/package=R2MLwiN</a>.
 </div>
 </div>
             </section>
