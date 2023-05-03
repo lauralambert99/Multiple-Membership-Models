@@ -1,0 +1,232 @@
+# Appendix 1 {-}
+```{r data generating code, include = TRUE, eval = FALSE}
+setwd("path\\goes\\here")
+library(haven)
+library(tidyverse)
+library(R2MLwiN)
+options(MLwiN_path="C:\\Program Files (x86)\\MLwiN trial\\i386\\mlwin.exe")
+
+################################################################################
+####Data Simulation and Saving out the .csv file for later analysis#############
+################################################################################
+
+#Simulate data for use in project; just need one data file - not a simulation study
+set.seed(1)
+
+#Number of level 1 units
+N = 5200
+
+#Student ID
+S_ID <- 1:N
+
+#SAT Math - as a "pre" 
+#Scores range from 200-800
+sat <- c(200:800)
+StudData$SAT_M <- sample(sat, N, replace = TRUE)
+
+#Student gender
+gender <- c(0, 1, 2)
+S_gend <- sample(x = gender, size = N, replace = TRUE,
+                 prob = c(0.56, 0.40, 0.04))
+
+#Since have 3 codes, will need dummy coding
+#Use 'male' as reference
+StudData$female <- ifelse(StudData$S_gend == 0, 1, 0)
+StudData$NB <- ifelse(StudData$S_gend == 2, 1, 0)
+
+#Student SES
+#Random generation - between 2 and 29; using the Kuppuswamy SES scale 
+S_SES <- rnorm(n = N, mean = 13, sd = 2)
+
+#Number of different math teachers had by each student
+#Treat as count data
+tchrs <- c(1:12)
+num_tchrs <- sample(x = tchrs, size = N, replace = TRUE,
+                    prob = c(0.3325, 0.3325, 0.08, 0.08, 0.08, 0.08,
+                             0.001, 0.001, 0.001, 0.001, 0.001, 0.01))
+
+#Physics teachers (as an example of cross-classified data)
+#Should work to make this better - match physics class with likelihood of STEM major 
+#based on math classes.
+p <- c(1, 0)
+phys <- sample(x = p, size = N, replace = TRUE,
+               prob = c(0.75, 0.25))
+
+#Join what we have so far in a dataframe
+StudData <- data.frame(S_ID, S_gend, S_SES, num_tchrs, phys)
+
+#22 physics teachers at JMU
+StudData$phys_tchr <- ifelse(StudData$phys == 1, (StudData$phys_tchr = (sample(22, size = N, replace = TRUE))), 0)
+
+#Teacher experience
+#This gets added to the df later; kept as a variable for right now.
+T_exp <- rnorm(n = 56, mean = 10, sd = 2)
+T_ID <- c(1:56)
+
+TData <- data.frame(T_ID, T_exp)
+
+#Teachers - 56 of them to choose from
+#Need to reference num_tchrs column.  Everyone has tchr1.  
+StudData$tchr1 = (sample(56, size = N, replace = TRUE))
+StudData$tchr2 <- ifelse(num_tchrs >= 2, (StudData$tchr2 = (sample(56, size = N, replace = TRUE))), (StudData$tchr2 = 0))
+StudData$tchr3 <- ifelse(num_tchrs >= 3, (StudData$tchr3 = (sample(56, size = N, replace = TRUE))), (StudData$tchr3 = 0))
+StudData$tchr4 <- ifelse(num_tchrs >= 4, (StudData$tchr4 = (sample(56, size = N, replace = TRUE))), (StudData$tchr4 = 0))
+StudData$tchr5 <- ifelse(num_tchrs >= 5, (StudData$tchr5 = (sample(56, size = N, replace = TRUE))), (StudData$tchr5 = 0))
+StudData$tchr6 <- ifelse(num_tchrs >= 6, (StudData$tchr6 = (sample(56, size = N, replace = TRUE))), (StudData$tchr6 = 0))
+StudData$tchr7 <- ifelse(num_tchrs >= 7, (StudData$tchr7 = (sample(56, size = N, replace = TRUE))), (StudData$tchr7 = 0))
+StudData$tchr8 <- ifelse(num_tchrs >= 8, (StudData$tchr8 = (sample(56, size = N, replace = TRUE))), (StudData$tchr8 = 0))
+StudData$tchr9 <- ifelse(num_tchrs >= 9, (StudData$tchr9 = (sample(56, size = N, replace = TRUE))), (StudData$tchr9 = 0))
+StudData$tchr10 <- ifelse(num_tchrs >= 10, (StudData$tchr10 = (sample(56, size = N, replace = TRUE))), (StudData$tchr10 = 0))
+StudData$tchr11 <- ifelse(num_tchrs >= 11, (StudData$tchr11 = (sample(56, size = N, replace = TRUE))), (StudData$tchr11 = 0))
+StudData$tchr12 <- ifelse(num_tchrs >= 12, (StudData$tchr12 = (sample(56, size = N, replace = TRUE))), (StudData$tchr12 = 0))
+
+#Need to clean out same numbers in one row - go through and check if values exist in any prior columns.  If not,
+#do nothing.  If so, add one.  Not the most elegant, but will do for now.  Should fix to be better later.
+c <- select(StudData, c("tchr1", "tchr2", "tchr3", "tchr4", "tchr5", "tchr6", 
+                           "tchr7", "tchr8", "tchr9", "tchr10", "tchr11", "tchr12"))
+c$tchr2 <- ifelse(c$tchr2 == c$tchr1, (c$tchr2 + 1), c$tchr2)
+c$tchr3 <- ifelse((c$tchr3 != 0), 
+                  (ifelse((c$tchr3 == c$tchr2|c$tchr3 == c$tchr1), (c$tchr3 + 1), c$tchr3)), 0)
+c$tchr4 <- ifelse((c$tchr4 != 0), 
+                   (ifelse((c$tchr4 == c$tchr3|c$tchr4 == c$tchr2|c$tchr4 == c$tchr1), (c$tchr4 + 1), c$tchr4)), 0)
+c$tchr5 <- ifelse((c$tchr5 != 0),
+                  (ifelse((c$tchr5 == c$tchr4|c$tchr5 == c$tchr3|c$tchr5 == c$tchr2|c$tchr5 == c$tchr1), (c$tchr5 + 1), c$tchr5)), 0)
+c$tchr6 <- ifelse((c$tchr6 != 0),
+                  (ifelse((c$tchr6 == c$tchr5|c$tchr6 == c$tchr4|c$tchr6 == c$tchr3|c$tchr6 == c$tchr2|c$tchr6 == c$tchr1), (c$tchr6 + 1), c$tchr6)), 0)
+c$tchr7 <- ifelse((c$tchr7 != 0),
+                  (ifelse((c$tchr7 == c$tchr6|c$tchr7 == c$tchr5|c$tchr7 == c$tchr4|c$tchr7 == c$tchr3|c$tchr7 == c$tchr2|c$tchr7 == c$tchr1), (c$tchr7 + 1), c$tchr7)), 0)
+c$tchr8 <- ifelse((c$tchr8 != 0),
+                  (ifelse((c$tchr8 == c$tchr7|c$tchr8 == c$tchr6|c$tchr8 == c$tchr5|c$tchr8 == c$tchr4|c$tchr8 == c$tchr3|c$tchr8 == c$tchr2|c$tchr8 == c$tchr1), (c$tchr8 + 1), c$tchr8)), 0)
+c$tchr9 <- ifelse((c$tchr9 != 0),
+                  (ifelse((c$tchr9 == c$tchr8|c$tchr9 == c$tchr7|c$tchr9 == c$tchr6|c$tchr9 == c$tchr5|c$tchr9 == c$tchr4|c$tchr9 == c$tchr3|c$tchr9 == c$tchr2|c$tchr9 == c$tchr1), (c$tchr9 + 1), c$tchr9)), 0)
+c$tchr10 <- ifelse((c$tchr10 != 0),
+                  (ifelse((c$tchr10 == c$tchr9|c$tchr10 == c$tchr8|c$tchr10 == c$tchr7|c$tchr10 == c$tchr6|c$tchr10 == c$tchr5|c$tchr10 == c$tchr4|c$tchr10 == c$tchr3|c$tchr10 == c$tchr2|c$tchr10 == c$tchr1), (c$tchr10 + 1), c$tchr10)), 0)
+c$tchr11 <- ifelse((c$tchr11 != 0),
+                  (ifelse((c$tchr11 == c$tchr10|c$tchr11 == c$tchr9|c$tchr11 == c$tchr8|c$tchr11 == c$tchr7|c$tchr11 == c$tchr6|c$tchr11 == c$tchr5|c$tchr11 == c$tchr4|c$tchr11 == c$tchr3|c$tchr11 == c$tchr2|c$tchr11 == c$tchr1), (c$tchr11 + 1), c$tchr11)), 0)
+c$tchr12 <- ifelse((c$tchr12 != 0),
+                  (ifelse((c$tchr12 == c$tchr11|c$tchr12 == c$tchr10|c$tchr12 == c$tchr9|c$tchr12 == c$tchr8|c$tchr12 == c$tchr7|c$tchr12 == c$tchr6|c$tchr12 == c$tchr5|c$tchr12 == c$tchr4|c$tchr12 == c$tchr3|c$tchr12 == c$tchr2|c$tchr12 == c$tchr1), (c$tchr12 + 1), c$tchr12)), 0)
+
+#Had to go through a few iterations of the above to get MLwiN to accept
+
+
+#Assigning variables back
+StudData$tchr2 <- c$tchr2
+StudData$tchr3 <- c$tchr3
+StudData$tchr4 <- c$tchr4
+StudData$tchr5 <- c$tchr5
+StudData$tchr6 <- c$tchr6
+StudData$tchr7 <- c$tchr7
+StudData$tchr8 <- c$tchr8
+StudData$tchr9 <- c$tchr9
+StudData$tchr10 <- c$tchr10
+StudData$tchr11 <- c$tchr11
+StudData$tchr12 <- c$tchr12
+
+#Weight
+#Proportion of time had each teacher - need to reference num_tchrs column for this
+Weight <- data.frame(num_tchrs = 1:12,
+                     w1 = c(1, 0.5, 0.33, 0.25, 0.2, 0.166, 0.1428, 0.125, 0.11, 0.1, 0.09, 0.083),
+                     w2 = c(0, 0.5, 0.33, 0.25, 0.2, 0.166, 0.1428, 0.125, 0.11, 0.1, 0.09, 0.083),
+                     w3 = c(0, 0, 0.33, 0.25, 0.2, 0.166, 0.1428, 0.125, 0.11, 0.1, 0.09, 0.083),
+                     w4 = c(0, 0, 0, 0.25, 0.2, 0.166, 0.1428, 0.125, 0.11, 0.1, 0.09, 0.083),
+                     w5 = c(0, 0, 0, 0, 0.2, 0.166, 0.1428, 0.125, 0.11, 0.1, 0.09, 0.083),
+                     w6 = c(0, 0, 0, 0, 0, 0.166, 0.1428, 0.125, 0.11, 0.1, 0.09, 0.083),
+                     w7 = c(0, 0, 0, 0, 0, 0, 0.1428, 0.125, 0.11, 0.1, 0.09, 0.083),
+                     w8 = c(0, 0, 0, 0, 0, 0, 0, 0.125, 0.11, 0.1, 0.09, 0.083),
+                     w9 = c(0, 0, 0, 0, 0, 0, 0, 0, 0.11, 0.1, 0.09, 0.083),
+                     w10 = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0.1, 0.09, 0.083),
+                     w11 = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.09, 0.083),
+                     w12 = c(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.083))
+
+#Merge the two dataframes to add in weights
+StudData <- left_join(StudData, Weight, by = "num_tchrs")
+
+#Make teacher experience variables - need to check if there's a teacher in each column, then grab experience
+library(bruceR)
+StudData$t1_exp <- LOOKUP(StudData, "tchr1", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t2_exp <- LOOKUP(StudData, "tchr2", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t3_exp <- LOOKUP(StudData, "tchr3", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t4_exp <- LOOKUP(StudData, "tchr4", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t5_exp <- LOOKUP(StudData, "tchr5", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t6_exp <- LOOKUP(StudData, "tchr6", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t7_exp <- LOOKUP(StudData, "tchr7", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t8_exp <- LOOKUP(StudData, "tchr8", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t9_exp <- LOOKUP(StudData, "tchr9", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t10_exp <- LOOKUP(StudData, "tchr10", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t11_exp <- LOOKUP(StudData, "tchr11", TData, "T_ID", "T_exp", return = "new.value")
+StudData$t12_exp <- LOOKUP(StudData, "tchr12", TData, "T_ID", "T_exp", return = "new.value")
+
+#Replace NA from teacher experience columns with 0
+StudData[is.na(StudData)] <- 0
+
+#Make the outcome variables - for simulation
+b0 <- 250
+b1 <- .25
+b2 <- .3
+b3 <- -0.77
+b4 <- -1.3
+SAT_M <- StudData$SAT_M
+S_SES <- StudData$S_SES
+female <- StudData$female
+NB <- StudData$NB
+tchr1 <- StudData$tchr1
+tchr2 <- StudData$tchr2
+tchr3 <- StudData$tchr3
+tchr4 <- StudData$tchr4
+tchr5 <- StudData$tchr5
+tchr6 <- StudData$tchr6
+tchr7 <- StudData$tchr7
+tchr8 <- StudData$tchr8
+tchr9 <- StudData$tchr9
+tchr10 <- StudData$tchr10
+tchr11 <- StudData$tchr11
+tchr12 <- StudData$tchr12
+exp1 <- StudData$t1_exp
+exp2 <- StudData$t2_exp
+exp3 <- StudData$t3_exp
+exp4 <- StudData$t4_exp
+exp5 <- StudData$t5_exp
+exp6 <- StudData$t6_exp
+exp7 <- StudData$t7_exp
+exp8 <- StudData$t8_exp
+exp9 <- StudData$t9_exp
+exp10 <- StudData$t10_exp
+exp11 <- StudData$t11_exp
+exp12 <- StudData$t12_exp
+w1 <- StudData$w1
+w2 <- StudData$w2
+w3 <- StudData$w3
+w4 <- StudData$w4
+w5 <- StudData$w5
+w6 <- StudData$w6
+w7 <- StudData$w7
+w8 <- StudData$w8
+w9 <- StudData$w9
+w10 <- StudData$w10
+w11 <- StudData$w11
+w12 <- StudData$w12
+
+#Probably messed this up - doubtful I modeled the teacher weights correctly
+Y <- b0 + b1*S_SES  + b2*SAT_M + b3*female + b4*NB + (tchr1*w1 + tchr2*w2 + tchr3*w3 + tchr4*w4 + tchr5*w5 + tchr6*w6 + tchr7*w7 + tchr8*w8 + tchr9*w9 + tchr10*w10 + tchr11*w11 + tchr12*w12) + 
+  (exp1*w1 + exp2*w2 + exp3*w3 + exp4*w4 + exp5*w5 + exp6*w6 + exp7*w7 + exp8*w8 + exp9*w9 + exp10*w10 + exp11*w11 + exp12*w12) + rnorm(N, 0, 20)
+StudData$Math <- Y
+
+#See what outcome variable looks like
+ggplot(data = StudData) +
+  geom_histogram(aes(Math))
+
+
+#Save out the file containing the outcome variable and others.
+write.csv(StudData, "exampledata2.csv")
+
+#Checking full model function; no level 2 predictors yet
+model1 <- Math ~ 1 + S_SES + female + NB + SAT_M + (1|tchr1) + (1|S_ID)
+
+
+MultiMemb <- list(list(
+  mmvar = list("tchr1", "tchr2", "tchr3", "tchr4", "tchr5", "tchr6", "tchr7", "tchr8", "tchr9", "tchr10", "tchr11", "tchr12"),
+  weights = list("w1", "w2", "w3", "w4", "w5", "w6", "w7", "w8", "w9", "w10", "w11", "w12")), NA)
+
+(MMembModel <- runMLwiN(Formula = model1, data = StudData, estoptions = list(EstM = 1, drop.data = FALSE, mm = MultiMemb)))
+```
+

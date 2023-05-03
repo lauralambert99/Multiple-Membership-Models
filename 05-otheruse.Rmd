@@ -1,0 +1,5 @@
+# Other uses of Multiple Membership Models
+Multiple membership models can be combined with a number of other model types, and they are not restricted to only one level.  It is possible to have multiple membership at level 2, but a pure hierarchy at level 3.  Multiple membership models can be combined with a three level model to incorporate longitudinal data as well [for example @Leroux].  They can also be combined with cross-classified models [eg. @Browne2001, @Beretvas] to handle even more complex data structures.  
+
+A use I found particularly interesting for multiple membership models was to handle missing data.  @Hill1998 proposed using a multiple membership structure to equally weight all possible schools for a student when actual school enrollment was unknown.  For students who had a known school membership, they were simply members of one school, with a weight of 1.  I found this an interesting approach to missing data, as you are still able to use the student information, though with less school information than those students who have a known membership.
+

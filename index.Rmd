@@ -7,21 +7,18 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 # url: your book url like https://bookdown.org/yihui/bookdown
 # cover-image: path to the social sharing image like images/cover.jpg
-description: |
-  This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor.  It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software.
+description: This is work done for a final project at JMU for the PSYC836 Hierarchical Linear Models course taught by Dr. Dena Pastor.  It is intended to give a brief introduction to multiple membership multilevel models as well as a walkthrough of how to run such a model using the R2MLwiN package to interface with the MLwiN software.
 link-citations: yes
-github-repo: rstudio/bookdown-demo
 ---
 
 # About
-
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+This is a fictional scenario and data set designed for the sole purpose of illustrating the coding and interpretation of multiple membership models using the R2MLwiN package.  These data were simulated by myself, and were designed to loosely resemble a population of students at JMU.  These data were not actually gathered from JMU students.  This is designed to be tutorial-style, with background information about the models presented prior to walking through model building and output interpretation.
 
 ## R packages used 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
 knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'R2MLwiN', 'tidyverse', 'ggplot2'
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'R2MLwiN', 'tidyverse', 'ggplot2', 'misty'
 ), 'packages.bib')
 ```
 
@@ -31,37 +28,14 @@ knitr (@R-knitr)
 Rmarkdown (@R-rmarkdown)  
 Tidyverse (@R-tidyverse)  
 ggplot2 (@R-ggplot2)  
+misty (@R-misty)
 R2MLwiN (@R-R2MLwiN)  
 
+The software MLwiN, v3.06 [@MLwiN] was also used, with Bayesian MCMC estimation [@MCMC2022]
 
 ## Acknowledgements 
 Much of the background information about multiple membership models was gathered from the learning resources provided by the University of Bristol's Center for Multilevel Modelling (@LEMMA).
 
 ## A Disclaimer
 The data used in this tutorial were simulated by me, and I am certain that a better job could have been done to better reflect some dependencies that should be in the data.  One known omission is variance components were not specified prior to estimating the outcome.  However, these data were simulated to reflect a student population at JMU to the best of my ability at the time and no intentional errors or misrepresentations were intended.  Data-generating code is included in the Appendix.
-
-
-You can render the HTML version of this example book without changing anything:
-
-1. Find the **Build** pane in the RStudio IDE, and
-
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
-
-Or build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
-```
-
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
-
-## Preview book
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
-
-```{r eval=FALSE}
-bookdown::serve_book()
-```
-
-
 

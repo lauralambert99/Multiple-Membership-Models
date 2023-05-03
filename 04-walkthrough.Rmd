@@ -1,9 +1,12 @@
 # Running a Multiple Membership Model 
 
-As noted in \@ref(software), the only software currently able to run a multiple membership model is MLwiN (add ref).  There is an R package, R2MLwiN [@R-R2MLwiN] that allows for an R-interface which runs MLwiN in the background.  This allows users to work with a program they are already familiar with while accessing the capabilities of MLwiN.  However, as also previously noted, you must have an active MLwiN license, and have the program installed on your computer for your R code to work.
+As noted in \@ref(software), we will be using MLwiN to evaluate the multiple membership models.  There is an R package, R2MLwiN [@R-R2MLwiN] that allows for an R-interface which runs MLwiN in the background.  This allows users to work with a program they are already familiar with while accessing the capabilities of MLwiN.  However, as also previously noted, you must have an active MLwiN license, and have the program installed on your computer for your R code to work.
 
 ## Intercept-only Model
 We will first run an intercept-only model, looking at Math as an outcome and only including the intercept and the multiple membership effect of teachers.  This model will inform us as to how the variance in Math scores is divided between teacher variance components (level 2) and student variance components (level 1).  
+$$y_{i} = \beta_{0} + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}$$
+$$u_{j}^{(2)} \sim N(0, \sigma_{u(2)}^{2})$$
+$$e_{i} \sim N(0, \sigma_{e}^{2})$$
 
 ### First Steps
 Setting this up to run in R, we first need to make sure we have MLwiN installed, as well as call the `R2MLwiN` package.  Additionally, R2MLwiN defaults the path to MLwiN as "C:/Program Files/MLwiN v3.06/".  If yours, like mine, is installed elsewhere, you need to include `options(MLwiN_pah = "path/to/MLwiN")`.  An easy way to copy the path is to find it in your computer, hold 'shift' and right click the program.  The option "copy as path" comes up as an option, and you can just paste it in.
@@ -52,8 +55,8 @@ Looking at the output from our intercept only model, we have a lot of informatio
 MLwiN (version: 2.36)  multilevel model (Normal) 
        N min     mean max N_complete min_complete mean_complete max_complete
 tchr1 56  75 92.85714 122         56           75      92.85714          122
-Estimation algorithm:  MCMC      Cross-classified              Elapsed time : 9.42s 
-Number of obs:  5200 (from total 5200)          Number of iter.: 5000  Chains: 1  Burn-in: 500 
+Estimation algorithm:  MCMC      Cross-classified              Elapsed time : 7.78s 
+Number of obs:  5200 (from total 5200)          Number of iter.: 5000  Chains: 1  Burn-in: 500  
 ```
 Since this is using Baysian MCMC estimation, we also get the number of iterations and burn-in count.  This is adjustable if you felt your model needed different parameters, but for this tutorial, I stuck with the default setting as shown.
 
@@ -62,14 +65,14 @@ We then get the DIC:
 ```{r output intonly DIC, include = TRUE, eval = FALSE}
 Bayesian Deviance Information Criterion (DIC)
 Dbar      D(thetabar)    pD      DIC
-56499.285  56453.141  46.146     56545.430  
+56520.996  56473.520  47.479     56568.477  
 ```
 Again, since this is MCMC estimation, we do not get any likelihood ratios, nor can we perform any likelihood ration tests.  This DIC is our baseline, to which other models including predictors will be compared to.  If a predictor is useful at explaining variance, we expect the DIC to decrease.  We can also use the DIC to determine if the multiple membership model is preferred to a single level model.  The single model would be specified and run as follows:
 ```{r single level, include = TRUE, eval = TRUE}
 intonlyred <- Math ~ 1 + (1|S_ID)
 (MMembModelRed <- runMLwiN(Formula = intonlyred, data = StudData, estoptions = list(EstM = 1)))
 ```
-From the output, we see that the DIC for the single level model is 56721.641, which is 176.211 higher than the multiple membership model.  This indicates that the multiple membership model is statistically preferred over the single level model.
+From the output, we see that the DIC for the single level model is 56721.641, which is 200.645 higher than the multiple membership model.  This indicates that the multiple membership model is statistically preferred over the single level model.
 
 
 We next get reminded of our model formula, and what the grouping predictors were:
@@ -81,33 +84,49 @@ Level 2: tchr1     Level 1: S_ID
 
 
 Skipping down to "The fixed part estimates:"
-```{r output intonly, include = TRUE, eval = FALSE}
+```{r fixed output intonly, include = TRUE, eval = FALSE}
 The fixed part estimates:  
                 Coef.   Std. Err.       z   Pr(>|z|)       [95% Cred.   Interval]   ESS 
-Intercept   431.52398     2.21944  194.43          0  ***   426.97449   435.91524   395 
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1   
+Intercept   441.78207     2.38716  185.07          0  ***   436.82835   446.43202   346 
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1  
 ```
-we see that the intercept is 431.52.  This is the overall mean of math achievement across all the students and all the teachers.  Conveniently, this output also provides us with a 95% credibility interval of (426.97, 435.91) indicating STUFF******.
+we see that the intercept is 441.78.  This is the overall mean of math achievement across all the students and all the teachers.  This output also provides us with a 95% credibility interval of (436.83, 446.43).  Keeping in mind that Bayesian techniques were used, we interpret this as there is a 95% probability that the true estimate of the intercept would lie within this range, given our observed data.
 
 Going further down, we come to the random part estimates at level 2 and level 1, or the variance components:
 ```{r output intonly var, include = TRUE, eval = FALSE}
 The random part estimates at the tchr1 level: 
                     Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
-var_Intercept   238.96526    57.92255    147.42228   374.11760   2080 
+var_Intercept   281.90093    66.21423    176.86386   432.97710   2258 
 --------------------------------------------------------------------------------------------------- 
 The random part estimates at the S_ID level: 
                      Coef.   Std. Err.   [95% Cred.    Interval]    ESS 
-var_Intercept   3064.65607    59.68536   2948.33898   3181.76541   4681 
+var_Intercept   3077.47965    59.92732   2960.59277   3194.83199   4679 
 ```
 
 
-Using these, we can calculate the variance partition coefficient (VPC) for this model, which will tell us the proportion of variance in Math scores that is at each level of our model.  However, as previously mentioned in \@ref(vpc), using only the values in the table will only tell us the variance partition coefficient for students who only had a single teacher.
+Using these, we can calculate the variance partition coefficient (VPC) for this model.  However, as previously mentioned in \@ref(vpc), using only the values in the table will only tell us the variance partition coefficient for students who only had a single teacher.
+
+$$VPC_{u(2)} = \frac{\sigma_{u(2)}^{2}}{\sigma_{u(2)}^{2} + \sigma_{e}^{2}} = \frac{281.90}{3077.48 + 281.90} = 8.4\%$$
+From this, we can say that for students that had a single teacher, 8.4% of the variation in their math scores is between teachers while the remaining 91.6% is between students.  ^[This is why I believe the data could have been simulated better.] This is also going to be the maximum amount of variation in student math scores that will be between teachers.  As students have more teachers, less of the variation in math scores will be between teachers and more will be between students.  Knowing this, predictors at level 1 will have the most impact, while level 2 predictors in this instance will have less of an impact.
 
 
 ## Adding in level 1 predictors
+We can add in level 1 predictors as predictors of student level variance in Math scores.  Our data set has SES, gender, and SAT math scores as student-level predictors.  Gender was dummy coded since there were three levels, with males being the reference for both NB and female. We use the same set up as for the intercept only model, only this time we add in our level 1 predictors.  We do not need to adjust anything for the multiple membership part of the code, as that is staying the same. 
 
-```{r level 1 pred, include = TRUE, eval = FALSE, message = FALSE}
-lev1 <- Math ~ 1 + S_SES + female + NB + SAT_M + (1|tchr1) + (1|S_ID)
+Prior to adding in SES and SAT math, we will grand mean center them.
+```{r CGM lev 1, include = TRUE, eval = TRUE, warning = FALSE}
+library(misty)
+StudData$SESc <- center(StudData$S_SES, type = "CGM")
+StudData$SATc <- center(StudData$SAT_M, type = "CGM")
+```
+This results in a final model, which can be written as
+$$y_{i} = \beta_{0} + \beta_{1}(SESc) + \beta_{2}(female) + \beta_{3}(NB) + \beta_{4}(SATc) + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}$$
+$$u_{j}^{(2)} \sim N(0, \sigma_{u(2)}^{2})$$
+$$e_{i} \sim N(0, \sigma_{e}^{2})$$
+
+Putting the centered predictors into our model, we get the following input:  (NOTE: I tried adding in random effects, but the model was unable to converge, so we are staying with fixed effects of SES and SAT only)
+```{r level 1 pred, include = TRUE, eval = TRUE, message = FALSE}
+lev1 <- Math ~ 1 + SESc + female + NB + SATc + (1|tchr1) + (1|S_ID)
 
 MultiMemb <- list(list(
   mmvar = list("tchr1", "tchr2", "tchr3", "tchr4", "tchr5", "tchr6", "tchr7", "tchr8", "tchr9", "tchr10", "tchr11", "tchr12"),
@@ -116,16 +135,114 @@ MultiMemb <- list(list(
 (MMembModel2 <- runMLwiN(Formula = lev1, data = StudData, estoptions = list(EstM = 1, drop.data = FALSE, mm = MultiMemb)))
 ```
 
+Looking at the output for this model, we can first look at the fixed part, to see which predictors are significant and which are not:
+```{r fixed output lev1, include = TRUE, eval = FALSE}
+The fixed part estimates:  
+                Coef.   Std. Err.       z    Pr(>|z|)       [95% Cred.   Interval]    ESS 
+Intercept   432.14999     2.13888  202.04           0  ***   428.14288   436.35112     60 
+SESc          0.19067     0.13910    1.37      0.1705         -0.08307     0.46388   4667 
+female        0.07923     0.58179    0.14      0.8917         -1.05906     1.23982   5000 
+NB           -5.54371     1.43551   -3.86   0.0001125  ***    -8.44713    -2.76427   5000 
+SATc          0.29936     0.00164  182.35           0  ***     0.29614     0.30264   4640 
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1  
+```
+From this, we see that SAT scores are significant, as is the NB gender code.  The intercept represents that the average student math score across all teachers is 432.15.  The slope was not allowed to randomly vary across clusters (see above), so all clusters have the same slope.  SAT has a positive effect: for every point increase in SAT math scores, Math outcome scores are predicted to be 0.3 points higher, holding all else constant.  Being nonbinary, however, has a negative effect when compared to males: they are predicted to score 5.5 points less than males, holding everything else constant.  This is likely not due to math ability, but a number of other situational, structural, and social factors outside of the direct control of these students.  
+
+We can also see how well our model did overall by examining the DIC.
+
+```{r output lev1 DIC, include = TRUE, eval = FALSE}
+Bayesian Deviance Information Criterion (DIC)
+Dbar      D(thetabar)    pD      DIC
+45975.020  45915.676  59.346     46034.367  
+```
+
+There was a decrease of over 10000 in the DIC between the intercept only model and this model, indicating that it is highly significant.
+
+We can also examine the random effects, just for intercepts, and use this to calculate the percent reduction in variance at each level.
+
+```{r output lev1 var, include = TRUE, eval = FALSE}
+The random part estimates at the tchr1 level: 
+                    Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+var_Intercept   258.75691    52.28955    177.05400   377.15343   4283 
+--------------------------------------------------------------------------------------------------- 
+The random part estimates at the S_ID level: 
+                    Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+var_Intercept   404.72528     7.93413    389.22146   420.44359   5000  
+```
+
+Here, the teacher-level variance is now interpreted as how much variance between teachers remains after accounting for the predictor variables.  Similarly, the student-level variance is interpreted as how much variance between students remains after accounting for the predictor variables.  As we only added in student-level predictors, we would most anticipate that the student-level variance would decrease.  Calculating the percent reduction in student-level variance, we get 
+$$\frac{\sigma^{2}(intonly) - \sigma^{2}(level1)}{\sigma^{2}(intonly)} = \frac{3077.48-404.73}{3077.48} = 86.8\%$$
+86.8% reduction in level 1 variance, which by most definitions is quite a lot!  
+
+We can also look at the level 2 variance reduction, though we are guessing it will not be much reduced at all.
+$$\frac{\sigma^{2}(intonly) - \sigma^{2}(level1)}{\sigma^{2}(intonly)} = \frac{281.9-258.76}{281.9} = 8.2\%$$
+
+We get that there was an 8.2% reduction in the level 2 variance.  Keeping in mind that there wasn't much variance at level 2 to begin with, this is not very  practically significant.
+
 ## Adding in level 2 predictors
+It is also possible to add in level 2 predictors to our model, to try and explain the (small) amount of teacher level variance.  However, as this is a multiple membership model, and we are accounting for the fact that students may have encountered one or more teachers, we will incorporate weights into these predictors.  In our data set, we have teacher experience as a teacher level predictor.  Since  both the values on the predictor and the weight are known, we can calculate a new predictor incorporating these items.
+$$\overline{t\_exp_{2i}} = \sum_{j \in teacher(i)}w_{j,i}^{(2)}(t\_exp)_{2j}^{(2)}$$
+```{r calc lev 2, include = TRUE, eval = TRUE, message = FALSE}
+StudData$tot_exp <- (StudData$t1_exp*StudData$w1 + StudData$t2_exp*StudData$w2 + StudData$t3_exp*StudData$w3 + StudData$t4_exp*StudData$w4 + StudData$t5_exp*StudData$w5 + StudData$t6_exp*StudData$w6 + StudData$t7_exp*StudData$w7 + StudData$t8_exp*StudData$w8 + StudData$t9_exp*StudData$w9 + StudData$t10_exp*StudData$w10 + StudData$t11_exp*StudData$w11 + StudData$t12_exp*StudData$w12)
+```
 
+After calculating the weighted average of teacher experience, we can put it in our model, which will now be represented as the equation:
+$$y_{i} = \beta_{0} + \beta_{1}(SESc) + \beta_{2}(female) + \beta_{3}(NB) + \beta_{4}(SATc) + \beta_{5}(\overline{t\_exp_{2i}}) + \sum_{j \in school(i)}w_{j,i}^{(2)}u_{j}^{(2)} + e_{i}$$
 
+```{r level 2 pred, include = TRUE, eval = TRUE, message = FALSE}
+lev2 <- Math ~ 1 + SESc + female + NB + SATc + tot_exp + (1|tchr1) + (1|S_ID)
 
-## Citations
+MultiMemb <- list(list(
+  mmvar = list("tchr1", "tchr2", "tchr3", "tchr4", "tchr5", "tchr6", "tchr7", "tchr8", "tchr9", "tchr10", "tchr11", "tchr12"),
+  weights = list("w1", "w2", "w3", "w4", "w5", "w6", "w7", "w8", "w9", "w10", "w11", "w12")), NA)
 
-Reference items in your bibliography file(s) using `@key`.
+(MMembModel2 <- runMLwiN(Formula = lev2, data = StudData, estoptions = list(EstM = 1, drop.data = FALSE, mm = MultiMemb)))
+```
 
-For example, we are using the **bookdown** package [@R-bookdown] (check out the last code chunk in index.Rmd to see how this citation key was added) in this sample book, which was built on top of R Markdown and **knitr** [@xie2015] (this citation was added manually in an external file book.bib). 
-Note that the `.bib` files need to be listed in the index.Rmd with the YAML `bibliography` key.
+Again looking at the output, we can start with the fixed effects, where we see that teacher experience is a significant predictor of math outcomes.  The more experience a teacher has, the better their student math outcomes.
+```{r fixed output lev2, include = TRUE, eval = FALSE}
+The fixed part estimates:  
+                Coef.   Std. Err.       z     Pr(>|z|)       [95% Cred.   Interval]    ESS 
+Intercept   416.34406    11.86173   35.10   6.796e-270  ***   392.63960   438.36022     74 
+SESc          0.29967     0.13931    2.15      0.03147  *       0.02538     0.56744   4690 
+female       -0.53750     0.57763   -0.93       0.3521         -1.67365     0.58375   5000 
+NB           -0.26779     1.41534   -0.19       0.8499         -3.01926     2.50454   5000 
+SATc          0.30029     0.00161  186.27            0  ***     0.29717     0.30337   5000 
+tot_exp       2.48257     1.09498    2.27      0.02338  *       0.47155     4.77992     78 
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1  
+```
+Interestingly, once including teacher experience as a predictor, NB is no longer significant, but student SES is.  However, looking at the ESS, or Effective Sample Size, we can see that it is very low for `tot_exp`, meaning that while 5000 draws were taken, they had as little information as might be expected in a sample of only 78 independent values, indicating a high level of autocorrelation [@Leckie2013].
 
+Examining the model as a whole, we can compare the DIC of this model to the DIC of the model only containing level 1 predictors:
+```{r output lev2 DIC, include = TRUE, eval = FALSE}
+Bayesian Deviance Information Criterion (DIC)
+Dbar      D(thetabar)    pD      DIC
+45955.359  45895.484  59.875     46015.234   
+```
+While not as an extreme lowering of the DIC as we saw in the level 1 model, the DIC is still 19.133 less.  While there are no "hard" guidelines, it is generally accepted that a difference larger than 10 indicate that the model with the lower DIC should be used.  So, in this case, the model incorporating the level 2 predictor is a better fit than the model without.
 
-The RStudio Visual Markdown Editor can also make it easier to insert citations: <https://rstudio.github.io/visual-markdown-editing/#/citations>
+Lastly, we can look at the reduction in variance components by looking at the random parts (again, we held all slopes constant).
+
+```{r output lev2 var, include = TRUE, eval = FALSE}
+The random part estimates at the tchr1 level: 
+                    Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+var_Intercept   276.54452    55.33169    185.96627   405.82281   3217 
+--------------------------------------------------------------------------------------------------- 
+The random part estimates at the S_ID level: 
+                    Coef.   Std. Err.   [95% Cred.   Interval]    ESS 
+var_Intercept   403.45930     8.05699    388.21652   419.58182   5110 
+```
+
+Performing the same calculations as above, we see that student level variance decreased by an additional 0.3%.  This would make sense, since no additional level 1 predictors were added to the model, so we were not anticipating a large decrease in student level variance.  However, teacher level variance INCREASED by 6.87%, indicating that perhaps this is not a good predictor to be using.
+
+## Circling back to the research questions 
+At the outset of this fictional study, JMU said they had three research questions they would like to answer with these data and models.
+
+### RQ1: Do teacher characteristics influence student math scores? (ie, do we need to factor in nesting and multiple membership?)
+We can answer this question with the intercept-only model.  We saw that while there wasn't much variation at the teacher level, there was more than zero, indicating that including the nesting and the multiple membership structure is important.  This was further verified by comparing the DIC of the intercept-only model to the single level model and finding that incorporating nesting caused a significant reduction of DIC (200).
+
+### RQ2:  What student characteristics predict math scores?
+This was answered when we added in level 1 predictors.  We saw that adding in SES, SAT math, and gender dummy codes produced a significantly better model than the intercept only model.  Of these predictors, SAT math and the nonbinary gender code were significant predictors of math scores.  The model including these predictors resulted in an 86.8% reduction in student level variance, and a model that fit significantly better than the intercept only model.
+
+### RQ3:  Does more teacher experience lead to better student outcomes?
+Answering this is a bit more complicated.  Looking at model fit and significance of teacher experience, we would conclude that as teacher experience increases, so too does student math outcomes.  Additionally, this is a significant predictor, and leads to a better fitting model.  However, inclusion of this predictor does not reduce teacher level variance and in fact increases it.  There may be other, better, teacher level predictors that should be added to the model to create a better fit.
